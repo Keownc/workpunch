@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Keownc/workpunch.git"
+    "url": "git@github.com:Keownc/workpunch.git"
   },
   "keywords": [
     "work"
