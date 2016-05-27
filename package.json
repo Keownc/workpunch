@@ -4,12 +4,12 @@
   "description": "WorkPunch is an Web application that will manage the records of employees working under it registered companies.",
   "main": "server/main.js",
   "scripts": {
-      "test": "PORT=1234 mocha",
-      "start": "node server/server.js"
+    "test": "PORT=1234 mocha",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Keownc/workpunch.git"
+    "url": "git+https://github.com/Keownc/workpunch.git"
   },
   "keywords": [
     "work"
@@ -21,12 +21,17 @@
   },
   "homepage": "https://github.com/Keownc/workpunch#readme",
   "dependencies": {
-      "body-parser": "^1.15.1",
-      "express": "^4.13.4",
-      "sqlite3": "^3.1.4"
+    "body-parser": "^1.15.1",
+    "bower": "^1.7.9",
+    "express": "^4.13.4",
+    "install": "^0.8.1",
+    "jQuery": "^1.7.4",
+    "jquery": "^2.2.4",
+    "path": "^0.12.7",
+    "sqlite3": "^3.1.4"
   },
-    "devDependencies": {
-      "mocha": "2.4.5",
-      "supertest": "1.2.0"
-    }
+  "devDependencies": {
+    "mocha": "2.4.5",
+    "supertest": "1.2.0"
+  }
 }

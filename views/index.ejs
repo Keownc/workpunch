@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WorkPunch</title>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/styles.css">
+    </head>
+    <body ng-app="workpunch">
+        <div ng-controller="indexController">
+            <header>
+                <nav>
+                    <!-- <a href="#" class="modalClick"></a> -->
+                    <button class="modalClick">Model</button>
+                </nav>
+            </header>
+            <!-- Modal to login -->
+            <div id="overlay">
+                <div id="modal">
+                    <span class="close"></span>
+                    <h2 class="header col-sm-offset-1">Sign up</h3>
+                    <div class="col-sm-offset-1 col-md-10 col-sm-offset-1 ">
+                        <form ng-Submit='login()'>
+                             <div class="form-group">
+                                <label for="fName">First Name</label>
+                                <input type="text" id="fName" class="form-control" placeholder="Sam" ng-model="" required/>
+                             </div>
+                             <div class="form-group">
+                                <label for="fName">Last Name</label>
+                                <input type="text" id="lName"  class="form-control" placeholder="Smith" ng-model="" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" class="form-control" placeholder="Fullsail" />
+                            </div>
+                            <!-- <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Remember me
+                                </label>
+                            </div> -->
+                            <a href="/password">forget password</a>
+                            <button type="button" name="login" type="submit">Login</button>
+                            <a href="/register"><button type="button" name="signup">Signup</button></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/pluggins/jquery-1.11.3.min.js"></script>
+        <script src="/pluggins/main.js"></script>
+    </body>
+</html>
