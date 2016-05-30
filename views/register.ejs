@@ -1,45 +1,37 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>WorkPunch</title>
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/styles.css">
-    </head>
-    <body ng-app="workpunch">
-        <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-md-5 col-lg-6">
-                <form ng-submit="register()">
-                    <div class="form-group">
-                        <label for="exampleInputText">Employee ID</label>
-                        <input type="text" class="form-control" id="exampleInputText" placeholder="Employee ID" ng-model="newuser.employeeId" >
-                    </div>
-                    <div class="form-group">
-                        <label for="employeeId">Password</label>
-                        <input type="password" class="form-control" id="employeeId" placeholder="Password" ng-model="newuser.password">
-                    </div>
-                    <div class="form-group">
-                        <label for="fName">First Name</label>
-                        <input type="text" class="form-control" id="fName" placeholder="John" ng-model="newuser.firstName">
-                    </div><div class="form-group">
-                        <label for="lName">Last Name</label>
-                        <input type="text" class="form-control" id="lName" placeholder="Smith" ng-model="newuser.lastName">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email" ng-model="newuser.email">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" class="form-control" id="company" placeholder="Full Sail" ng-model="newuser.company">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                    <a href="#/main" ><button type="button" class="main btn btn-primary">Back</button></a>
-                </form>
-            </div>
+<div class="container" ng-controller="authController">
+    <div class="row">
+        <div class="col-sm-6 col-md-5 col-lg-6">
+            <form ng-submit="signup()">
+                <div class="form-group">
+                    <label for="exampleInputText">Employee ID</label>
+                    <input type="text" class="form-control" id="exampleInputText" placeholder="Employee ID" ng-model="newuser.employeeId" >
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="exampleInputText" placeholder="username" ng-model="newuser.username" >
+                </div>
+                <div class="form-group">
+                    <label for="employeeId">Password</label>
+                    <input type="password" class="form-control" id="employeeId" placeholder="Password" ng-model="newuser.password">
+                </div>
+                <div class="form-group">
+                    <label for="fName">First Name</label>
+                    <input type="text" class="form-control" id="fName" placeholder="John" ng-model="newuser.firstName">
+                </div><div class="form-group">
+                    <label for="lName">Last Name</label>
+                    <input type="text" class="form-control" id="lName" placeholder="Smith" ng-model="newuser.lastName">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="newuser.email">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" class="form-control" id="company" placeholder="Full Sail" ng-model="newuser.company">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a href="/" ><button type="button" class="main btn btn-primary">Back</button></a>
+            </form>
         </div>
-      </div>
-</body>
-</html>
+    </div>
+</div>
