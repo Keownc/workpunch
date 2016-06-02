@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 class="modal-title">Sign up</h3>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">X</button>
+</div>
+<div class="modal-body">
+    <div class="">
+        <form novalidate>
+             <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="fName" class="form-control" placeholder="Sam" ng-model="user.name" ng-required="true"/>
+             </div>
+             <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password"  class="form-control" placeholder="Smith" ng-model="user.password" required/>
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" class="form-control" placeholder="Fullsail" ng-model="user.company" />
+            </div>
+            <!-- <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </div> -->
+            <a href="/password">forget password</a>
+            <button type="button" name="login" type="button" ng-click="login()">Login</button>
+            <a href="#/register"><button type="button" name="signup" ng-click="cancel()">Signup</button></a>
+        </form>
+    </div>
+</div>

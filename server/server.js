@@ -6,24 +6,25 @@ const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
+//Initialize models Schema
+require('../models/model.js');
+const api = require('../routes/api');
+const authenticate = require('../routes/authenticate')(passport);
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/workpunch");
-const db = mongoose.connection;
 const app = express();
 const port = process.env.PORT || 4000;
 
-const home = require('../routes/index');
-const register = require('../routes/register');
-const dashboard = require('../routes/dashboard');
-const authenticate = require('../routes/authenticate')(passport);
-
-// View engine
-app.set('view engine', 'ejs');
-app.set('../views', path.join(__dirname + 'views'));
-
 //set static folder
-app.use(express.static(path.join(__dirname, '../assets')));
+app.use(express.static(path.join(__dirname, '../public')));
+
+//app.use(facicon(__dirname + '/public/facicon.ico'))
+
+app.get('*', function(req, res) {
+    // res.sendFile(__dirname + '/views/index.html');
+    res.sendFile('index.html', { root: path.join(__dirname, '../public/views') });
+});
 
 //express session
 app.use(session({
@@ -31,7 +32,6 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
-
 //connect flash
 app.use(flash());
 // middleware
@@ -41,18 +41,12 @@ app.use(cookie_parser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Initialize models
-require('../models/employee.js');
 //initialize Password
 const init_password = require('./passport');
 init_password(passport);
 
-// Routes
-app.use('/', home);
-app.use('/register', register);
-app.use('/dashboard', dashboard);
+app.use('/api' ,api);
 app.use('/auth', authenticate);
-
 
 // Start server
 var server = app.listen(port, function() {

@@ -2,7 +2,7 @@
   "name": "workpunch",
   "version": "1.0.0",
   "description": "WorkPunch is an Web application that will manage the records of employees working under it registered companies.",
-  "main": "server/main.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "PORT=1234 mocha",
     "start": "node server/server.js"

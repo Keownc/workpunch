@@ -14,4 +14,13 @@ const userSchema = new mongoose.Schema({
     created_at: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('User', userSchema);
+const profileSchema = new mongoose.Schema({
+    firstName: String,
+    lastName: String,
+    company: String,
+    position: String,
+    description: String
+});
+
+mongoose.model('User', userSchema);
+mongoose.model('Profile', profileSchema);
