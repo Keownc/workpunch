@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 //app.use(facicon(__dirname + '/public/facicon.ico'))
 
 app.get('*', function(req, res) {
-    // res.sendFile(__dirname + '/views/index.html');
+    // res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
     res.sendFile('index.html', { root: path.join(__dirname, '../public/views') });
 });
 

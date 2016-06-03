@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Profile = mongoose.model('Profile');
+const User = mongoose.model('User');
 
 
 function isAuthenticated (req, res, next) {
@@ -17,7 +17,7 @@ router.use('/dashboard', isAuthenticated);
 router.route('/dashboard')
 
     .get(function (req, res) {
-        Profile.find(function(err, user){
+        User.find(function(err, user){
 			console.log('debug2');
 			if(err){
 				return res.send(500, err);
@@ -26,7 +26,7 @@ router.route('/dashboard')
 		});
     })
     .post(function (req, res) {
-        var user = new Profile();
+        var user = new User();
         user.name = req.body.name;
         user.company = req.body.company;
         user.position = req.body.position;

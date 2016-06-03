@@ -7,16 +7,16 @@
         <form novalidate>
              <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="fName" class="form-control" placeholder="Sam" ng-model="user.name" ng-required="true"/>
+                <input type="text" id="fName" class="form-control" placeholder="Sam" ng-model="user.username" ng-required="true"/>
              </div>
              <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password"  class="form-control" placeholder="Smith" ng-model="user.password" required/>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="company">Company</label>
                 <input type="text" id="company" class="form-control" placeholder="Fullsail" ng-model="user.company" />
-            </div>
+            </div> -->
             <!-- <div class="checkbox">
                 <label>
                     <input type="checkbox"> Remember me
@@ -24,7 +24,7 @@
             </div> -->
             <a href="/password">forget password</a>
             <button type="button" name="login" type="button" ng-click="login()">Login</button>
-            <a href="#/register"><button type="button" name="signup" ng-click="cancel()">Signup</button></a>
+            <button type="button" name="signup" ng-click="cancel()">Signup</button>
         </form>
     </div>
 </div>

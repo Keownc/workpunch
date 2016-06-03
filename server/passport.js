@@ -1,6 +1,7 @@
 'use-strict'
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Company = mongoose.model('Company');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 
@@ -8,7 +9,7 @@ const bcrypt = require('bcryptjs');
 module.exports = function(passport){
 
     passport.serializeUser(function(user, done) {
-      return done(null, user.username);
+      return done(null, user._id);
     });
 
     passport.deserializeUser(function(id, done) {
@@ -24,9 +25,9 @@ module.exports = function(passport){
         },
         function(req, username, password, done) {
             User.findOne({ username: username }, function (err, user) {
-                if (err) { return done(err, false); }
-                if (!user) { return done('User not found', false); }
-                if (!isValidPassword(user, password)) { return done('invalid password', false); }
+                if (err) { return done(err); }
+                if (!user) { return done(null, false, req.flash('message','User not found')); }
+                if (!isValidPassword(user, password)) { return done(null, false, req.flash('message','Invalid Password')); }
 
                 return done(null, user);
              });
@@ -40,23 +41,42 @@ module.exports = function(passport){
 
             User.findOne({ username: username }, function (err, user) {
 
-                if (err) { console.log( ' Error signup'+err); return done(err); }
-                if (user) {console.log('user exits'+ username); return done(null, false); } else {
-                    console.log('create new use'+ username);
-                    const newuser = new User();
-                    newuser.employeeId = employeeId;
-                    newuser.firstName = firstName;
-                    newuser.lastName = lastName;
-                    newuser.username = username;
-                    newuser.email = email;
-                    newuser.password = createHash(password);
-                    newuser.company = company;
-                    newuser.save(function(err){
+                if (err) { return done(err); }
+
+                if (user) {
+
+                    console.log('user exits'+ username);
+                    return done(null, false);
+                }
+                // } else if(user === company){
+                //
+                //     const new_company = new Company();
+                //     new_company.username = username;
+                //     new_company.password = createHash(password);
+                //     new_company.branch = req.param('branch');
+                //     new_company.companyID = req.param('companyID');
+                //     new_company.company = req.param('company');
+                //     new_company.save(function(err){
+                //         if (err) { return done(err, false); }
+                //         return done(null, new_company);
+                // }
+            else {
+
+                    console.log('create new user '+ username);
+
+                    const new_user = new User();
+                    new_user.username = username;
+                    new_user.password = createHash(password);
+                    new_user.firstName = req.param('firstName');
+                    new_user.lastName = req.param('lastName');
+                    new_user.email = req.param('email');
+                    new_user.companyID = req.param('companyID');
+                    new_user.company = req.param('company');
+                    new_user.save(function(err){
                         if (err) { return done(err, false); }
-                        return done(null, newuser);
+                        return done(null, new_user);
                     });
                 }
-                if (!user.verifyPassword(password)) { return done(null, false); }
             });
         }
     ));

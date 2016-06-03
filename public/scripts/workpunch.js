@@ -26,11 +26,19 @@ app.config(function($routeProvider){
         .when('/register',{
             templateUrl: './views/pages/register.html',
             controller: 'registerCtrl',
-            controllerAs: 'register'
+            // controllerAs: 'register'
         })
-        .when('/feature',{
-            templateUrl: './views/pages/feature.html',
-            controller: 'authController',
+        .when('/eregister',{
+            templateUrl: './views/pages/eregister.html',
+            controller: 'employeeRCtrl',
+        })
+        .when('/cregister',{
+            templateUrl: './views/pages/cregister.html',
+            controller: 'companyRCtrl',
+        })
+        .when('/dashboard',{
+            templateUrl: './views/pages/dashboard.html',
+            controller: 'dashboardCtrl',
         })
         .otherwise('/');
 });
@@ -49,18 +57,14 @@ app.controller('HomeCtrl',function($scope, $uibModal, $log ){
 });
 
 app.controller('HomeModalCtrl', function($scope, $uibModalInstance, $rootScope, $http, $location) {
-    $scope.user = {username: '', password: '', company: '' };
+    $scope.user = {};
     $scope.error_message = '';
-
-    $scope.user = function () {
-        $scope.newuser;
-    }
 
     $scope.login = function () {
         console.log('LOG IN', $scope.user);
         $http.post('/auth/login', $scope.user).success(function(data){
             $rootScope.authenticated = true;
-            $rootScope.current_user = data.user.username;
+            // $rootScope.current_user = data.users.username;
             $location.path('/dashboard');
         });
         $uibModalInstance.close();
@@ -73,5 +77,55 @@ app.controller('HomeModalCtrl', function($scope, $uibModalInstance, $rootScope, 
 
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
+      $location.path('/register');
     };
-})
+});
+
+
+app.controller('registerCtrl', function ($scope, $rootScope, $http, $location) {
+
+    $scope.employee = function () {
+      $location.path('/eregister');
+    };
+
+    $scope.company = function () {
+      $location.path('/cregister');
+    };
+
+});
+
+app.controller('employeeRCtrl', function ($scope, $rootScope, $http, $location) {
+    $scope.user = {};
+
+    $scope.registerUser = function(){
+        $http.post('/auth/signup', $scope.user).success(function(data){
+            $rootScope.authenticated = true;
+            // $rootScope.current_user = data.users.username;
+            $location.path('/dashboard');
+        });
+    };
+    $scope.back = function () {
+      $location.path('/register');
+    };
+
+});
+
+app.controller('companyRCtrl', function ($scope, $rootScope, $http, $location) {
+    $scope.user = {};
+
+    $scope.registerCompany = function(){
+        $http.post('/auth/signup', $scope.user).success(function(data){
+            $rootScope.authenticated = true;
+            // $rootScope.current_user = data.users.username;
+            $location.path('/plan');
+        });
+    };
+    $scope.back = function () {
+      $location.path('/register');
+    };
+
+});
+
+app.controller('dashboardCtrl', function($scope, $http){
+
+});

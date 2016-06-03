@@ -2,25 +2,34 @@
 // Employee schema
 const mongoose = require('mongoose');
 
-
+//Employee Database schema
 const userSchema = new mongoose.Schema({
-    employeeID: String,
+    username: String,
+    password: String,
     firstName: String,
     lastName: String,
     email: String,
+    companyID: String,
+    company: String,
+    position: String,
+    description: String,
+    avatar: String,
+    created_at: {type: Date, default: Date.now}
+});
+//Company Database schema
+const companySchema = new mongoose.Schema({
     username: String,
     password: String,
     company: String,
-    created_at: {type: Date, default: Date.now}
-});
-
-const profileSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    company: String,
-    position: String,
+    companyID: String,
+    plan: String,
+    branch: String,
     description: String
 });
 
+//Timepunch Database
+
+//SickLeave
+
 mongoose.model('User', userSchema);
-mongoose.model('Profile', profileSchema);
+mongoose.model('Company', companySchema);
