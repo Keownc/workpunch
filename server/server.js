@@ -42,8 +42,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //initialize Password
-const init_password = require('./passport');
-init_password(passport);
+const init_passport = require('./passport');
+init_passport(passport);
 
 app.use('/api' ,api);
 app.use('/auth', authenticate);

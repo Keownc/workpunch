@@ -1,3 +1,36 @@
-<p>
-    asd
-</p>
+<section class="row">
+    <div class="col-md-3">
+        <form ng-upload='avater()'>
+            <label for="avater">Image</label>
+            <input type="file" accept="image/*" image="image"/>
+            <img ng-show="avater" ng-src="{{avater.url}}" type="{{avater.file.type}}" />
+            <button type="submit" ng-click="avater" disabled>Add</button>
+        </form>
+    </div>
+    <section class="col-md-9">
+        <article class="">
+            <h2>Name</h2>
+            <p>
+
+            </p>
+        </article>
+        <article class="">
+            <h2>Company</h2>
+            <p>
+
+            </p>
+        </article>
+        <article class="">
+            <h2>Position</h2>
+            <p>
+
+            </p>
+        </article>
+        <article class="">
+            <h2>Description</h2>
+            <p>
+
+            </p>
+        </article>
+    </section>
+</section>

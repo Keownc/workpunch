@@ -6,10 +6,10 @@ const User = mongoose.model('User');
 
 
 function isAuthenticated (req, res, next) {
-    if (method = 'GET'){ return next();}
+    // if (method = 'GET'){ return next();}
     if(req.isAuthenticated()){return next();}
 
-    return res.redirect('/login');
+    res.redirect('/');
 }
 
 router.use('/dashboard', isAuthenticated);

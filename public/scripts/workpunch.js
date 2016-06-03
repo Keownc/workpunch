@@ -127,5 +127,7 @@ app.controller('companyRCtrl', function ($scope, $rootScope, $http, $location) {
 });
 
 app.controller('dashboardCtrl', function($scope, $http){
-
+    $scope.avater = function(){
+        $scope.response = JSON.parse()
+    };
 });
