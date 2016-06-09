@@ -6,7 +6,7 @@
  * # registerCtrl
  * Controller of the workPunchApp
  */
-const app = angular.module('workpunch', ['ngRoute','ngAnimate', 'ui.bootstrap', 'xeditable']).run(function($rootScope, $http){
+const app = angular.module('workpunch', ['ngRoute','ngAnimate', 'ui.bootstrap', 'xeditable', 'angularFileUpload']).run(function($rootScope, $http){
     $rootScope.authenticated = false;
     $rootScope.current_user = '';
     $rootScope.logout = function(){
@@ -134,10 +134,14 @@ app.controller('companyRCtrl', function ($scope, $rootScope, $http, $location) {
 
 });
 //Employee Dashboard page controller
-app.controller('dashboardCtrl', function($scope, $http){
+app.controller('dashboardCtrl', function($scope, $http, FileUploader){
     $scope.avater = function(){
         $scope.response = JSON.parse()
     };
+    // $scope.uploader = new FileUploader({
+    //       url: 'upload.php'
+    //   });
+      $scope.uploader = new FileUploader();
 
     $scope.user = {
         name: 'Keown Creese',

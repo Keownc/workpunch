@@ -1,5 +1,30 @@
-/*Modal
---------------------------------------------*/
+/*
+NAME: Keown Creese
+DATE: 06/01/2016
+PROJECT: Final Project WorkPunch
+*/
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font: 300/1 1.6rem "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*--------------------------------- Navigation ---------------------------------*/
+/*.navbar-static-top {
+    z-index: 1000;
+    border-width: 0 0 1px;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}*/
+
 .navbar-wrapper > .container {
   padding-right: 0;
   padding-left: 0;
@@ -11,7 +36,12 @@
 .navbar-wrapper .navbar .container {
   width: auto;
 }
+/*--------------------------------- Home Page CTA ---------------------------------*/
+#myCarousel {
+    /*position: fixed;
+    width: auto;*/
 
+}
 .carousel {
   height: 500px;
   margin-bottom: 60px;
@@ -33,51 +63,186 @@
   min-width: 100%;
   height: 500px;
 }
-
-
-#overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,.5);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    display: none;
+/*--------------------------------- Dashboard Wallpaper ---------------------------------*/
+#wallpaper  {
+    height: 500px;
+    background-color: #777;
+    font-size: 21px;
+    line-height: 1.4;
 }
 
-#modal {
-    width: 550px;
-    background:#CCC;
-    box-shadow: 0 0 10px #000;
-    border-radius: 10px;
-    overflow: hidden;
+.text {
+    color: #fff;
+    font-style: normal;
+}
+.avater {
+    background-color: #aeaeae;
+}
+.profile-details a {
+    /*color: #000;*/
+}
+/*--------------------------------- Modal ---------------------------------*/
+
+/*--------------------------------- Footer ---------------------------------*/
+footer {
+    background: #19232d;
+    color: #d7dade; /*#d7dade*/
+}
+img {
+    width: 75px;
+}
+footer a {
+    color: #ffffff;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/*#workpunch, #navigation, #learn {
+    width: calc(100%/3);
+    float: left;
+    padding: 2rem;
+}*/
+footer h2{
+    font: bold 1.6rem "Open Sans", Arial, sans-serif;
+    text-transform: uppercase;
+    border-bottom: 1px solid #253443;
+    color: #c5c7cb;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+/*---------------- Workpunch ------------------*/
+
+#workpunch p:first-of-type {
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+#workpunch em{
+    color: #e54e53;
+}
+label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+label[for*="submit"] {
+    display: none;
+}
+#workpunch input {
+    width: 200px;
+    background: #1f2c38;
+    color: #c5c7cb;
+    line-height: 1.4;
+    padding: 8px 12px;
+    display: inline;
+    margin-right: 5px;
+}
+#workpunch input[type*="submit"]{
+    width: 100px;
+    background: #2a3c4c;
+    color: #fff;
+}
+
+
+#navigation {
+
+}
+
+
+
+/*---------------last section--------------*/
+#bottom-footer {
+    font-size: 1.3rem;
+    line-height: 50px;
+    padding: 0 0 0 20px;
+    background-color: #121a21;
+    color: #8d8e92;
+    clear: both;
+}
+#bottom-footer p {
+    width: 75%;
+    float: left;
+}
+#bottom-footer ul {
+    width: 25%;
+    float: right;
+    text-align: left;
+
+}
+#bottom-footer ul li {
+    width: 65px;
+    display: inline-block;
+    text-transform: capitalize;
+    border-right: 1px dotted center;
+}
+#bottom-footer a {
+    color: #c5c7cb;
+}
+
+
+
+/*--------------------------------- RESPONSIVE CSS ------------------------------ */
+
+@media (min-width: 768px) {
+  /* Navbar positioning foo */
+  .navbar-wrapper {
     position: relative;
-    top: 50%;
-    left: 50%;
-    margin-top: -200px;
-    margin-left: -200px;
-    z-index: 1001;
-    display: none;
-}
-#modal .header {
-    border-bottom: 2px solid #fff;
-    color:#000;
-    padding: 10px;
-}
+    top: 2rem;
+    /*margin-top: 20px;*/
+    z-index: 1000;
+  }
+  .navbar-wrapper .container {
+    padding-right: 5rem;
+    padding-left: 5rem;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
 
-#modal p {
-    margin: 15px;
-}
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+  #myCarousel , #wallpaper{
+    position: relative;
+    top: -7.1rem;
 
-#modal .close {
+  }
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+  /* wallpaper content */
+  #wallpaper .content {
     position: absolute;
-    right: 5px;
-    top: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    background-color: #F00;
+    top: 25%;
+    right: 5%;
+    left: 5%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6)
+  }
+  .profile-details {
+      text-align: left;
+      padding-left: 4rem;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
 }
