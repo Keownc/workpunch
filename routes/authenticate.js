@@ -17,13 +17,15 @@ module.exports = function(passport){
 	//log in
 	router.post('/login', passport.authenticate('login', {
 		successRedirect: '/auth/success',
-		failureRedirect: '/auth/failure'
+		failureRedirect: '/auth/failure',
+		failureFlash : true
 	}));
 
 	//sign up
 	router.post('/signup', passport.authenticate('signup', {
 		successRedirect: '/auth/success',
-		failureRedirect: '/auth/failure'
+		failureRedirect: '/auth/failure',
+		failureFlash : true 
 	}));
 
 	//log out

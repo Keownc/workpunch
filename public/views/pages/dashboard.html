@@ -9,28 +9,12 @@
     </div>
     <section class="col-md-9">
         <article class="">
-            <h2>Name</h2>
-            <p>
-
-            </p>
-        </article>
-        <article class="">
-            <h2>Company</h2>
-            <p>
-
-            </p>
-        </article>
-        <article class="">
-            <h2>Position</h2>
-            <p>
-
-            </p>
-        </article>
-        <article class="">
-            <h2>Description</h2>
-            <p>
-
-            </p>
+            <div>
+                <div>Name: <a href="#" editable-text="user.name">{{ user.name || 'empty' }}</a></div>
+                <div>Company: <a href="#" editable-text="user.company">{{ user.company || 'empty' }}</a></div>
+                <div>Position: <a href="#" editable-text="user.position">{{ user.position || 'empty' }}</a></div>
+                <div>Description: <a href="#" editable-textarea="user.description" e-rows="7" e-cols="40">{{ user.description || 'no description' }}</a></div>
+            </div>
         </article>
     </section>
 </section>

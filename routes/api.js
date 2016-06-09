@@ -5,17 +5,26 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 
-function isAuthenticated (req, res, next) {
+const isAuthenticated = function (req, res, next) {
     // if (method = 'GET'){ return next();}
-    if(req.isAuthenticated()){return next();}
-
+    if(!req.isAuthenticated()){return next();}
+    res.send(401);
     res.redirect('/');
 }
 
 router.use('/dashboard', isAuthenticated);
 
-router.route('/dashboard')
+// router.route('/dashboard', isAuthenticated)
+//
+//     .get(function (req, res) {
+//
+//     })
+//     .post(function (req, res) {
+//
+//     });
 
+
+router.route('/dashboard/:id', isAuthenticated)
     .get(function (req, res) {
         User.find(function(err, user){
 			console.log('debug2');
@@ -25,9 +34,12 @@ router.route('/dashboard')
 			return res.send(200,user);
 		});
     })
-    .post(function (req, res) {
+
+    .put(function (req, res) {
         var user = new User();
-        user.name = req.body.name;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.name = user.firstName + user.lastName;
         user.company = req.body.company;
         user.position = req.body.position;
         user.description = req.body.description;
@@ -37,16 +49,6 @@ router.route('/dashboard')
             }
             return res.json(user);
         });
-    });
-
-
-router.route('/dashboard/:id')
-    .get(function (req, res) {
-        res.send({message: 'get'});
-    })
-
-    .put(function (req, res) {
-        res.send({message: 'put'});
     })
 
     .delete(function (req, res) {

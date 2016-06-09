@@ -1,4 +1,7 @@
 'use-strict'
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Company = mongoose.model('Company');
@@ -24,7 +27,7 @@ module.exports = function(passport){
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            User.findOne({ username: username }, function (err, user) {
+            User.findOne({ username: username,password : password }, function (err, user) {
                 if (err) { return done(err); }
                 if (!user) { return done(null, false, req.flash('message','User not found')); }
                 if (!isValidPassword(user, password)) { return done(null, false, req.flash('message','Invalid Password')); }
@@ -39,7 +42,7 @@ module.exports = function(passport){
         },
         function(req, username, password, done) {
 
-            User.findOne({ username: username }, function (err, user) {
+            User.findOne({ username: username , password : password }, function (err, user) {
 
                 if (err) { return done(err); }
 
@@ -47,20 +50,7 @@ module.exports = function(passport){
 
                     console.log('user exits'+ username);
                     return done(null, false);
-                }
-                // } else if(user === company){
-                //
-                //     const new_company = new Company();
-                //     new_company.username = username;
-                //     new_company.password = createHash(password);
-                //     new_company.branch = req.param('branch');
-                //     new_company.companyID = req.param('companyID');
-                //     new_company.company = req.param('company');
-                //     new_company.save(function(err){
-                //         if (err) { return done(err, false); }
-                //         return done(null, new_company);
-                // }
-            else {
+                } else {
 
                     console.log('create new user '+ username);
 
@@ -89,3 +79,16 @@ module.exports = function(passport){
     }
 
 }
+
+// } else (user === company){
+//
+//     const new_company = new Company();
+//     new_company.username = username;
+//     new_company.password = createHash(password);
+//     new_company.branch = req.param('branch');
+//     new_company.companyID = req.param('companyID');
+//     new_company.company = req.param('company');
+//     new_company.save(function(err){
+//         if (err) { return done(err, false); }
+//         return done(null, new_company);
+// }
