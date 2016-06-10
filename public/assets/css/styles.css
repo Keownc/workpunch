@@ -81,8 +81,53 @@ body {
 .profile-details a {
     /*color: #000;*/
 }
-/*--------------------------------- Modal ---------------------------------*/
+/*.uploader {
+    position: relative;
+    bottom: 0%;
+    left: 80%;
 
+}*/
+/*--------------------------------- Dashboard sidebar ---------------------------------*/
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #fff;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  /*color: #fff;*/
+  background-color: #e0e0d1;
+}
+
+/*--------------------------------- Dashboard Boyd ---------------------------------*/
+#tabsNav h3{
+    float: left;
+    width: 70%;
+    line-height: .1;
+    color: #000;
+}
+/*--------------------------------- Modal ---------------------------------*/
+.modal-header h3 {
+    float: left;
+    width: auto;
+}
+.modal-header button {
+    float: right;
+    width: auto;
+}
+.modal-header, .modal-body {
+    padding: 2rem 6rem 6rem 6rem;
+}
+.modal-header {
+    padding-bottom: 2rem;
+}
 /*--------------------------------- Footer ---------------------------------*/
 footer {
     background: #19232d;
@@ -98,11 +143,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/*#workpunch, #navigation, #learn {
-    width: calc(100%/3);
-    float: left;
-    padding: 2rem;
-}*/
 footer h2{
     font: bold 1.6rem "Open Sans", Arial, sans-serif;
     text-transform: uppercase;
@@ -112,8 +152,6 @@ footer h2{
     margin-bottom: 2rem;
     padding-bottom: 1rem;
 }
-
-/*---------------- Workpunch ------------------*/
 
 #workpunch p:first-of-type {
     text-transform: uppercase;
@@ -147,14 +185,10 @@ label[for*="submit"] {
     color: #fff;
 }
 
-
 #navigation {
 
 }
 
-
-
-/*---------------last section--------------*/
 #bottom-footer {
     font-size: 1.3rem;
     line-height: 50px;
@@ -184,7 +218,6 @@ label[for*="submit"] {
 }
 
 
-
 /*--------------------------------- RESPONSIVE CSS ------------------------------ */
 
 @media (min-width: 768px) {
@@ -208,6 +241,7 @@ label[for*="submit"] {
   .navbar-wrapper .navbar {
     border-radius: 4px;
   }
+  /* Bring the CTA and the wallpaper to the top */
   #myCarousel , #wallpaper{
     position: relative;
     top: -7.1rem;
@@ -238,6 +272,24 @@ label[for*="submit"] {
 
   .featurette-heading {
     font-size: 50px;
+  }
+
+  /* Dashboard sidebar */
+  .sidebar {
+    position: relative;
+    top: -7.1rem;
+    bottom: 0;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #326699;
+    border-right: 1px solid #eee;
+  }
+
+  .main {
+    position: relative;
+    top: -10.1rem;
+    bottom: 0;
   }
 }
 
