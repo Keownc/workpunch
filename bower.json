@@ -1,0 +1,25 @@
+{
+  "name": "workpunch",
+  "description": "WorkPunch is an Web application that will manage the records of employees working under it registered companies.",
+  "main": "server/server.js",
+  "authors": [
+    "Keown Creese"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "work"
+  ],
+  "homepage": "https://github.com/Keownc/workpunch",
+  "dependencies": {
+    "angular": "^1.5.7",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.5.5",
+    "angular-bootstrap": "^1.3.3",
+    "angular-animate": "^1.5.3",
+    "angular-xeditable": "^0.1.12"
+},
+    "install": {
+        "path" : "public/libs"
+    }
+
+}

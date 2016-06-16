@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
+const Employee = mongoose.model('Employee');
 const Company = mongoose.model('Company');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
@@ -27,7 +27,7 @@ module.exports = function(passport){
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            User.findOne({ username: username,password : password }, function (err, user) {
+            Employee.findOne({ username: username,password : password }, function (err, user) {
                 if (err) { return done(err); }
                 if (!user) { return done(null, false, req.flash('message','User not found')); }
                 if (!isValidPassword(user, password)) { return done(null, false, req.flash('message','Invalid Password')); }
@@ -42,7 +42,7 @@ module.exports = function(passport){
         },
         function(req, username, password, done) {
 
-            User.findOne({ username: username , password : password }, function (err, user) {
+            Employee.findOne({ username: username , password : password }, function (err, user) {
 
                 if (err) { return done(err); }
 
@@ -54,7 +54,7 @@ module.exports = function(passport){
 
                     console.log('create new user '+ username);
 
-                    const new_user = new User();
+                    const new_user = new Employee();
                     new_user.username = username;
                     new_user.password = createHash(password);
                     new_user.firstName = req.param('firstName');

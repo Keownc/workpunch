@@ -1,14 +1,18 @@
 <!-- Dashboard Wallpaper -->
 <div id="wallpaper">
+
     <div class="view">
-        <img ng-show="wallpaper" ng-src="{{wallpaper.url}}" type="{{wallpaper.file.type}}" alt="wallpaper image">
+        <!-- <img ng-show="wallpaper" ng-src="{{wallpaper.url}}" type="{{wallpaper.file.type}}" alt="wallpaper image"> -->
+
         <div class="content">
              <div class="container">
                 <div class="col-md-3 text">
-                    <form ng-upload='avater()' class="avater">
-                        <label for="avater">Image</label>
-                        <input type="file" accept="image/*" image="image"/>
-                        <img ng-show="avater" ng-src="{{avater.url}}" type="{{avater.file.type}}" />
+                    <form ng-upload='avatar()' class="avatar">
+                        <div class="form-group">
+                            <label for="avatar">Image</label>
+                            <input type="file" accept="image/*" file-model='user.avatar'/>
+                            <!-- <img ng-show="avater" ng-src="{{avater.url}}" type="{{avater.file.type}}" /> -->
+                        </div>
                         <button type="submit" ng-click="avater" disabled>Add</button>
                     </form>
                 </div>

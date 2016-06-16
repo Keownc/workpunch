@@ -7,7 +7,7 @@
         <title>WorkPunch</title>
         <link rel="icon" href="../../favicon.ico">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+        <link href="bower_components/angular-xeditable/dist/js/xeditable.css" rel="stylesheet">
         <link rel="stylesheet" href="./assets/css/styles.css">
     </head>
     <body ng-app="workpunch">
@@ -30,12 +30,12 @@
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
                                 <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-                                <li><a href="#/features">Features</a></li>
-                                <li><a href="#/prices">Prices</a></li>
-                                <li><a href="#/contact">Contact</a></li>
+                                <li><a href="/features">Features</a></li>
+                                <li><a href="/prices">Prices</a></li>
+                                <li><a href="/contact">Contact</a></li>
                                 <!-- <a href="#" class="modalClick"></a> -->
                                 <li><button type="button" class="btn btn-default" ng-hide="authenticated" ng-click="open()">Login</button></li>
-                                <li><button type="button" class="btn btn-default"  ng-show="authenticated" ng-click="logout()"><a href="#/">Logout</a></button></li>
+                                <li><button type="button" class="btn btn-default"  ng-show="authenticated" ng-click="logout()"><a href="/">Logout</a></button></li>
 
                             </ul>
                         </div><!-- /.navbar-collapse -->
@@ -45,15 +45,23 @@
         </div>
 
         <div ng-view></div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
-        <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
-        <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+        <script type="text/javascript" src="../libs/jquery/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.min.js"></script> -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
-        <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+
+        <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
+
         <script type="text/javascript" src="../scripts/workpunch.js"></script>
-        <!-- <script type="text/javascript" src="../scripts/controllers/registerCtrl.js"></script> -->
+        <script type="text/javascript" src="../libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript" src="../libs/angular-xeditable/xeditable.js"></script>
+        <script type="text/javascript" src="../libs/bootstrap/bootstrap.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/registerCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/eRegisterCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/dashboardCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/cRegisterCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/homeCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/homeModalCtrl.js"></script>
     </body>
 </html>

@@ -1,12 +1,8 @@
 'use-strict'
-/**
- * @ngdoc function
- * @name workpunch.controller:registerCtrl
- * @description
- * # registerCtrl
- * Controller of the workPunchApp
- */
-const app = angular.module('workpunch', ['ngRoute','ngAnimate', 'ui.bootstrap', 'xeditable', 'angularFileUpload']).run(function($rootScope, $http){
+
+const myApp = angular.module('workpunch', ['ngRoute','ngAnimate', 'ui.bootstrap', 'xeditable', 'angularFileUpload']);
+
+myApp.run(function($rootScope, $http){
     $rootScope.authenticated = false;
     $rootScope.current_user = '';
     $rootScope.logout = function(){
@@ -17,7 +13,8 @@ const app = angular.module('workpunch', ['ngRoute','ngAnimate', 'ui.bootstrap', 
     }
 });
 
-app.config(function($routeProvider){
+myApp.config(['$routeProvider', '$locationProvider',
+    function($routeProvider, $locationProvider ){
     $routeProvider
         .when('/',{
             templateUrl: './views/pages/home.html',
@@ -30,126 +27,26 @@ app.config(function($routeProvider){
         })
         .when('/eregister',{
             templateUrl: './views/pages/eregister.html',
-            controller: 'employeeRCtrl',
+            controller: 'eRegisterCtrl',
         })
         .when('/cregister',{
             templateUrl: './views/pages/cregister.html',
-            controller: 'companyRCtrl',
+            controller: 'cRegisterCtrl',
         })
         .when('/dashboard',{
             templateUrl: './views/pages/dashboard.html',
             controller: 'dashboardCtrl',
         })
         .otherwise('/');
-});
+
+        $locationProvider
+            .html5Mode({enabled:true, requireBase: false})
+}]);
+
+
 //Home page controller
-app.controller('HomeCtrl',function($scope, $uibModal, $log ){
 
-    $scope.animationsEnabled = true;
 
-    $scope.open = function () {
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: './views/modals/login.html',
-            controller: 'HomeModalCtrl'
-        });
-    }
-});
-//Home page Modal controller
-app.controller('HomeModalCtrl', function($scope, $uibModalInstance, $rootScope, $http, $location) {
-    $scope.user = {};
-    $scope.error_message = '';
-
-    $scope.login = function () {
-        console.log('LOG IN', $scope.user.firstName);
-        $http.get('/auth/login', $scope.user).success(function(user){
-            $rootScope.authenticated = true;
-            if(!user){
-                $location.path('/');
-            } else {
-                $location.path('/dashboard');
-            }
-        });
-        // Auth.login('password', $scope.user, function(err){
-        //     $http.post('/auth/login')
-        // })
-        $uibModalInstance.close();
-    }
-
-    $scope.signup = function () {
-      $uibModalInstance.close();
-      $location.path('/register');
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
-});
-
-//register page controller
-app.controller('registerCtrl', function ($scope, $rootScope, $http, $location) {
-
-    $scope.employee = function () {
-      $location.path('/eregister');
-    };
-
-    $scope.company = function () {
-      $location.path('/cregister');
-    };
-
-});
-//Employee register page controller
-app.controller('employeeRCtrl', function ($scope, $rootScope, $http, $location) {
-    $scope.user = {};
-
-    $scope.registerUser = function(){
-        $http.post('/auth/signup', $scope.user).success(function(data){
-            $rootScope.authenticated = true;
-            if(!user){
-                $location.path('/');
-            } else {
-                $location.path('/dashboard');
-            }
-        });
-    };
-    $scope.back = function () {
-      $location.path('/register');
-    };
-
-});
-//Company register page controller
-app.controller('companyRCtrl', function ($scope, $rootScope, $http, $location) {
-    $scope.user = {};
-
-    $scope.registerCompany = function(){
-        $http.post('/auth/signup', $scope.user).success(function(data){
-            $rootScope.authenticated = true;
-            // $rootScope.current_user = data.users.username;
-            $location.path('/plan');
-        });
-    };
-    $scope.back = function () {
-      $location.path('/register');
-    };
-
-});
-//Employee Dashboard page controller
-app.controller('dashboardCtrl', function($scope, $http, FileUploader){
-    $scope.avater = function(){
-        $scope.response = JSON.parse()
-    };
-    // $scope.uploader = new FileUploader({
-    //       url: 'upload.php'
-    //   });
-      $scope.uploader = new FileUploader();
-
-    $scope.user = {
-        name: 'Keown Creese',
-        company: 'Work Punch',
-        position: 'Developer',
-        description: 'sdf'
-    }
-});
 
 
 // app.factory('Auth', function Auth($location, $http, $rootScope, $cookieStore, Session, User){

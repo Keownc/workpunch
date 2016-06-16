@@ -4,7 +4,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
-const logger = require('morgan')
+const logger = require('morgan');
 const path = require('path');
 const passport = require('passport');
 //Initialize models Schema
@@ -30,7 +30,7 @@ app.get('*', function(req, res) {
 
 //express session
 app.use(session({
-    secret: 'punchme',
+    secret: 'punchme cat',
     saveUninitialized: false,
     resave: true,
     store: new MongoDBStore({

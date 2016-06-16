@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 //Employee Database schema
-const userSchema = new mongoose.Schema({
+const employeeSchema = new mongoose.Schema({
     username: String,
     password: String,
     firstName: String,
@@ -14,7 +14,15 @@ const userSchema = new mongoose.Schema({
     position: String,
     description: String,
     avatar: String,
-    created_at: {type: Date, default: Date.now}
+    created_at: {type: Date, default: Date.now},
+    timecards: {
+        year: Number,
+        month: Number,
+        day: Number,
+        clockIn: {type: Date, default: Date.now},
+        clockOut: {type: Date, default: Date.now},
+
+    }
 });
 //Company Database schema
 const companySchema = new mongoose.Schema({
@@ -31,5 +39,5 @@ const companySchema = new mongoose.Schema({
 
 //SickLeave
 
-mongoose.model('User', userSchema);
+mongoose.model('Employee', employeeSchema);
 mongoose.model('Company', companySchema);

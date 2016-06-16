@@ -69,6 +69,8 @@ body {
     background-color: #777;
     font-size: 21px;
     line-height: 1.4;
+    background-image: url("../images/wallpaper.png");
+    background-size: cover;
 }
 
 .text {
