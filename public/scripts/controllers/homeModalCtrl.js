@@ -10,7 +10,7 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
             if(!user){
                 $location.path('/');
             } else {
-                $location.path('/dashboard');
+                $location.path('/employeeDashboard');
             }
         });
         // Auth.login('password', $scope.user, function(err){

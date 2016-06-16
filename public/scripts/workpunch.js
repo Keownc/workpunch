@@ -1,10 +1,19 @@
 'use-strict'
 
-const myApp = angular.module('workpunch', ['ngRoute','ngAnimate', 'ui.bootstrap', 'xeditable', 'angularFileUpload']);
+const myApp = angular.module('workpunch', [
+    'ngRoute',
+    'ngAnimate',
+    'ui.bootstrap',
+    'xeditable',
+    'angularFileUpload',
+    'ngResource'
+]);
 
 myApp.run(function($rootScope, $http){
     $rootScope.authenticated = false;
     $rootScope.current_user = '';
+    $rootScope.firstName = '';
+    $rootScope.lastName = '';
     $rootScope.logout = function(){
         $http.get('auth/logout');
 
@@ -25,17 +34,17 @@ myApp.config(['$routeProvider', '$locationProvider',
             controller: 'registerCtrl',
             // controllerAs: 'register'
         })
-        .when('/eregister',{
-            templateUrl: './views/pages/eregister.html',
+        .when('/employeeRegister',{
+            templateUrl: './views/pages/employee/register.html',
             controller: 'eRegisterCtrl',
         })
-        .when('/cregister',{
-            templateUrl: './views/pages/cregister.html',
-            controller: 'cRegisterCtrl',
-        })
-        .when('/dashboard',{
-            templateUrl: './views/pages/dashboard.html',
+        .when('/employeeDashboard',{
+            templateUrl: './views/pages/employee/dashboard.html',
             controller: 'dashboardCtrl',
+        })
+        .when('/companyRegister',{
+            templateUrl: './views/pages/company/register.html',
+            controller: 'cRegisterCtrl',
         })
         .otherwise('/');
 

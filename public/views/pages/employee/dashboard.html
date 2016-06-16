@@ -19,10 +19,10 @@
                 <section class="col-md-9">
                     <article class="profile-details">
                         <div>
-                            <div><em class="text">Name: </em><a href="#" editable-text="user.name">{{ user.name || 'empty' }}</a></div>
-                            <div><em class="text">Company: </em><a href="#" editable-text="user.company">{{ user.company || 'empty' }}</a></div>
-                            <div><em class="text">Position: </em><a href="#" editable-text="user.position">{{ user.position || 'empty' }}</a></div>
-                            <div><em class="text">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40">{{ user.description || 'no description' }}</a></div>
+                            <div><em class="text">Name: </em><a href="#" editable-text="user.name" onaftersave="addPost()">{{ user.name || 'empty' }}</a></div>
+                            <div><em class="text">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || 'empty' }}</a></div>
+                            <div><em class="text">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || 'empty' }}</a></div>
+                            <div><em class="text">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div>
                         </div>
                     </article>
                 </section>

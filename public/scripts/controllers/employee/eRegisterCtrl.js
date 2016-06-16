@@ -8,7 +8,7 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
             if(!user){
                 $location.path('/');
             } else {
-                $location.path('/dashboard');
+                $location.path('/employee/dashboard');
             }
         });
     };

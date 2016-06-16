@@ -12,12 +12,14 @@ const isAuthenticated = function (req, res, next) {
     res.redirect('/');
 }
 
-router.use('/dashboard', isAuthenticated);
+router.use('/employee/dashboard', isAuthenticated);
 
-router.route('/dashboard', isAuthenticated)
+router.route('/employee/dashboard', isAuthenticated)
 
     .get(function (req, res) {
-
+        Employee.find({}, function(err, data) {
+            res.json(data);
+        })
     })
     .post(function (req, res) {
 
@@ -28,38 +30,46 @@ router.route('/dashboard', isAuthenticated)
         user.company = req.body.company;
         user.position = req.body.position;
         user.description = req.body.description;
-        user.save(function(err, user) {
+        user.save(function(err, data) {
             if (err){
                 return res.send(500, err);
             }
-            return res.json(user);
+            return res.json(data);
         });
     })
 
 
-router.route('/dashboard/:id', isAuthenticated)
+router.route('/employee/dashboard/:id', isAuthenticated)
+
     .get(function (req, res) {
-        Employee.findOne(function(err, user){
-			console.log('debug2');
-			if(err){
-				return res.send(500, err);
-			}
-			return res.send(200, user);
-		});
+        Employee.findOne({_id: req.params.id },function(err, data){
+
+            const user = data
+            user.firstName = req.body.firstName;
+            user.lastName = req.body.lastName;
+            user.name = user.firstName + user.lastName;
+            user.company = req.body.company;
+            user.position = req.body.position;
+            user.description = req.body.description;
+            user.save(function(err, data) {
+                if (err){
+                    return res.send(500, err);
+                }
+                return res.json(data);
+            });
+        });
     })
 
-    .put(function (req, res) {
-        Employee.findAndModify({
-            // update: {$set: {name: {req.firstName, req.lastName}, position: req.postion, company: req.company}},
-            new: true,
-            function(err, user){
-                res.json(user);
-            }
+    .post(function (req, res) {
+        Employee.findAndModify({_id: req.params.id}, function(err, data){
+            res.json(data);
         });
     })
 
     .delete(function (req, res) {
-        res.send({message: 'delete'});
+        Employee.remove({_id: req.params.id}, function (err) {
+            res.send(500, err);
+        });
     });
 
 

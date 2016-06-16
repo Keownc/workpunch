@@ -15,14 +15,13 @@ const employeeSchema = new mongoose.Schema({
     description: String,
     avatar: String,
     created_at: {type: Date, default: Date.now},
-    timecards: {
-        year: Number,
-        month: Number,
-        day: Number,
-        clockIn: {type: Date, default: Date.now},
-        clockOut: {type: Date, default: Date.now},
-
-    }
+    // timecards: {
+    //     year: Number,
+    //     month: Number,
+    //     day: Number,
+    //     clockIn: {type: Date, default: Date.now},
+    //     clockOut: {type: Date, default: Date.now},
+    // }
 });
 //Company Database schema
 const companySchema = new mongoose.Schema({

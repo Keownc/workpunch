@@ -43,25 +43,29 @@
                 </nav>
             </div>
         </div>
-
-        <div ng-view></div>
+        <!-- Body -->
+        <div ng-view="" class="ng-scope" data-ng-animate="1"></div>
+        <!-- jQuery -->
         <script type="text/javascript" src="../libs/jquery/jquery.js"></script>
+        <!-- Angular links -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.min.js"></script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
-
+        <!-- Angular local file-->
         <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
-
         <script type="text/javascript" src="../scripts/workpunch.js"></script>
         <script type="text/javascript" src="../libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="../libs/angular-xeditable/xeditable.js"></script>
         <script type="text/javascript" src="../libs/bootstrap/bootstrap.js"></script>
+        <!-- Controllers -->
         <script type="text/javascript" src="../scripts/controllers/registerCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/eRegisterCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/dashboardCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/cRegisterCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/employee/eRegisterCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/employee/dashboardCtrl.js"></script>
+        <script type="text/javascript" src="../scripts/controllers/company/cRegisterCtrl.js"></script>
         <script type="text/javascript" src="../scripts/controllers/homeCtrl.js"></script>
         <script type="text/javascript" src="../scripts/controllers/homeModalCtrl.js"></script>
+        <!-- Services -->
+        <script type="text/javascript" src="../scripts/services/Api.js"></script>
     </body>
 </html>
