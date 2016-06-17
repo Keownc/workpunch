@@ -19,11 +19,26 @@
                 <section class="col-md-9">
                     <article class="profile-details">
                         <div>
-                            <div><em class="text">Name: </em><a href="#" editable-text="user.name" onaftersave="addPost()">{{ user.name || 'empty' }}</a></div>
-                            <div><em class="text">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || 'empty' }}</a></div>
-                            <div><em class="text">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || 'empty' }}</a></div>
-                            <div><em class="text">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div>
+                            <div><em class="title">Name: </em><a href="#" editable-text="user.name" onaftersave="addPost()">{{ user.name || 'empty' }}</a></div>
+                            <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || 'empty' }}</a></div>
+                            <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || 'empty' }}</a></div>
+                            <div><em class="title">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div>
                         </div>
+                        <!-- <form editable-form name="editableForm" onaftersave="addPost()">
+                            <div><em class="title">Name: </em><span editable-text="user.name"  e-name="name">{{ user.name || 'empty' }}</span></div>
+                            <div><em class="title">Company: </em><span editable-text="user.company"  e-name="company" >{{ user.company || 'empty' }}</span></div>
+                            <div><em class="title">Position: </em><span editable-text="user.position" e-name="postion"  >{{ user.position || 'empty' }}</span></div>
+                            <div><em class="title">Description: </em><span editable-textarea="user.description" e-name="description" e-rows="7" e-cols="40" >{{ user.description || 'no description' }}</span></div>
+                            <div>
+                                 button to show form
+                                <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
+                                buttons to submit / cancel form
+                                <span ng-show="editableForm.$visible">
+                                    <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">Save</button>
+                                    <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
+                                </span>
+                            </div>
+                        </form> -->
                     </article>
                 </section>
             </div>
@@ -40,41 +55,99 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Time Punch</a></li>
-            <li><a href="#">Sick Leave</a></li>
-            <li><a href="#">Account</a></li>
-            <li><a href="#">Help & support</a></li>
-            <li><a href="#">Setting</a></li>
+            <li><a href="#" ng-click="tab = 0">Time Punch</a></li>
+            <li><a href="#" ng-click="tab = 1">Sick Leave</a></li>
+            <li><a href="#" ng-click="tab = 2">Account</a></li>
+            <li><a href="#" ng-click="tab = 3">Help & support</a></li>
+            <li><a href="#" ng-click="tab = 4">Setting</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
+
           </ul>
         </div>
         <!-- Dashboard Body Content -->
         <div class="col-sm-9 col-md-10 main">
-          <h1 class="page-header">Dashboard</h1>
-          <div class="panel {{panelClass || 'panel-default'}}">
-               <div class="panel-heading">
-                 <!-- <h4 class="panel-title" style="color:#fa39c3">
-                   <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
-                     <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
-                       {{heading}}
-                     </span>
-                   </a> -->
-                 </h4>
-                 <ul id="tabsNav" class="panel-title nav nav-pills" style="color:#fa39c3">
-                     <h3>Time Punch</h3>
-                     <li><a href="#space" tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">Time</a></li>
-                     <li><a href="#solar">OverTime</a></li>
-                     <li><a href="#planet">Logs</a></li>
-                 </ul>
-               </div>
-               <div class="panel-collapse collapse" uib-collapse="!isOpen">
-                 <div class="panel-body" style="text-align: right" ng-transclude></div>
-               </div>
-             </div>
+            <h1 class="page-header">Dashboard</h1>
+            <!-- Sidebar Navigation Tab -->
+            <uib-tabset active="tab" id="tabsNav">
+                <!-- Switch to Timepunch -->
+                <uib-tab index="0" >
+                    <div class="panel {{panelClass || 'panel-default'}}">
+                        <div class="panel-heading">
+                            <uib-tabset  id="tabsNav">
+                                <h2>Time Punch</h2>
+                                <uib-tab index="0" heading="Time">
+                                    <div ng-hide="punchcard.dateOut || punchcard.dateIn">
+                                        <h3>Check In</h3>
+                                        <p>Date: </p>
+                                        <p>
+                                        time
+                                        </p>
+                                        <button type="button" name="button">Punch Me</button>
+                                    </div>
+                                    <div ng-show="punchcard.dateIn && !punchcard.dateOut">
+                                        <h3>Check Out</h3>
+                                        <p>Date: </p>
+                                        <p>
+                                        time
+                                        </p>
+                                        <button type="button" name="button">Punch Me</button>
+                                    </div>
+                                    <div ng-show="punchcard.dateIn && punchcard.dateOut">
+                                        <h3>Next Check In</h3>
+                                        <p>Date: </p>
+                                        <p>
+                                        Next login available at 7am
+                                        </p>
+                                        <p>
+                                        time
+                                        </p>
+                                        <button type="button" name="button" disable="disabled">Punch Me</button>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab index="1" heading="OverTime">
+                                    OverTime
+                                </uib-tab>
+                                <uib-tab index="2" heading="Logs">
+                                    Logs
+                                </uib-tab>
+                            </uib-tabset>
+                        </div>
+                    </div>
+                </uib-tab>  <!-- End Switch to Timepunch  -->
+                <!-- Switch to Sick Leave -->
+                <uib-tab index="1">
+                    <div class="panel {{panelClass || 'panel-default'}}">
+                        <div class="panel-heading">
+                            <uib-tabset id="tabsNav">
+                                <h2>Sick Leave</h2>
+                                <uib-tab index="0" heading="Form">
+                                    Form
+                                    <form class="" action="index.html" method="post">
+
+                                    </form>
+                                </uib-tab>
+                                <uib-tab index="1" heading="View">
+                                    View
+                                </uib-tab>
+                            </uib-tabset>
+                        </div>
+                    </div>
+                </uib-tab> <!-- End Switch to Sick Leave  -->
+                <uib-tab index="2">
+                    <div class="panel {{panelClass || 'panel-default'}}">
+                        <div class="panel-heading">
+                            <uib-tabset id="tabsNav">
+                                <h2>Account</h2>
+                                <uib-tab index="0" heading="Account">
+                                    Account
+                                </uib-tab>
+                            </uib-tabset>
+                        </div>
+                    </div>
+                </uib-tab> <!-- End Switch to Sick Leave  -->
+            </uib-tabset>    <!-- End Sidebar Navigation Tab  -->
         </div>
     </div>
 </div>

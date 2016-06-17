@@ -8,8 +8,9 @@ myApp.controller('dashboardCtrl', function($scope, $http, FileUploader, $rootSco
         description: ''
     };
     $scope.employee = [];
+
     Api.Employee.query({}, function(data){
-      $scope.user = data;
+        return $scope.user = data;
     });
 
     $scope.refresh =function(){
@@ -20,14 +21,14 @@ myApp.controller('dashboardCtrl', function($scope, $http, FileUploader, $rootSco
     //Add to the user Database
     $scope.addPost = function(){
         $scope.user.name = $rootScope.firstName + $rootScope.lastName;
-        Api.Employee.save({},$scope.user, function(data){
-            // $scope.user = {name: {$rootScope.firstName + $rootScope.lastName}, company: $scope.user.company};
+        Api.Employee.save({"company": $scope.user.company},$scope.user, function(data){
             $scope.employee.push(data);
         })
     }
     //Edit the to user Database information
     $scope.edit = function(){
-        $http.get().success(function(data){
+        $http.get('/employee/dashboard/').success(function(data){
+
         })
     }
     //Update the to user Database information
@@ -43,6 +44,5 @@ myApp.controller('dashboardCtrl', function($scope, $http, FileUploader, $rootSco
     //       url: 'upload.php'
     //   });
       $scope.uploader = new FileUploader();
-
 
 });

@@ -73,7 +73,7 @@ body {
     background-size: cover;
 }
 
-.text {
+.title {
     color: #fff;
     font-style: normal;
 }
@@ -108,8 +108,8 @@ body {
   background-color: #e0e0d1;
 }
 
-/*--------------------------------- Dashboard Boyd ---------------------------------*/
-#tabsNav h3{
+/*--------------------------------- Dashboard Body ---------------------------------*/
+#tabsNav h2{
     float: left;
     width: 70%;
     line-height: .1;
