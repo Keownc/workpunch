@@ -1,5 +1,5 @@
 //Employee Dashboard page controller
-myApp.controller('dashboardCtrl', function($scope, $http, FileUploader, $rootScope, Api){
+myApp.controller('dashboardCtrl', function($scope, $http, FileUploader, $rootScope, Api, $route){
 
     $scope.user = {
         name: '',
@@ -10,31 +10,28 @@ myApp.controller('dashboardCtrl', function($scope, $http, FileUploader, $rootSco
     $scope.employee = [];
 
     Api.Employee.query({}, function(data){
-        return $scope.user = data;
+        // console.log(data.user.company);
+         $scope.employee = data;
+         //
+         console.log("company " + data.user);
     });
+    // console.log(Api.Employee.query());
 
     $scope.refresh =function(){
-        $http.get().success(function(data){
-
+        $http.get('/employee/dashboard/').success(function(data){
+             $scope.user = data;
+            console.log("company" + $scope.user.company);
         })
     }
     //Add to the user Database
     $scope.addPost = function(){
         $scope.user.name = $rootScope.firstName + $rootScope.lastName;
-        Api.Employee.save({"company": $scope.user.company},$scope.user, function(data){
-            $scope.employee.push(data);
+        Api.Employee.save({},$scope.user, function(data){
+            // $scope.user.push(data);
+            $scope.employee = Api.Employee.query();
         })
     }
-    //Edit the to user Database information
-    $scope.edit = function(){
-        $http.get('/employee/dashboard/').success(function(data){
 
-        })
-    }
-    //Update the to user Database information
-    $scope.update = function () {
-        // $http.put('/')
-    }
 
     // Adds an profile image
     $scope.avater = function(){
@@ -44,5 +41,12 @@ myApp.controller('dashboardCtrl', function($scope, $http, FileUploader, $rootSco
     //       url: 'upload.php'
     //   });
       $scope.uploader = new FileUploader();
+
+    $scope.options = {
+        days: [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+            24, 25, 26, 27, 28, 29, 30
+        ]
+    };
 
 });

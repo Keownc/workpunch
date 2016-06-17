@@ -14,7 +14,7 @@ const employeeSchema = new mongoose.Schema({
     position: String,
     description: String,
     avatar: String,
-    created_at: {type: Date, default: Date.now},
+    // created_at: {type: Date, default: Date.now},
     // timecards: {
     //     year: Number,
     //     month: Number,

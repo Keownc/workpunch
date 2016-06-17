@@ -6,7 +6,8 @@ const myApp = angular.module('workpunch', [
     'ui.bootstrap',
     'xeditable',
     'angularFileUpload',
-    'ngResource'
+    'ngResource',
+    'ngRoute'
 ]);
 
 myApp.run(function($rootScope, $http){

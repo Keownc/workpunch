@@ -14,17 +14,6 @@ $(function(){
         $('#tabs '+ action).fadeIn('fast');
     }).eq(0).addClass('current');
 
-    //Modal code
-    //open modal window
-    $('.modalClick').on('click', function(e){
-        e.preventDefault();
-        $('#overlay').fadeIn().find('#modal').fadeIn();
-    });
-    //Close modal windiw
-    $('.close').on('click', function(e){
-        e.preventDefault();
-        $('#overlay').fadeOut().find('#modal').fadeOut();
 
-    });
 
 });

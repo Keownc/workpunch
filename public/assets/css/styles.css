@@ -115,6 +115,13 @@ body {
     line-height: .1;
     color: #000;
 }
+/* Sick Leave Form*/
+.form-option {
+    width: 10%;
+    height: 3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 /*--------------------------------- Modal ---------------------------------*/
 .modal-header h3 {
     float: left;

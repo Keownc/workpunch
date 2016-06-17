@@ -18,7 +18,7 @@
                 </div>
                 <section class="col-md-9">
                     <article class="profile-details">
-                        <div>
+                        <div >
                             <div><em class="title">Name: </em><a href="#" editable-text="user.name" onaftersave="addPost()">{{ user.name || 'empty' }}</a></div>
                             <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || 'empty' }}</a></div>
                             <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || 'empty' }}</a></div>
@@ -125,7 +125,24 @@
                                 <uib-tab index="0" heading="Form">
                                     Form
                                     <form class="" action="index.html" method="post">
+                                        <div class="form-group">
+                                            <label for="fName">First Name</label>
+                                            <input type="text" id="fName" class="form-control" placeholder="Sam" ng-model="user.fname" ng-required="true"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lName">Last Name</label>
+                                            <input type="text" id="lName" class="form-control" placeholder="Sam" ng-model="user.lname" ng-required="true"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="company">Company</label>
+                                            <input type="text" id="fName" class="form-control" placeholder="Sam" ng-model="user.company" ng-required="true"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fName">Number of days</label>
 
+                                            <select class="form-option" ng-model="days" ng-options="opt for opt in options.days" ></select>
+                                        </div>
+                                        <button type="button" name="submit" type="button" ng-click="sumbit()">Sumbit</button>
                                     </form>
                                 </uib-tab>
                                 <uib-tab index="1" heading="View">
@@ -146,8 +163,12 @@
                             </uib-tabset>
                         </div>
                     </div>
-                </uib-tab> <!-- End Switch to Sick Leave  -->
+                 <!-- End Switch to Sick Leave  -->
             </uib-tabset>    <!-- End Sidebar Navigation Tab  -->
+            <p>
+                company :{{ employee.company }}
+                company :{{ user.company }}
+            </p>
         </div>
     </div>
 </div>
