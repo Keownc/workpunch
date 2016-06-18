@@ -3,11 +3,11 @@
 const myApp = angular.module('workpunch', [
     'ngRoute',
     'ngAnimate',
+    'ngResource',
+    'ngRoute',
     'ui.bootstrap',
     'xeditable',
-    'angularFileUpload',
-    'ngResource',
-    'ngRoute'
+    'angularFileUpload'
 ]);
 
 myApp.run(function($rootScope, $http){

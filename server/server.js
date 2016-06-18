@@ -5,18 +5,22 @@ const flash = require('connect-flash');
 const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
 const logger = require('morgan');
+const multer  = require('multer');
+const upload = multer({ dest: '../uploads/'}).array()
 const path = require('path');
 const passport = require('passport');
 //Initialize models Schema
 require('../models/model.js');
 const api = require('../routes/api');
-const authenticate = require('../routes/authenticate')(passport);
+// Database connection and session
+const authenticate = require('../routes/auth')(passport);
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/workpunch");
 const MongoDBStore = require('connect-mongodb-session')(session)
+// Run Server
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
@@ -43,7 +47,7 @@ app.use(flash());
 // middleware
 app.use(logger('dev'));
 app.use(body_parser.json());
-app.use(body_parser.urlencoded({extended: false}))
+app.use(body_parser.urlencoded({extended: false}));
 app.use(cookie_parser());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -53,6 +57,7 @@ init_passport(passport);
 
 app.use('/api' ,api);
 app.use('/auth', authenticate);
+app.use(upload);
 
 // Start server
 var server = app.listen(port, function() {

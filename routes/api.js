@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
+const SickLeave = mongoose.model('SickLeave');
 
 
 const isAuthenticated = function (req, res, next) {
@@ -64,6 +65,21 @@ router.route('/employee/dashboard/:id', isAuthenticated)
         });
     });
 
+    router.post('/upload', function(req, res){
+        // var userForm = new SickLeave();
+        // userForm.employeeID = req.body.employeeID;
+        // userForm.daysOutSick = req.body.days;
+        // userForm.slip = req.body.file
+        // userForm.save(function(err, data) {
+        //     if (err){
+        //         return res.send(500, err);
+        //     }
+        //     return res.json(data);
+        // });
+            console.log(req.body);
+            console.log(req.files);
+        	res.status(204).end()
+    	});
 
 
 
