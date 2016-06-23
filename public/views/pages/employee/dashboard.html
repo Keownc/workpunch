@@ -15,19 +15,16 @@
                         </div>
                         <button type="submit" ng-click="avater" disabled>Add</button>
                     </form> -->
-                    <div class="">
-                        {{ item.file.name }}
-                    </div>
-                    <input type="file" nv-file-select="" uploader="uploader" />
-                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                          <span class="glyphicon glyphicon-upload"></span> Upload all
-                      </button>
+
+
+                    <img src="{{avater}}" alt="" />
+                    <a href="#" ngf-select="avatar($files)">Upload</a>
 
                 </div>
                 <section class="col-md-9">
                     <article class="profile-details">
                         <div >
-                            <div><em class="title">Name: </em><a href="#" editable-text="user.name" onaftersave="addPost()">{{ user.name || 'empty' }}</a></div>
+                            <div><em class="title">Name: </em><a href="#" editable-text="user.fullname" onaftersave="addPost()">{{ user.name || 'empty' }}</a></div>
                             <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || 'empty' }}</a></div>
                             <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || 'empty' }}</a></div>
                             <div><em class="title">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div>

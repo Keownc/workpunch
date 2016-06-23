@@ -7,6 +7,7 @@ const employeeSchema = new mongoose.Schema({
     employeeID: String,
     firstName: String,
     lastName: String,
+    fullname: String,
     username: String,
     password: String,
     email: String,
@@ -15,6 +16,7 @@ const employeeSchema = new mongoose.Schema({
     position: String,
     description: String,
     avatar: String,
+    employeeID: String
     // created_at: {type: Date, default: Date.now},
     // timecards: {
     //     year: Number,

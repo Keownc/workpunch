@@ -1,6 +1,6 @@
 'use-strict'
 //Employee Dashboard page controller
-myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, FileUploader, SickLeaveForm){
+myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
 
     $scope.user = {};
     $scope.employee = [];
@@ -31,26 +31,30 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
 
 
     // Adds an profile image
-    $scope.avater = function(){
-        $scope.response = JSON.parse()
-    };
-    // $scope.uploader = new FileUploader({
-    //       url: 'upload.php'
-    //   });
-    // $scope.uploader = new FileUploader();
+    // $scope.avatar = function(files){
+    //     $scope.files = files;
+    //     if(!$scope.files){ return }
+    //     angular.forEach(files, function(file){
+    //         if(file && !file.$error){
+    //             file.upload = $upload.upload({
+    //                 url:"https://api.cloudinary.com/v1_1"+cloudinary.config().cloud_name+"/upload",
+    //                 data:{
+    //                     upload_preset:cloudinary.config().cloud_preset,
+    //                     tags:'myphotoalbum',
+    //                     file: file
+    //                 }
+    //             }).success(function(data, status, headers, config){
+    //                 file_result = data;
+    //                 const avatarUrl = data.url;
+    //                 $scope.avatar = avatarUrl;
+    //             }).error(function (data, status, headers, config) {
+    //                 file_result = data;
+    //             })
+    //         }
+    //     })
+    // };
 
-    const uploader = $scope.uploader = new FileUploader({
-                url: 'upload.php'
-            });
 
-            // FILTERS
-
-            uploader.filters.push({
-                name: 'customFilter',
-                fn: function(item /*{File|FileLikeObject}*/, options) {
-                    return this.queue.length < 10;
-                }
-            });
 
     // Sick leave form days option
     $scope.options = {

@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
+const Employee = mongoose.model('Employee');
 const Company = mongoose.model('Company');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
@@ -11,8 +11,9 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const app = express();
 
+
 passport.serializeUser(function(user, next) {
-  return next(null, user);
+  return next(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {

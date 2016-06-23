@@ -35,15 +35,16 @@ app.get('*', function(req, res) {
 //express session
 app.use(session({
     secret: 'punchme cat',
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: true,
     store: new MongoDBStore({
         uri: 'mongodb://localhost:27017/connect_mongodb_session_test',
-        collection: 'mySessions'
+        collection: 'mySessions',
+        connection: mongoose.connect,
+        ttl: 2 * 3 * 60 * 60
   })
 }));
-//connect flash
-app.use(flash());
+
 // middleware
 app.use(logger('dev'));
 app.use(body_parser.json());
@@ -55,8 +56,11 @@ app.use(passport.session());
 const init_passport = require('./passport');
 init_passport(passport);
 
+//connect flash
+app.use(flash());
+
 app.use('/api' ,api);
-app.use('/auth', authenticate);
+app.use('/auth',api, authenticate);
 app.use(upload);
 
 // Start server

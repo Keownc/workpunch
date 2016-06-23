@@ -16,33 +16,36 @@ module.exports = function(passport){
     });
 
     passport.deserializeUser(function(id, done) {
-      User.findById(id, function (err, user) {
-          if (err) { return done(err, false); }
-          if (!user) { return done('User not found', false); }
-          return done(err, user);
-      });
+        Employee.findById(id, function (err, user) {
+            if (err) { return done(err, false); }
+            if (!user) { return done('User not found', false); }
+            return done(err, user);
+        });
+
     });
 
     passport.use('login', new localStrategy({
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            Employee.findOne({ username: username,password : password }, function (err, user) {
-                if (err) { return done(err); }
-                if (!user) { return done(null, false, req.flash('message','User not found')); }
-                if (!isValidPassword(user, password)) { return done(null, false, req.flash('message','Invalid Password')); }
+            process.nextTick(function(){
+                Employee.findOne({ username: username, password: password }, function (err, user) {
+                    if (err) { return done(err); }
+                    if (!user) { return done(null, false, req.flash('message','User not found')); }
+                    if (!isValidPassword(password)) { return done(null, false, req.flash('message','Invalid Password')); }
 
-                return done(null, user);
+                    return done(null, user);
+                 });
              });
          }
     ));
 
-    passport.use('signup',new localStrategy({
+    passport.use('employee-signup',new localStrategy({
             passReqToCallback : true
         },
         function(req, username, password, done) {
 
-            Employee.findOne({ username: username , password : password }, function (err, user) {
+            Employee.findOne({ 'username': username , 'password' : password }, function (err, user) {
 
                 if (err) { return done(err); }
 
@@ -55,7 +58,7 @@ module.exports = function(passport){
                     console.log('create new user '+ username);
 
                     const new_user = new Employee();
-                    new_user.username = username;
+                    new_user.username = req.param.username;
                     new_user.password = createHash(password);
                     new_user.firstName = req.param('firstName');
                     new_user.lastName = req.param('lastName');
@@ -71,7 +74,7 @@ module.exports = function(passport){
         }
     ));
     const isValidPassword = function(user, password){
-        return bcrypt.compareSync(password, user.password)
+        return bcrypt.compare(password, user.password)
     }
     // Generate Hash
     const createHash = function (password) {

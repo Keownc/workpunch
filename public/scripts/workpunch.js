@@ -6,8 +6,11 @@ const myApp = angular.module('workpunch', [
     'ngResource',
     'ngRoute',
     'ui.bootstrap',
-    'xeditable',
-    'angularFileUpload'
+    'xeditable'
+    // 'ngFileUpload',
+    // 'cloudinary',
+    // 'Upload'
+
 ]);
 
 myApp.run(function($rootScope, $http){
@@ -21,6 +24,11 @@ myApp.run(function($rootScope, $http){
         $rootScope.authenticated = false;
         $rootScope.current_user = '';
     }
+   //  $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
+   //   if ($location.path() === '/profile' && !authentication.isLoggedIn()) {
+   //     $location.path('/');
+   //   }
+   // });
 });
 
 myApp.config(['$routeProvider', '$locationProvider',
@@ -53,66 +61,9 @@ myApp.config(['$routeProvider', '$locationProvider',
             .html5Mode({enabled:true, requireBase: false})
 }]);
 
-
-//Home page controller
-
-
-
-
-// app.factory('Auth', function Auth($location, $http, $rootScope, $cookieStore, Session, User){
-//     $rootScope.current_user = $cookieStore.get('user') || null;
-//     $cookieStore.remove('user');
+// myApp.config('cloudinaryProvider', function (cloudinaryProvider) {
+//     cloudinaryProvider
+//         .set('cloud_name','dbqouy9xa')
+//         .set('upload_preset', 'vzjnjauc')
 //
-//     return {
-//         login: function(user, callback){
-//             const call_back = callback || angular.noop;
-//             Session.save({
-//                 username: user.username,
-//                 password: user.password
-//
-//             }.function(user){
-//                  $rootScope.current_user = user;
-//                  return call_back();
-//             });
-//         },
-//
-//         logout: function(callback){
-//             const call_back = callback || angular.noop;
-//             Session.delete(function(res) {
-//                 $rootScope.current_user = null;
-//                 return call_back();
-//           });
-//       },
-//
-//       createUser: function(userinfo, callback) {
-//         const call_back = callback || angular.noop;
-//         User.save(userinfo,
-//           function(user) {
-//             $rootScope.current_user = user;
-//             return call_back();
-//           },
-//           function(err) {
-//             return call_back(err.data);
-//           });
-//       },
-//
-//       currentUser: function() {
-//         Session.get(function(user) {
-//           $rootScope.current_user = user;
-//         });
-//       },
-//     }
-// });
-//
-// app.factory('User', function($resource){
-//     return $http.get('/api/dashboard/:id', {},
-//         {
-//             'update' : {
-//                 method : 'PUT'
-//             }
-//         });
-// });
-//
-// app.factory('User', function($resource){
-//     return $http.get('/auth/session');
 // })

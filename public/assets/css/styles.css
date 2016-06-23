@@ -63,6 +63,21 @@ body {
   min-width: 100%;
   height: 500px;
 }
+/*--------------------------------- Home Page Body ---------------------------------*/
+
+.heading h2, h3{
+    text-align: center;
+}
+.services {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+.services h2{
+    margin-bottom: 6rem;
+}
+.item {
+     background-color: #777;
+}
 /*--------------------------------- Dashboard Wallpaper ---------------------------------*/
 #wallpaper  {
     height: 500px;

@@ -1,6 +1,9 @@
 'use-strict'
 const express = require('express');
 const router = express.Router();
+const api = require('../routes/api');
+const mongoose = require('mongoose');
+const Employee = mongoose.model('Employee');
 
 module.exports = function(passport){
 
@@ -12,6 +15,7 @@ module.exports = function(passport){
 	//sends failure login state back to angular
 	router.get('/failure', function(req, res){
 		res.send({state: 'failure', user: null, message: "Invalid username or password"});
+		res.redirect('/');
 	});
 
 	//log in
@@ -22,14 +26,14 @@ module.exports = function(passport){
 	}));
 
 	//sign up
-	router.post('/signup', passport.authenticate('signup', {
+	router.post('/employee-signup', passport.authenticate('employee-signup', {
 		successRedirect: '/auth/success',
 		failureRedirect: '/auth/failure',
-		failureFlash : true 
+		failureFlash : true
 	}));
 
 	//log out
-	router.get('/signout', function(req, res) {
+	router.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});
