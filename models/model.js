@@ -1,6 +1,7 @@
 'use-strict'
 // Employee schema
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 //Employee Database schema
 const employeeSchema = new mongoose.Schema({
@@ -46,6 +47,17 @@ const sickLeaveSchema = new mongoose.Schema({
     daysOutSick: Number,
     slip: String,
 });
+
+// Methods
+// Generate Hash
+employeeSchema.methods.createHash = function (password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+}
+// checking if password is valid
+employeeSchema.methods.validPassword = function(password){
+    return bcrypt.compareSync(password, this.password)
+}
+
 
 
 mongoose.model('Employee', employeeSchema);

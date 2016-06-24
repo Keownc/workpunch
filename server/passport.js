@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 const Company = mongoose.model('Company');
 const localStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcryptjs');
 
 
 module.exports = function(passport){
@@ -17,11 +16,8 @@ module.exports = function(passport){
 
     passport.deserializeUser(function(id, done) {
         Employee.findById(id, function (err, user) {
-            if (err) { return done(err, false); }
-            if (!user) { return done('User not found', false); }
             return done(err, user);
         });
-
     });
 
     passport.use('login', new localStrategy({
@@ -32,7 +28,7 @@ module.exports = function(passport){
                 Employee.findOne({ username: username, password: password }, function (err, user) {
                     if (err) { return done(err); }
                     if (!user) { return done(null, false, req.flash('message','User not found')); }
-                    if (!isValidPassword(password)) { return done(null, false, req.flash('message','Invalid Password')); }
+                    if (!user.validPassword(password)) { return done(null, false, req.flash('message','Invalid Password')); }
 
                     return done(null, user);
                  });
@@ -44,22 +40,16 @@ module.exports = function(passport){
             passReqToCallback : true
         },
         function(req, username, password, done) {
-
-            Employee.findOne({ 'username': username , 'password' : password }, function (err, user) {
-
+            Employee.findOne({ username: username , password : password }, function (err, user) {
                 if (err) { return done(err); }
-
                 if (user) {
-
                     console.log('user exits'+ username);
                     return done(null, false);
                 } else {
-
                     console.log('create new user '+ username);
-
                     const new_user = new Employee();
-                    new_user.username = req.param.username;
-                    new_user.password = createHash(password);
+                    new_user.username = username;
+                    new_user.password = new_user.createHash(password);
                     new_user.firstName = req.param('firstName');
                     new_user.lastName = req.param('lastName');
                     new_user.email = req.param('email');
@@ -73,13 +63,6 @@ module.exports = function(passport){
             });
         }
     ));
-    const isValidPassword = function(user, password){
-        return bcrypt.compare(password, user.password)
-    }
-    // Generate Hash
-    const createHash = function (password) {
-        return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-    }
 
 }
 

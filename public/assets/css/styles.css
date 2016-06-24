@@ -65,15 +65,16 @@ body {
 }
 /*--------------------------------- Home Page Body ---------------------------------*/
 
-.heading h2, h3{
+.heading {
     text-align: center;
-}
-.services {
     margin-top: 6rem;
     margin-bottom: 6rem;
 }
-.services h2{
+.services {
     margin-bottom: 6rem;
+}
+.services h3{
+    text-align: center;
 }
 .item {
      background-color: #777;

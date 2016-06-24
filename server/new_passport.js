@@ -9,76 +9,33 @@ const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 
 const passport = require('passport');
-const app = express();
 
 
-passport.serializeUser(function(user, next) {
-  return next(null, user._id);
+// Serializes user instance from a session store in order to support login sessions
+passport.serializeUser(function(user, done) {
+    done(null, user);
 });
 
-passport.deserializeUser(function(id, done) {
-  return models.User.find({
-   where: {
-     user_id: user._id
-   }
- }).then(function(user) {
-   // SEND THE USER TO THE NEXT
-   return next(null, user);
- });
+// Deserializes user so that every request will not contain the user credentials
+passport.deserializeUser(function(user, done) {
+    done(null, user);
 });
 
-passport.use(new localStrategy({
-        passReqToCallback : true
-    },
-    function (accessToken, refreshToken, profile, next) {
-        // FIND THE USER OR CREATE ONE IF IT DOESN"T EXIST
-        return models.User.findOrCreate({
-          where: {
-            user_id: profile.id
-          },
-          defaults: {
-            name: profile.displayName,
-            username: profile.username,
-            UserTypeId: 1
-          }
-        }).then(function(user) {
-          // SEND THE USER TO THE NEXT
-          return next(null, user[0]);
-        });
-    }
-));
-// SETUP THE EXPRESS STORE
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: false,
-  // SETUP A STORE (MONGO or SEQUALIZE)
-  store: new sequelizeStore({
-    db: appRequire('core/db')
-  })
-}));
-
-app.get('/auth/success', passport.authenticate('success'), function(req, res) {
-  // The request will be redirected to GitHub for authentication, so this
-  // function will not be called.
-});
-
-app.get('auth/success/callback', passport.authenticate('success', {
-  failureRedirect: '/'
-}), function(req, res) {
-  var type;
-  type = req.user.UserTypeId === 1 ? 'dashboard' : 'company';
-  return res.redirect('/#/' + type);
-});
-
-app.get('auth/logout', function(req, res, next) {
-  req.logout();
-  return req.session.destroy(function() {
-    return res.redirect('/#/');
+// Defining login strategy to use
+passport.use('employee-login', new localStrategy({
+  usernameField: 'username',
+  passwordField: 'password',
+  passReqToCallback: true
+},
+function(req, email, password, done){
+  process.nextTick(function(){
+    Employee.findOne({'username': username, 'password': password}, function(err, user){
+      if(user)
+        return done(null, user);
+      if(err)
+        return err;
+      return false;
+    });
   });
-});
-
-app.use(require('app/routes'));
-app.use(require('app/erours'));
-
-module.exports = app;
+}
+));

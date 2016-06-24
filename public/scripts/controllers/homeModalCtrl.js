@@ -1,39 +1,42 @@
 //Home page Modal controller
-myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope, $http, $location, Auth) {
+myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope, $http, $location, Auth, Session, $cookieStore, Api) {
     $scope.user = {};
     $scope.error_message = '';
+    $scope.error = {};
+    $scope.employee = [];
+    $rootScope.current_user = $cookieStore.get('user') || null;
+
+    Api.Employee.query({}, function(data){
+         $scope.employee = data;
+    });
+
+    $scope.loadAuth = function() {
+        Auth.load().success(function(data) {
+            $scope.employee = data.user;
+             $location.path('/employeeDashboard');
+        });
+    }
 
     $scope.login = function () {
-        // $http.post('/auth/login', $scope.user).success(function(user){
-        //     $rootScope.authenticated = true;
-        //
-        //     $location.path('/employeeDashboard');
-        //     $uibModalInstance.close();
-        // }).error(function(err) {
-        //   // If any errors redirect back to homepage
-        //   $location.path('/');
-        // })
 
-        $scope.loadAuth = function() {
-        		Auth.load().success(function(data) {
-        			$scope.user = data.user;
-                     $location.path('/employee/dashboard');
-        		});
-        	}
+        Auth.login($scope.user).success(function(data) {
+            // If successful redirect to dashboard
+            // $scope.employee = Api.Employee.query();
+            // var username = $scope.employee.username;
+            // username = username.replace(/\s+/g, '-').toLowerCase();
+            // $location.path('/' + username + '/employeeDashboard');
+             $location.path('/employeeDashboard');
+            $uibModalInstance.close();
 
-            Auth.login($scope.user).success(function(data) {
-                 $location.path('/employee/dashboard');
-    			// if (data.error) {
-    			// 	toastr.error(data.error);
-                //     // $location.path('/');
-    			// } else {
-    			// 	$scope.loadAuth();
-                //      $location.path('/employee/dashboard');
-    			// }
-    		});
+		}) .error(function(err) {
+          // If any errors redirect back to homepage
+          console.log('Authentication unsuccessful!', err);
+          $location.path('/');
+        })
 
 
     }
+
 
     $scope.signup = function () {
       $uibModalInstance.close();

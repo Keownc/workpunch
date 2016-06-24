@@ -5,22 +5,22 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
     $scope.registerUser = function(){
         // $http.post('/api/register', $scope.user).success(function(data){
         //     $rootScope.authenticated = true;
-        //     if(!user){
-        //         $location.path('/');
-        //     } else {
-        //         $location.path('/employee/dashboard');
-        //     }
+        //     var username = data.puser.username;
+        //
         // });
 
         Auth.register($scope.user).success(function(data) {
-            if (data.error) {
-                toastr.error(data.error);
-            } else {
-                $location.path('/employee/dashboard');
-            }
+            $location.path('/employeeDashboard');
+
+            $rootScope.current_user = data.username;
+            var username;
+            username = $rootScope.current_user.replace(/\s+/g, '-').toLowerCase();
+            $location.path('/' + username + '/employeeDashboard');
+            //
         });
 
     };
+
     $scope.back = function () {
       $location.path('/register');
     };

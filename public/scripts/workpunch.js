@@ -6,15 +6,25 @@ const myApp = angular.module('workpunch', [
     'ngResource',
     'ngRoute',
     'ui.bootstrap',
-    'xeditable'
+    'xeditable',
+    'ngCookies'
     // 'ngFileUpload',
     // 'cloudinary',
     // 'Upload'
 
 ]);
 
-myApp.run(function($rootScope, $http){
-    $rootScope.authenticated = false;
+myApp.run(function($rootScope, $http, $location, Auth){
+
+    // $rootScope.$watch('currentUser', function(current_user) {
+    //     if (!current_user && (['/', '/logout', '/employeeRegister'].indexOf($location.path()) == -1 )) {
+    //         Auth.currentUser();
+    //       }
+    // });
+    // $rootScope.$on('event:auth-loginRequired', function() {
+    //     $location.path('/login');
+    //     return false;
+    // });
     $rootScope.current_user = '';
     $rootScope.firstName = '';
     $rootScope.lastName = '';
@@ -24,11 +34,6 @@ myApp.run(function($rootScope, $http){
         $rootScope.authenticated = false;
         $rootScope.current_user = '';
     }
-   //  $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-   //   if ($location.path() === '/profile' && !authentication.isLoggedIn()) {
-   //     $location.path('/');
-   //   }
-   // });
 });
 
 myApp.config(['$routeProvider', '$locationProvider',

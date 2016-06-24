@@ -29,7 +29,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         })
     }
 
-
     // Adds an profile image
     // $scope.avatar = function(files){
     //     $scope.files = files;
