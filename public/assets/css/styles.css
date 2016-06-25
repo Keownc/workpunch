@@ -11,6 +11,16 @@ html {
 body {
     font: 300/1 1.6rem "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+@import url('http://fonts.googleapis.com/css?family=Rationale');
+/* this import should be first line in css file else add as <link> in html*/
+.widget-clock.blue-light .digital {
+  text-align: center;
+}
+.widget-clock.blue-light .time {
+  font-family: 'Rationale', sans-serif;
+  font-size: 3.0em;
+  color: #1da4eb;
+}
 
 /*--------------------------------- Navigation ---------------------------------*/
 /*.navbar-static-top {
@@ -63,12 +73,23 @@ body {
   min-width: 100%;
   height: 500px;
 }
+.cta{
+    padding: 1.2rem 6rem;
+}
 /*--------------------------------- Home Page Body ---------------------------------*/
-
+.body {
+    margin-top: -12rem;
+}
+.features .thumbnail {
+    padding: 3rem;
+    background-color: #326699
+}
 .heading {
     text-align: center;
     margin-top: 6rem;
     margin-bottom: 6rem;
+    font: 4.5rem Cronos Pro, "Helvetica Neue", Helvetica, Arial sans-serif;
+    color: #505151;
 }
 .services {
     margin-bottom: 6rem;
@@ -125,6 +146,20 @@ body {
 }
 
 /*--------------------------------- Dashboard Body ---------------------------------*/
+.timepunch{
+    text-align: center;
+}
+.timepunch h3{
+    font-size: 5rem;
+    text-transform: uppercase;
+}
+.timepunch span {
+    font-size: 3.5rem;
+}
+.timepunch date {
+    width: 50%;
+    float: left;
+}
 #tabsNav h2{
     float: left;
     width: 70%;

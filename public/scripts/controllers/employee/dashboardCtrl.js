@@ -68,4 +68,5 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         const uploadUrl = '/upload';
         SickLeaveForm.post(uploadUrl, $scope.user)
     }
+    
 });

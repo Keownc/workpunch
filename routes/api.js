@@ -21,15 +21,15 @@ router.route('/employeeDashboard')
 
         Employee.find({id: req.session.passport.user._id}, function(err, data) {
             res.json({
-             user : data.user,
-
-              sessions: req.session
-          })
+                user : data.user,
+                // user: req.data
+                sessions: req.session
+            })
         })
     })
     .post(function (req, res) {
 
-        var user = new Employee();
+        var user = req.user;
         user.fullname = user.body.fullname;
         user.company = req.body.company;
         user.position = req.body.position;

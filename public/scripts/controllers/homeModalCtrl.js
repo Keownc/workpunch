@@ -28,15 +28,12 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
              $location.path('/employeeDashboard');
             $uibModalInstance.close();
 
-		}) .error(function(err) {
+		}).error(function(err) {
           // If any errors redirect back to homepage
           console.log('Authentication unsuccessful!', err);
           $location.path('/');
         })
-
-
     }
-
 
     $scope.signup = function () {
       $uibModalInstance.close();

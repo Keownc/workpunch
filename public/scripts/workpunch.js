@@ -7,7 +7,8 @@ const myApp = angular.module('workpunch', [
     'ngRoute',
     'ui.bootstrap',
     'xeditable',
-    'ngCookies'
+    'ngCookies',
+    'ds.clock'
     // 'ngFileUpload',
     // 'cloudinary',
     // 'Upload'

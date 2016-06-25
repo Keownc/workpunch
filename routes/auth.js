@@ -5,12 +5,6 @@ const api = require('../routes/api');
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 
-const isLoggedIn = function (req, res, next) {
-    // if (method = 'GET'){ return next();}
-    if(req.isAuthenticated()){return next();}
-    res.send(401);
-}
-
 module.exports = function(passport){
 
 	//sends successful login state back to angular
@@ -22,7 +16,7 @@ module.exports = function(passport){
 	//sends failure login state back to angular
 	router.get('/failure', function(req, res){
 		// res.send({state: 'failure', user: null, message: "Invalid username or password"});
-		res.redirect('/employeeDashboard');
+		res.redirect('/');
 	});
 
 	//log in

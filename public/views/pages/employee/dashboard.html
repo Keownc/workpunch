@@ -83,33 +83,34 @@
                             <uib-tabset  id="tabsNav">
                                 <h2>Time Punch</h2>
                                 <uib-tab index="0" heading="Time">
-                                    <div ng-hide="punchcard.dateOut || punchcard.dateIn">
-                                        <h3>Check In</h3>
-                                        <p>Date: </p>
-                                        <p>
-                                        time
-                                        </p>
-                                        <button type="button" name="button">Punch Me</button>
-                                    </div>
-                                    <div ng-show="punchcard.dateIn && !punchcard.dateOut">
-                                        <h3>Check Out</h3>
-                                        <p>Date: </p>
-                                        <p>
-                                        time
-                                        </p>
-                                        <button type="button" name="button">Punch Me</button>
-                                    </div>
-                                    <div ng-show="punchcard.dateIn && punchcard.dateOut">
-                                        <h3>Next Check In</h3>
-                                        <p>Date: </p>
-                                        <p>
-                                        Next login available at 7am
-                                        </p>
-                                        <p>
-                                        time
-                                        </p>
-                                        <button type="button" name="button" disable="disabled">Punch Me</button>
-                                    </div>
+                                    <section class="timepunch">
+                                        <div ng-hide="punchcard.dateOut || punchcard.dateIn">
+                                            <h3>Check In</h3>
+                                            <p><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'">></ds-widget-clock></p>
+                                            <!-- theme="blue-light" -->
+                                            <ds-widget-clock show-digital digital-format="'hh:mm:ss a'">></ds-widget-clock>
+                                           <button type="button" name="button">Punch Me</button>
+                                        </div>
+                                        <div ng-show="punchcard.dateIn && !punchcard.dateOut">
+                                            <h3>Check Out</h3>
+                                            <p>Date: </p>
+                                            <p>
+                                            time
+                                            </p>
+                                            <button type="button" name="button">Punch Me</button>
+                                        </div>
+                                        <div ng-show="punchcard.dateIn && punchcard.dateOut">
+                                            <h3>Next Check In</h3>
+                                            <p>Date: </p>
+                                            <p>
+                                            Next login available at 7am
+                                            </p>
+                                            <p>
+                                            time
+                                            </p>
+                                            <button type="button" name="button" disable="disabled">Punch Me</button>
+                                        </div>
+                                    </section>
                                 </uib-tab>
                                 <uib-tab index="1" heading="OverTime">
                                     OverTime
@@ -165,10 +166,6 @@
                     </div>
                  <!-- End Switch to Sick Leave  -->
             </uib-tabset>    <!-- End Sidebar Navigation Tab  -->
-            <p>
-                company :{{ employee.company }}
-                company :{{ user.company }}
-            </p>
         </div>
     </div>
 </div>
