@@ -3,15 +3,18 @@
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
 
     $scope.user = {};
-    $scope.employee = [];
+    $scope.employee = {};
     // Return from the Database
-    Api.Employee.query({}, function(data){
-
-         $scope.employee = data;
-         //
-         console.log("company " + data.user);
-    });
-
+    // Api.Employee.query({}, function(data){
+    //
+    //      $scope.employee = data;
+    //      //
+    //     //  console.log("firstname " +data.data.user.firstName);
+    //      console.log("firstname " + $scope.employee.firstName);
+    // });
+$http.get('api/employeeDashboard').success(function (data) {
+         console.log("firstname " + data.user);
+})
 
     // $scope.refresh =function(){
     //     $http.get('/employee/dashboard/').success(function(data){
@@ -22,7 +25,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
 
     // Add/Insert to the user Database
     $scope.addPost = function(){
-        $scope.user.name = $rootScope.firstName + $rootScope.lastName;
         Api.Employee.save({},$scope.user, function(data){
             // $scope.user.push(data);
             $scope.employee = Api.Employee.query();
@@ -30,28 +32,28 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     }
 
     // Adds an profile image
-    // $scope.avatar = function(files){
-    //     $scope.files = files;
-    //     if(!$scope.files){ return }
-    //     angular.forEach(files, function(file){
-    //         if(file && !file.$error){
-    //             file.upload = $upload.upload({
-    //                 url:"https://api.cloudinary.com/v1_1"+cloudinary.config().cloud_name+"/upload",
-    //                 data:{
-    //                     upload_preset:cloudinary.config().cloud_preset,
-    //                     tags:'myphotoalbum',
-    //                     file: file
-    //                 }
-    //             }).success(function(data, status, headers, config){
-    //                 file_result = data;
-    //                 const avatarUrl = data.url;
-    //                 $scope.avatar = avatarUrl;
-    //             }).error(function (data, status, headers, config) {
-    //                 file_result = data;
-    //             })
-    //         }
-    //     })
-    // };
+    $scope.avatar = function(files){
+        $scope.files = files;
+        if(!$scope.files){ return }
+        angular.forEach(files, function(file){
+            if(file && !file.$error){
+                file.upload = $upload.upload({
+                    url:"https://api.cloudinary.com/v1_1"+cloudinary.config().cloud_name+"/upload",
+                    data:{
+                        upload_preset:cloudinary.config().cloud_preset,
+                        tags:'myphotoalbum',
+                        file: file
+                    }
+                }).success(function(data, status, headers, config){
+                    file_result = data;
+                    const avatarUrl = data.url;
+                    $scope.avatar = avatarUrl;
+                }).error(function (data, status, headers, config) {
+                    file_result = data;
+                })
+            }
+        })
+    };
 
 
 
@@ -68,5 +70,5 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         const uploadUrl = '/upload';
         SickLeaveForm.post(uploadUrl, $scope.user)
     }
-    
+
 });

@@ -9,7 +9,7 @@ const passport = require('passport');
 const isLoggedIn = function (req, res, next) {
     // if (method = 'GET'){ return next();}
     if(req.isAuthenticated()){return next();}
-    // res.send(401);
+    res.send(401);
     res.redirect('/');
 }
 
@@ -25,12 +25,13 @@ router.route('/employeeDashboard')
                 // user: req.data
                 sessions: req.session
             })
+            console.log('user data'+ data.user.username);
         })
     })
     .post(function (req, res) {
 
         var user = req.user;
-        user.fullname = user.body.fullname;
+        user.fullName = req.body.fullname;
         user.company = req.body.company;
         user.position = req.body.position;
         user.description = req.body.description;
@@ -50,8 +51,8 @@ router.route('/employeeDashboard/:id')
                 if (err){
                     return res.send(500, err);
                 }
-                res.json(data);
-
+                res.json(data.user);
+                console.log('user data id'+ data.user.username);
         });
     })
 

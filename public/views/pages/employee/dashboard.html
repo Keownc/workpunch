@@ -7,57 +7,37 @@
         <div class="content">
              <div class="container">
                 <div class="col-md-3 text">
-                    <!-- <form ng-upload='avatar()' class="avatar">
-                        <div class="form-group">
-                            <label for="avatar">Image</label>
-                            <input type="file" accept="image/*" file-model='user.avatar'/>
-                            <img ng-show="avater" ng-src="{{avater.url}}" type="{{avater.file.type}}" />
-                        </div>
-                        <button type="submit" ng-click="avater" disabled>Add</button>
-                    </form> -->
-
-
-                    <img src="{{avater}}" alt="" />
-                    <a href="#" ngf-select="avatar($files)">Upload</a>
-
+                    <section>
+                        <img src="{{avater}}" alt="User avatar goes here" />
+                        <a href="#" ngf-select="avatar($files)">Upload</a>
+                    </section>
                 </div>
                 <section class="col-md-9">
                     <article class="profile-details">
                         <div >
-                            <div><em class="title">Name: </em><a href="#" editable-text="user.fullname" onaftersave="addPost()">{{ user.name || 'empty' }}</a></div>
+                            <div><em class="title">Name: </em>{{ employee.firstName }} {{ employee.lastName }}</div>
+                            <div><em class="title">EmployeeID: </em>{{ user.employeeID }}</div>
                             <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || 'empty' }}</a></div>
                             <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || 'empty' }}</a></div>
                             <div><em class="title">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div>
                         </div>
-                        <!-- <form editable-form name="editableForm" onaftersave="addPost()">
-                            <div><em class="title">Name: </em><span editable-text="user.name"  e-name="name">{{ user.name || 'empty' }}</span></div>
-                            <div><em class="title">Company: </em><span editable-text="user.company"  e-name="company" >{{ user.company || 'empty' }}</span></div>
-                            <div><em class="title">Position: </em><span editable-text="user.position" e-name="postion"  >{{ user.position || 'empty' }}</span></div>
-                            <div><em class="title">Description: </em><span editable-textarea="user.description" e-name="description" e-rows="7" e-cols="40" >{{ user.description || 'no description' }}</span></div>
-                            <div>
-                                 button to show form
-                                <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
-                                buttons to submit / cancel form
-                                <span ng-show="editableForm.$visible">
-                                    <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">Save</button>
-                                    <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
-                                </span>
-                            </div>
-                        </form> -->
                     </article>
                 </section>
             </div>
         </div>
-        <!-- <div class="uploader">
+        <div class="uploader">
             <a href=""><svg id="Layer_1" width="50" height="25" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 34"><defs><style>.cls-1{opacity:0.2;}.cls-2{fill:#231f20;}.cls-3{fill:#f4f4f4;}.cls-4{fill:#77b3d4;}.cls-5{fill:#fff;}</style></defs><title>camera</title><g class="cls-1"><path class="cls-2" d="M49.5,22.3h-5s-1.4,0-2.5-2.7c-0.5-1.4-1.1-2.7-2.5-2.7h-10c-1.4,0-2,1.3-2.5,2.7-1,2.7-2.5,2.7-2.5,2.7H22a2.59,2.59,0,0,0-2.5-2.7H17a2.59,2.59,0,0,0-2.5,2.7A2.59,2.59,0,0,0,12,25V46.3A2.59,2.59,0,0,0,14.5,49h35A2.59,2.59,0,0,0,52,46.3V25A2.59,2.59,0,0,0,49.5,22.3Z" transform="translate(-12 -15)"/></g><path class="cls-3" d="M49.5,20h-5s-1.4.3-2.5-2.3c-0.5-1.4-1.1-2.7-2.5-2.7h-10c-1.4,0-2,1.3-2.5,2.7-1,2.7-2.5,2.3-2.5,2.3H22c0-1.5-1.1-2-2.5-2H17c-1.4,0-2.5.5-2.5,2-1.4,0-2.5,1.5-2.5,3V44.3A2.59,2.59,0,0,0,14.5,47h35A2.59,2.59,0,0,0,52,44.3V23C52,21.5,50.9,20,49.5,20Z" transform="translate(-12 -15)"/><circle class="cls-4" cx="22" cy="18" r="9"/><g class="cls-1"><path class="cls-2" d="M34,46A11,11,0,1,1,45,35,11,11,0,0,1,34,46Zm0-18a7,7,0,1,0,7,7A7,7,0,0,0,34,28Z" transform="translate(-12 -15)"/></g><path class="cls-5" d="M34,43.5A10.5,10.5,0,1,1,44.5,33,10.5,10.5,0,0,1,34,43.5Zm0-18A7.5,7.5,0,1,0,41.5,33,7.55,7.55,0,0,0,34,25.5Z" transform="translate(-12 -15)"/></svg>
             <input type="file" nv-file-select uploader="uploader"/><br/>
-        </div> -->
+        </div>
     </div>
 </div>
 <div class="container-fluid">
     <div class="row">
         <!-- Dashboard Sidebar -->
         <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+              <li><h2 class="sidebar-heading">WorkPunch</h2></li>
+            </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="#" ng-click="tab = 0">Time Punch</a></li>
@@ -66,11 +46,7 @@
             <li><a href="#" ng-click="tab = 3">Help & support</a></li>
             <li><a href="#" ng-click="tab = 4">Setting</a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-
-          </ul>
-        </div>
+      </div><!-- End Dashboard Sidebar -->
         <!-- Dashboard Body Content -->
         <div class="col-sm-9 col-md-10 main">
             <h1 class="page-header">Dashboard</h1>
@@ -116,7 +92,22 @@
                                     OverTime
                                 </uib-tab>
                                 <uib-tab index="2" heading="Logs">
-                                    Logs
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                Date
+                                            </th>
+                                            <th>
+                                                time
+                                            </th>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                date here
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </uib-tab>
                             </uib-tabset>
                         </div>
@@ -129,7 +120,6 @@
                             <uib-tabset id="tabsNav">
                                 <h2>Sick Leave</h2>
                                 <uib-tab index="0" heading="Form">
-                                    Form
                                     <form class="" action="index.html" method="post">
                                         <div class="form-group">
                                             <label for="employeeID">EmployeeID</label>
@@ -153,6 +143,7 @@
                         </div>
                     </div>
                 </uib-tab> <!-- End Switch to Sick Leave  -->
+                <!-- Switch to user account -->
                 <uib-tab index="2">
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
@@ -164,8 +155,8 @@
                             </uib-tabset>
                         </div>
                     </div>
-                 <!-- End Switch to Sick Leave  -->
+             </uib-tab> <!-- End Switch to user account  -->
             </uib-tabset>    <!-- End Sidebar Navigation Tab  -->
-        </div>
-    </div>
-</div>
+        </div> <!-- End Dashboard Body Content -->
+    </div> <!-- End row-->
+</div><!-- End container-fluid  -->

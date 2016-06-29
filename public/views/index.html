@@ -1,97 +1,97 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>WorkPunch</title>
-        <link rel="icon" href="../../favicon.ico">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link href="bower_components/angular-xeditable/dist/js/xeditable.css" rel="stylesheet">
-        <link href="../libs/angular-ui-clock/angular-clock.css" rel="stylesheet">
-        <link rel="stylesheet" href="./assets/css/styles.css">
-    </head>
-    <body ng-app="workpunch">
-        <div class="navbar-wrapper">
-            <div class="container">
-                <nav class="navbar navbar-inverse navbar-static-top" ng-controller="HomeCtrl">
-                    <div class="container">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WorkPunch</title>
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="bower_components/angular-xeditable/dist/js/xeditable.css" rel="stylesheet">
+    <link href="../bower/angular-ui-clock/dist/angular-clock.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body ng-app="workpunch">
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-static-top" ng-controller="HomeCtrl">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="/">WorkPunch</a>
-                        </div>
+                        </button>
+                        <a class="navbar-brand" href="/">WorkPunch</a>
+                    </div>
 
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-                                <li><a href="/features">Features</a></li>
-                                <li><a href="/prices">Prices</a></li>
-                                <li><a href="/contact">Contact</a></li>
-                                <!-- <a href="#" class="modalClick"></a> -->
-                                <li><button type="button" class="btn btn-default" ng-hide="authenticated" ng-click="open()">Login</button></li>
-                                <li><button type="button" class="btn btn-default"  ng-show="authenticated" ng-click="logout()"><a href="/">Logout</a></button></li>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+                            <li><a href="/features">Features</a></li>
+                            <li><a href="/prices">Prices</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                            <!-- <a href="#" class="modalClick"></a> -->
+                            <li><button type="button" class="btn btn-default" ng-hide="authenticated" ng-click="open()">Login</button></li>
+                            <li><button type="button" class="btn btn-default"  ng-show="authenticated" ng-click="logout()"><a href="/">Logout</a></button></li>
 
-                            </ul>
-                        </div><!-- /.navbar-collapse -->
-                    </div><!-- /.container-fluid -->
-                </nav>
-            </div>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
         </div>
-        <!-- Body -->
-        <div ng-view="" class="ng-scope" data-ng-animate="1"></div>
-        <!-- jQuery -->
-        <script type="text/javascript" src="../libs/jquery/jquery.js"></script>
-        <!-- <script type="text/javascript" scr="../assets/js/main.js"> -->
+    </div>
+    <!-- Body -->
+    <div ng-view="" class="ng-scope" data-ng-animate="1">
+        {{ employee.firstName }}
+        {{ employee.firstName }}</div>
+    <!-- jQuery -->
+    <script type="text/javascript" src="../libs/jquery/jquery.js"></script>
 
-        </script>
-        <!-- Angular links -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script> -->
-        <!-- <script type="text/javascript" src="../bower/angular/angular.min.js"></script> -->
+<!-- Angular links -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script> -->
+<!-- <script type="text/javascript" src="../bower/angular/angular.min.js"></script> -->
 
-        <!-- Angular local file-->
-        <script type="text/javascript" src="../libs/angular/angular.js"></script>
-        <script type="text/javascript" src="../libs/angular-route/angular-route.js"></script>
-        <script type="text/javascript" src="../libs/angular-animate/angular-animate.js"></script>
-        <script type="text/javascript" src="../libs/angular-resource/angular-resource.js"></script>
-        <script type="text/javascript" src="../libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script type="text/javascript" src="../libs/bootstrap/bootstrap.js"></script>
-        <script type="text/javascript" src="../libs/angular-xeditable/xeditable.js"></script>
-        <script type="text/javascript" src="../libs/flow.js/flow.js"></script>
-        <script type="text/javascript" src="../libs/ng-flow/ng-flow.js"></script>
-        <script type="text/javascript" src="../libs/angular-cookies/angular-cookies.js"></script>
-        <script type="text/javascript" src="../libs/angular-http-auth/http-auth-interceptor.js"></script>
-        <script type="text/javascript" src="../libs/angular-ui-clock/angular-clock.js"></script>
-        <!-- <script src="../bower/angular-file-upload/dist/angular-file-upload.js"></script> -->
-        <!-- <script type="text/javascript" src="../libs/cloudinary_ng/angular.cloudinary.js"></script>
-        <script type="text/javascript" src="../libs/cloudinary_core/cloudinary-core.js"></script>
-        <script type="text/javascript" src="../libs/lodash/lodashjs"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-sanitize.js"></script>
-        <!-- Controllers -->
-        <script type="text/javascript" src="../scripts/workpunch.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/registerCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/employee/eRegisterCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/employee/dashboardCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/company/cRegisterCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/homeCtrl.js"></script>
-        <script type="text/javascript" src="../scripts/controllers/homeModalCtrl.js"></script>
-        <!-- Services -->
-        <script type="text/javascript" src="../scripts/services/Api.js"></script>
-        <script type="text/javascript" src="../scripts/services/auth.js"></script>
-        <script type="text/javascript" src="../scripts/services/form.js"></script>
-        <!-- directives -->
-        <script type="text/javascript" src="../scripts/directives/sickLeaveModel.js"></script>
-        <script type="text/javascript" src="../scripts/directives/mongooseError.js"></script>
-        <script type="text/javascript" src="../scripts/directives/onFocus.js"></script>
-        <script type="text/javascript" src="../scripts/directives/uniqueUsername.js"></script>
-    </body>
+<!-- Angular local file-->
+<script type="text/javascript" src="../libs/angular/angular.js"></script>
+<script type="text/javascript" src="../libs/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="../libs/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="../libs/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="../libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="../libs/bootstrap/bootstrap.js"></script>
+<script type="text/javascript" src="../libs/angular-xeditable/xeditable.js"></script>
+<script type="text/javascript" src="../libs/flow.js/flow.js"></script>
+<script type="text/javascript" src="../libs/ng-flow/ng-flow.js"></script>
+<script type="text/javascript" src="../libs/angular-cookies/angular-cookies.js"></script>
+<script type="text/javascript" src="../libs/angular-http-auth/http-auth-interceptor.js"></script>
+<script type="text/javascript" src="../libs/angular-ui-clock/angular-clock.js"></script>
+<script type="text/javascript" src="../libs/ng-file-upload/ng-file-upload.js"></script>
+<script type="text/javascript" src="../libs/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+<script type="text/javascript" src="../libs/cloudinary_ng/angular.cloudinary.js"></script>
+<script type="text/javascript" src="../libs/cloudinary-core/cloudinary-core.js"></script>
+<script type="text/javascript" src="../libs/lodash/lodash.js"></script>
+<!-- Controllers -->
+<script type="text/javascript" src="../scripts/workpunch.js"></script>
+<script type="text/javascript" src="../scripts/controllers/registerCtrl.js"></script>
+<script type="text/javascript" src="../scripts/controllers/employee/eRegisterCtrl.js"></script>
+<script type="text/javascript" src="../scripts/controllers/employee/dashboardCtrl.js"></script>
+<script type="text/javascript" src="../scripts/controllers/company/cRegisterCtrl.js"></script>
+<script type="text/javascript" src="../scripts/controllers/homeCtrl.js"></script>
+<script type="text/javascript" src="../scripts/controllers/homeModalCtrl.js"></script>
+<!-- Services -->
+<script type="text/javascript" src="../scripts/services/Api.js"></script>
+<script type="text/javascript" src="../scripts/services/auth.js"></script>
+<script type="text/javascript" src="../scripts/services/form.js"></script>
+<!-- directives -->
+<script type="text/javascript" src="../scripts/directives/sickLeaveModel.js"></script>
+<script type="text/javascript" src="../scripts/directives/mongooseError.js"></script>
+<script type="text/javascript" src="../scripts/directives/onFocus.js"></script>
+<script type="text/javascript" src="../scripts/directives/uniqueUsername.js"></script>
+</body>
 </html>

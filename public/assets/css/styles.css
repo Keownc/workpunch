@@ -23,17 +23,6 @@ body {
 }
 
 /*--------------------------------- Navigation ---------------------------------*/
-/*.navbar-static-top {
-    z-index: 1000;
-    border-width: 0 0 1px;
-}
-
-.navbar {
-    position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-}*/
 
 .navbar-wrapper > .container {
   padding-right: 0;
@@ -100,6 +89,12 @@ body {
 .item {
      background-color: #777;
 }
+/*---------------------------------  Register Form ---------------------------------*/
+
+/*--------------------------------- Employee Register Form ---------------------------------*/
+#employee-form {
+
+}
 /*--------------------------------- Dashboard Wallpaper ---------------------------------*/
 #wallpaper  {
     height: 500px;
@@ -144,6 +139,10 @@ body {
   /*color: #fff;*/
   background-color: #e0e0d1;
 }
+.sidebar-heading{
+    color: #fff;
+    text-align: center;
+}
 
 /*--------------------------------- Dashboard Body ---------------------------------*/
 .timepunch{
@@ -173,6 +172,9 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.panel-default>.panel-heading {
+    height: 45rem;
+}
 /*--------------------------------- Modal ---------------------------------*/
 .modal-header h3 {
     float: left;
@@ -193,6 +195,7 @@ footer {
     background: #19232d;
     color: #d7dade; /*#d7dade*/
 }
+
 img {
     width: 75px;
 }
@@ -344,6 +347,7 @@ label[for*="submit"] {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #326699;
     border-right: 1px solid #eee;
+    height: 55.2rem;
   }
 
   .main {

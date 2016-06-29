@@ -8,11 +8,9 @@ const myApp = angular.module('workpunch', [
     'ui.bootstrap',
     'xeditable',
     'ngCookies',
-    'ds.clock'
-    // 'ngFileUpload',
-    // 'cloudinary',
-    // 'Upload'
-
+    'ds.clock',
+    // 'cloudinary ',
+    'ngFileUpload'
 ]);
 
 myApp.run(function($rootScope, $http, $location, Auth){
@@ -67,9 +65,9 @@ myApp.config(['$routeProvider', '$locationProvider',
             .html5Mode({enabled:true, requireBase: false})
 }]);
 
-// myApp.config('cloudinaryProvider', function (cloudinaryProvider) {
+// myApp.config(['cloudinaryProvider', function (cloudinaryProvider) {
 //     cloudinaryProvider
 //         .set('cloud_name','dbqouy9xa')
 //         .set('upload_preset', 'vzjnjauc')
 //
-// })
+// }]);

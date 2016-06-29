@@ -12,10 +12,10 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
         Auth.register($scope.user).success(function(data) {
             $location.path('/employeeDashboard');
 
-            $rootScope.current_user = data.username;
-            var username;
-            username = $rootScope.current_user.replace(/\s+/g, '-').toLowerCase();
-            $location.path('/' + username + '/employeeDashboard');
+            // $rootScope.current_user = data.username;
+            // var username;
+            // username = $rootScope.current_user.replace(/\s+/g, '-').toLowerCase();
+            // $location.path('/' + username + '/employeeDashboard');
             //
         });
 
