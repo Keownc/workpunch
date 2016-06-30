@@ -1,27 +1,21 @@
 'use-strict'
 //Employee Dashboard page controller
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
-
+    $rootScope.form = false;
     $scope.user = {};
     $scope.employee = {};
     // Return from the Database
-    // Api.Employee.query({}, function(data){
-    //
-    //      $scope.employee = data;
-    //      //
-    //     //  console.log("firstname " +data.data.user.firstName);
-    //      console.log("firstname " + $scope.employee.firstName);
-    // });
-$http.get('api/employeeDashboard').success(function (data) {
-         console.log("firstname " + data.user);
-})
+    Api.Employee.query({}, function(data){
+         $scope.employee = data;
+         console.log("firstname " + $scope.employee.firstName);
+    });
 
-    // $scope.refresh =function(){
-    //     $http.get('/employee/dashboard/').success(function(data){
-    //          $scope.user = data;
-    //         console.log("company" + $scope.user.company);
-    //     })
-    // }
+    $scope.refresh =function(){
+        $http.get('/api/employeeDashboard/').success(function(data){
+             $scope.firstName = data.data.firstName;
+            console.log("company" + $scope.user.company);
+        })
+    }
 
     // Add/Insert to the user Database
     $scope.addPost = function(){

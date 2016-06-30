@@ -35,12 +35,18 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
         })
     }
 
-    $scope.signup = function () {
-      $uibModalInstance.close();
-      $location.path('/register');
-    };
-
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.signup = function () {
+      $location.path('/employeeRegister');
+       $uibModalInstance.close();
+    };
+
+    $scope.company = function () {
+      $location.path('/companyRegister');
+       $uibModalInstance.close();
+    };
+    
 });

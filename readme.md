@@ -6,7 +6,8 @@ Clone the git repository to your machine using ssh.
 ```
 $ git clone git@github.com:Keownc/workpunch.git
 
-Install the dependencies by using
+Install the dependencies by using.
+
 $ npm install //Installs the package.json file.
 
 Use bower-installer to get the bower files

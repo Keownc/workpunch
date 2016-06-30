@@ -1,5 +1,6 @@
 //Company register page controller
 myApp.controller('cRegisterCtrl', function ($scope, $rootScope, $http, $location) {
+    $rootScope.form = true;
     $scope.user = {};
 
     $scope.registerCompany = function(){
@@ -10,7 +11,7 @@ myApp.controller('cRegisterCtrl', function ($scope, $rootScope, $http, $location
         });
     };
     $scope.back = function () {
-      $location.path('/register');
+      $location.path('/');
     };
 
 });

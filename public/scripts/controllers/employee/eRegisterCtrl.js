@@ -22,7 +22,9 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
     };
 
     $scope.back = function () {
-      $location.path('/register');
+      $location.path('/');
     };
+
+    $rootScope.form = true;
 
 });

@@ -91,9 +91,8 @@ body {
 }
 /*---------------------------------  Register Form ---------------------------------*/
 
-/*--------------------------------- Employee Register Form ---------------------------------*/
 #employee-form {
-
+    width: 60rem;
 }
 /*--------------------------------- Dashboard Wallpaper ---------------------------------*/
 #wallpaper  {
@@ -136,8 +135,8 @@ body {
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-  /*color: #fff;*/
-  background-color: #e0e0d1;
+  color: #fff;
+  /*background-color: grey;*/
 }
 .sidebar-heading{
     color: #fff;

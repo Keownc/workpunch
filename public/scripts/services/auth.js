@@ -13,30 +13,6 @@ myApp.factory('Auth', function Auth($location, $http, $rootScope, Session, Api){
                 $rootScope.current_user = user;
             });
         }
-        // login: function(provider, user, callback) {
-        //   var cb = callback || angular.noop;
-        //   Session.save({
-        //     username: user.username,
-        //     password: user.password,
-        //   }, function(user) {
-        //     $rootScope.currentUser = user;
-        //     return cb();
-        //   }, function(err) {
-        //     return cb(err.data);
-        //   });
-        // },
-        //
-        // logout: function(callback) {
-        //   var cb = callback || angular.noop;
-        //   Session.delete(function(res) {
-        //       $rootScope.currentUser = null;
-        //       return cb();
-        //     },
-        //     function(err) {
-        //       return cb(err.data);
-        //     });
-        // },
-
     }
 });
 
