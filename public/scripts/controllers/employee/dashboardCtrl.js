@@ -63,6 +63,9 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.sickLeaveSubmit = function () {
         const uploadUrl = '/upload';
         SickLeaveForm.post(uploadUrl, $scope.user)
+    };
+    var number = function () {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     }
-
+    console.log( number() + number()+ number() );
 });

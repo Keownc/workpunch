@@ -17,15 +17,8 @@ const employeeSchema = new mongoose.Schema({
     position: String,
     description: String,
     avatar: String,
-    employeeID: String
-    // created_at: {type: Date, default: Date.now},
-    // timecards: {
-    //     year: Number,
-    //     month: Number,
-    //     day: Number,
-    //     clockIn: {type: Date, default: Date.now},
-    //     clockOut: {type: Date, default: Date.now},
-    // }
+    employeeID: String,
+    created_at: {type: Date, default: Date.now}
 });
 
 //Company Database schema
@@ -40,6 +33,14 @@ const companySchema = new mongoose.Schema({
 });
 
 //Timepunch Database
+const timecardSchema = new mongoose.Schema({
+    employeeID: String,
+    year: Number,
+    month: Number,
+    day: Number,
+    clockIn: {type: Date, default: Date.now},
+    clockOut: {type: Date, default: Date.now}
+});
 
 //SickLeave
 const sickLeaveSchema = new mongoose.Schema({
@@ -57,9 +58,11 @@ employeeSchema.methods.createHash = function (password) {
 employeeSchema.methods.validPassword = function(password){
     return bcrypt.compareSync(password, this.password)
 }
+//EmployeeID Generator
 
 
 
 mongoose.model('Employee', employeeSchema);
 mongoose.model('Company', companySchema);
 mongoose.model('SickLeave', sickLeaveSchema);
+mongoose.model('Timecard', timecardSchema);
