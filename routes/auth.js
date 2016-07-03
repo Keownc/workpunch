@@ -26,8 +26,15 @@ module.exports = function(passport){
 		failureFlash : true
 	}));
 
-	//sign up
+	//sign up employee
 	router.post('/employee-signup', passport.authenticate('employee-signup', {
+		successRedirect: '/auth/success',
+		failureRedirect: '/auth/failure',
+		failureFlash : true
+	}));
+
+    //sign up companies
+	router.post('/company-signup', passport.authenticate('company-signup', {
 		successRedirect: '/auth/success',
 		failureRedirect: '/auth/failure',
 		failureFlash : true

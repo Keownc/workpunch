@@ -64,18 +64,31 @@ module.exports = function(passport){
             });
         }
     ));
+    // passport registration for companies
+    passport.use('company-signup',new localStrategy({
+            passReqToCallback : true
+        },
+        function(req, username, password, done) {
+            Employee.findOne({ username: username , password : password }, function (err, user) {
+                if (err) { return done(err); }
+                if (user) {
+                    console.log('user exits'+ username);
+                    return done(null, false);
+                } else {
+                    console.log('create new user '+ username);
+                    const new_company = new Company();
+                    new_company.branch = req.param('branch');
+                    new_company.companyID = req.param('companyID');
+                    new_company.company = req.param('company');
+                    new_company.username = username;
+                    new_company.password = new_company.createHash(password);
+                    new_company.save(function(err){
+                        if (err) { return done(err, false); }
+                        return done(null, new_company);
+                    });
+                }
+            });
+        }
+    ));
 
 }
-
-// } else (user === company){
-//
-//     const new_company = new Company();
-//     new_company.username = username;
-//     new_company.password = createHash(password);
-//     new_company.branch = req.param('branch');
-//     new_company.companyID = req.param('companyID');
-//     new_company.company = req.param('company');
-//     new_company.save(function(err){
-//         if (err) { return done(err, false); }
-//         return done(null, new_company);
-// }

@@ -21,17 +21,6 @@ const employeeSchema = new mongoose.Schema({
     created_at: {type: Date, default: Date.now}
 });
 
-//Company Database schema
-const companySchema = new mongoose.Schema({
-    username: String,
-    password: String,
-    company: String,
-    companyID: String,
-    plan: String,
-    branch: String,
-    description: String
-});
-
 //Timepunch Database
 const timecardSchema = new mongoose.Schema({
     employeeID: String,
@@ -67,7 +56,7 @@ employeeSchema.methods.createID = function(company){
 }
 
 
+
 mongoose.model('Employee', employeeSchema);
-mongoose.model('Company', companySchema);
 mongoose.model('SickLeave', sickLeaveSchema);
 mongoose.model('Timecard', timecardSchema);

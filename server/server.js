@@ -11,6 +11,7 @@ const path = require('path');
 const passport = require('passport');
 // Database connection and session
 require('../models/model.js');
+require('../models/companyModel.js');
 const auth = require('../routes/auth')(passport);
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
