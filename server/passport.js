@@ -35,7 +35,7 @@ module.exports = function(passport){
              });
          }
     ));
-
+    // passport registration for employees 
     passport.use('employee-signup',new localStrategy({
             passReqToCallback : true
         },

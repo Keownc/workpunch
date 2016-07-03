@@ -3,7 +3,12 @@ NAME: Keown Creese
 DATE: 06/01/2016
 PROJECT: Final Project WorkPunch
 */
-
+/*Colors
+#326699 - blue
+#e0e0d1 -
+#cc6666 - red
+#339966 - green
+*/
 html {
     font-size: 62.5%;
 }
@@ -23,7 +28,9 @@ body {
 }
 
 /*--------------------------------- Navigation ---------------------------------*/
-
+.navbar>.container .navbar-brand{
+    /*color: #e0e0d1;*/
+}
 .navbar-wrapper > .container {
   padding-right: 0;
   padding-left: 0;
@@ -34,6 +41,16 @@ body {
 }
 .navbar-wrapper .navbar .container {
   width: auto;
+}
+.navbar-nav>li>button{
+    margin-top: .8rem;
+    width: 7rem;
+    background: #;
+}
+.nav-btn {
+    color: #326699;
+     background-color: #e0e0d1;
+     border-color: #ccc;
 }
 /*--------------------------------- Home Page CTA ---------------------------------*/
 #myCarousel {
@@ -49,7 +66,6 @@ body {
 .carousel-caption {
   z-index: 10;
 }
-
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 500px;
@@ -62,14 +78,14 @@ body {
   min-width: 100%;
   height: 500px;
 }
-.cta{
+.cta-btn{
     padding: 1.2rem 6rem;
 }
 /*--------------------------------- Home Page Body ---------------------------------*/
 .body {
     margin-top: -12rem;
 }
-.features .thumbnail {
+#features .thumbnail {
     padding: 3rem;
     background-color: #326699
 }
@@ -80,10 +96,10 @@ body {
     font: 4.5rem Cronos Pro, "Helvetica Neue", Helvetica, Arial sans-serif;
     color: #505151;
 }
-.services {
+#services {
     margin-bottom: 6rem;
 }
-.services h3{
+#services h3{
     text-align: center;
 }
 .item {
@@ -189,12 +205,59 @@ body {
 .modal-header {
     padding-bottom: 2rem;
 }
+/* Modal login section*/
+#modal-login{
+    width: 60%;
+    border-right: 1px solid #ccc;
+    padding-right: 4rem;
+}
+.modal-body button{
+    margin-top: 1rem;
+}
+.modal-body .form-control{
+    height: 40px;
+}
+#modal-login button{
+    width: 100%;
+    height: 40px;
+}
+#modal-login .checkbox{
+    width: 50%;
+}
+#modal-login p{
+    position: absolute;
+    left: 41%;
+    bottom: 16%;
+}
+/* Modal signup section*/
+#modal-signup {
+    width: 40%;
+    position: absolute;
+    top: 10%;
+    right: 0;
+    padding-left: 2rem;
+    padding-right: 3rem;
+}
+#modal-signup button{
+    display: block;
+    width: 100%;
+    height: 40px;
+}
+.btn-employee {
+    color: #fff;
+    background-color: #326699;
+    border-color: #46b8da;
+}
+.btn-company{
+    color: #fff;
+    background-color: #339966;
+    border-color: #46b8da;
+}
 /*--------------------------------- Footer ---------------------------------*/
 footer {
     background: #19232d;
     color: #d7dade; /*#d7dade*/
 }
-
 img {
     width: 75px;
 }
@@ -204,7 +267,6 @@ footer a {
 a:hover {
     text-decoration: underline;
 }
-
 footer h2{
     font: bold 1.6rem "Open Sans", Arial, sans-serif;
     text-transform: uppercase;
@@ -214,7 +276,6 @@ footer h2{
     margin-bottom: 2rem;
     padding-bottom: 1rem;
 }
-
 #workpunch p:first-of-type {
     text-transform: uppercase;
     font-size: 2.2rem;
@@ -246,11 +307,9 @@ label[for*="submit"] {
     background: #2a3c4c;
     color: #fff;
 }
-
 #navigation {
 
 }
-
 #bottom-footer {
     font-size: 1.3rem;
     line-height: 50px;
@@ -267,7 +326,6 @@ label[for*="submit"] {
     width: 25%;
     float: right;
     text-align: left;
-
 }
 #bottom-footer ul li {
     width: 65px;
@@ -278,7 +336,6 @@ label[for*="submit"] {
 #bottom-footer a {
     color: #c5c7cb;
 }
-
 
 /*--------------------------------- RESPONSIVE CSS ------------------------------ */
 
@@ -298,7 +355,6 @@ label[for*="submit"] {
     padding-right: 0;
     padding-left: 0;
   }
-
   /* The navbar becomes detached from the top, so we round the corners */
   .navbar-wrapper .navbar {
     border-radius: 4px;
@@ -331,11 +387,9 @@ label[for*="submit"] {
       text-align: left;
       padding-left: 4rem;
   }
-
   .featurette-heading {
     font-size: 50px;
   }
-
   /* Dashboard sidebar */
   .sidebar {
     position: relative;
@@ -348,14 +402,12 @@ label[for*="submit"] {
     border-right: 1px solid #eee;
     height: 55.2rem;
   }
-
   .main {
     position: relative;
     top: -10.1rem;
     bottom: 0;
   }
 }
-
 @media (min-width: 992px) {
   .featurette-heading {
     margin-top: 120px;
