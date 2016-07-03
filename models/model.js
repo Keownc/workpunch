@@ -59,7 +59,12 @@ employeeSchema.methods.validPassword = function(password){
     return bcrypt.compareSync(password, this.password)
 }
 //EmployeeID Generator
-
+employeeSchema.methods.createID = function(company){
+    const number = function(){
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+    return number() + number() + number()
+}
 
 
 mongoose.model('Employee', employeeSchema);

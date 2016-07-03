@@ -48,13 +48,14 @@ module.exports = function(passport){
                 } else {
                     console.log('create new user '+ username);
                     const new_user = new Employee();
-                    new_user.username = username;
-                    new_user.password = new_user.createHash(password);
-                    new_user.firstName = req.param('firstName');
-                    new_user.lastName = req.param('lastName');
-                    new_user.email = req.param('email');
                     new_user.companyID = req.param('companyID');
                     new_user.company = req.param('company');
+                    new_user.email = req.param('email');
+                    new_user.firstName = req.param('firstName');
+                    new_user.lastName = req.param('lastName');
+                    new_user.username = username;
+                    new_user.password = new_user.createHash(password);
+                    new_user.employeeID = req.param('company').substring(0,3) + new_user.createID();
                     new_user.save(function(err){
                         if (err) { return done(err, false); }
                         return done(null, new_user);
