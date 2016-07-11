@@ -12,7 +12,6 @@ const passport = require('passport');
 // Database connection and session
 require('../models/model.js');
 require('../models/companyModel.js');
-const auth = require('../routes/auth')(passport);
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/workpunch");
@@ -33,10 +32,9 @@ app.get('*', function(req, res) {
 
 // middleware
 app.use(logger('dev'));
+app.use(cookie_parser());
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended: false}));
-app.use(cookie_parser());
-
 //express session
 app.use(session({
     secret: 'punchme cat',
@@ -57,9 +55,10 @@ init_passport(passport);
 //connect flash
 app.use(flash());
 // Api routes
+const auth = require('../routes/auth')(passport);
 const api = require('../routes/api');
-app.use('/api' ,api);
-app.use('/auth',api, auth);
+app.use('/auth', auth);
+app.use('/api', api);
 
 
 

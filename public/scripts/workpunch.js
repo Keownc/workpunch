@@ -25,10 +25,11 @@ myApp.run(function($rootScope, $http, $location, Auth){
     //     return false;
     // });
     $rootScope.current_user = '';
+    $rootScope.authenticated = false;
     $rootScope.firstName = '';
     $rootScope.lastName = '';
     $rootScope.logout = function(){
-        $http.get('auth/logout');
+        $http.get('/auth/logout');
 
         $rootScope.authenticated = false;
         $rootScope.current_user = '';

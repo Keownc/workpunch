@@ -10,12 +10,12 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
          $scope.employee = data;
     });
 
-    $scope.loadAuth = function() {
-        Auth.load().success(function(data) {
-            $scope.employee = data.user;
-             $location.path('/employeeDashboard');
-        });
-    }
+    // $scope.loadAuth = function() {
+    //     Auth.load().success(function(data) {
+    //         $scope.employee = data.user;
+    //         //  $location.path('/employeeDashboard');
+    //     });
+    // }
 
     $scope.login = function () {
 
@@ -25,14 +25,19 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
             // var username = $scope.employee.username;
             // username = username.replace(/\s+/g, '-').toLowerCase();
             // $location.path('/' + username + '/employeeDashboard');
-             $location.path('/employeeDashboard');
-            $uibModalInstance.close();
 
-		}).error(function(err) {
-          // If any errors redirect back to homepage
-          console.log('Authentication unsuccessful!', err);
-          $location.path('/');
-        })
+            if(data.state == 'success'){
+               $rootScope.authenticated = true;
+               $rootScope.current_user = data.user;
+              $location.path('/employeeDashboard');
+               $uibModalInstance.close();
+            } else {
+                $scope.error_message = data.message;
+                $location.path('/');
+                $uibModalInstance.close();
+            }
+
+		})
     }
 
     $scope.cancel = function () {
@@ -48,5 +53,5 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
       $location.path('/companyRegister');
        $uibModalInstance.close();
     };
-    
+
 });

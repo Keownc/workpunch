@@ -10,13 +10,13 @@ module.exports = function(passport){
 	//sends successful login state back to angular
 	router.get('/success', function(req, res){
 		// res.send({state: 'success', user: req.user ? req.user : null});
-        res.json(req.session);
+        res.render('/api/employeeDashboard');
 	});
 
 	//sends failure login state back to angular
 	router.get('/failure', function(req, res){
-		// res.send({state: 'failure', user: null, message: "Invalid username or password"});
-		res.redirect('/');
+		res.send({state: 'failure', user: null, message: "Invalid username or password"});
+		// res.redirect('/');
 	});
 
 	//log in
@@ -40,10 +40,16 @@ module.exports = function(passport){
 		failureFlash : true
 	}));
 
+    // Check to see if user is logged in
+    router.get('', function(req, res){
+        res.send(req.isAuthenticated() ? req.user : 0)
+    })
+
 	//log out
 	router.get('/logout', function(req, res) {
 		req.logout();
-		res.redirect('/');
+        res.redirect('/');
+        res.send(200);
 	});
 
 	return router;

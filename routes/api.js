@@ -7,10 +7,12 @@ const SickLeave = mongoose.model('SickLeave');
 const passport = require('passport');
 
 const isLoggedIn = function (req, res, next) {
-    // if (method = 'GET'){ return next();}
-    if(req.isAuthenticated()){return next();}
-    res.send(401);
-    res.redirect('/');
+    
+    if(req.isAuthenticated())
+        res.send(401);
+        // res.redirect('/');
+    else
+        next();
 }
 
 router.use('/employeeDashboard', isLoggedIn);
