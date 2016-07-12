@@ -48,5 +48,5 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
       $location.path('/companyRegister');
        $uibModalInstance.close();
     };
-    
+
 });
