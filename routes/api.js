@@ -12,7 +12,7 @@ router.post('/register', function(req, res){
 
     const new_user = new Employee();
     new_user.username = req.body.username;
-    new_user.password = req.body.password;
+    new_user.password = req.body.password);
     new_user.firstName = req.body.firstName;
     new_user.lastName = req.body.lastName;
     new_user.email = req.body.email;
@@ -77,5 +77,57 @@ router.get('/logout', function(req, res) {
 // Employee Dashboard Route
 
 
+router.route('/employeeDashboard')
+
+    .get(function (req, res) {
+
+        Employee.find({id: req.session.passport.user._id}, function(err, data) {
+            res.json({
+                user : data.user,
+                // user: req.data
+                sessions: req.session
+            })
+            console.log('user data'+ data.user.username);
+        })
+    })
+    .post(function (req, res) {
+
+        var user = req.user;
+        user.fullName = req.body.fullname;
+        user.company = req.body.company;
+        user.position = req.body.position;
+        user.description = req.body.description;
+        user.save(function(err, data) {
+            if (err){
+                return res.send(500, err);
+            }
+            return res.json(data);
+        });
+    })
+
+router.route('/employeeDashboard/:id')
+
+    .get(function (req, res) {
+        Employee.findOne({_id: req.params.id },function(err, data){
+
+                if (err){
+                    return res.send(500, err);
+                }
+                res.json(data.user);
+                console.log('user data id'+ data.user.username);
+        });
+    })
+
+    .post(function (req, res) {
+        Employee.findAndModify({_id: req.params.id}, function(err, data){
+            res.json(data);
+        });
+    })
+
+    .delete(function (req, res) {
+        Employee.remove({_id: req.params.id}, function (err) {
+            res.send(500, err);
+        });
+    });
 
 module.exports = router;
