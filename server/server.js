@@ -1,6 +1,6 @@
 'use-strict'
 const express = require('express');
-const session = require('express-session');
+var session = require('express-session');
 const flash = require('connect-flash');
 const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
@@ -22,9 +22,9 @@ const port = process.env.PORT || 5000;
 
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
-
+//Get facicon
 //app.use(facicon(__dirname + '/public/facicon.ico'))
-
+//Get Index route
 app.get('*', function(req, res) {
     // res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
     res.sendFile('index.html', { root: path.join(__dirname, '../public/views') });
@@ -55,12 +55,10 @@ init_passport(passport);
 //connect flash
 app.use(flash());
 // Api routes
-const auth = require('../routes/auth')(passport);
 const api = require('../routes/api');
+const auth = require('../routes/auth')(passport);
 app.use('/auth', auth);
 app.use('/api', api);
-
-
 
 app.use(upload);
 

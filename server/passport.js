@@ -17,7 +17,7 @@ module.exports = function(passport){
 
     passport.deserializeUser(function(id, done) {
         Employee.findById(id, function (err, user) {
-            // console.log('deserializing user:',user.username);
+            console.log('deserializing user:',user.username);
             return done(err, user);
         });
     });
@@ -31,7 +31,7 @@ module.exports = function(passport){
                     if (err) { return done(err); }
                     if (!user) {
                         console.log('User Not Found with username '+username);
-                        return done(null, false, req.flash('message','User not found')); }
+                        return done(null, false, {message:'User not found'}); }
                     if (!user.validPassword(password)) {
                         console.log('Invalid Password');
                         return done(null, false, req.flash('message','Invalid Password')); }
@@ -46,7 +46,7 @@ module.exports = function(passport){
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            Employee.findOne({ username: username}, function (err, user) {
+            Employee.findOne({ 'username': username}, function (err, user) {
                 if (err) { return done(err); }
                 if (user) {
                     console.log('user exits'+ username);
@@ -75,7 +75,7 @@ module.exports = function(passport){
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            Employee.findOne({ username: username , password : password }, function (err, user) {
+            Employee.findOne({ 'username': username }, function (err, user) {
                 if (err) { return done(err); }
                 if (user) {
                     console.log('user exits'+ username);

@@ -21,21 +21,14 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
 
         Auth.login($scope.user).success(function(data) {
             // If successful redirect to dashboard
-            // $scope.employee = Api.Employee.query();
-            // var username = $scope.employee.username;
-            // username = username.replace(/\s+/g, '-').toLowerCase();
-            // $location.path('/' + username + '/employeeDashboard');
 
-            if(data.state == 'success'){
+
                $rootScope.authenticated = true;
                $rootScope.current_user = data.user;
+               console.log("current User"+$rootScope.current_user);
               $location.path('/employeeDashboard');
                $uibModalInstance.close();
-            } else {
-                $scope.error_message = data.message;
-                $location.path('/');
-                $uibModalInstance.close();
-            }
+        
 
 		})
     }

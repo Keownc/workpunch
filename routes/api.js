@@ -6,14 +6,53 @@ const Employee = mongoose.model('Employee');
 const SickLeave = mongoose.model('SickLeave');
 const passport = require('passport');
 
-const isLoggedIn = function (req, res, next) {
-    
-    if(req.isAuthenticated())
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()){
+        console.log("Authenticated");
         res.send(401);
-        // res.redirect('/');
-    else
+    }else{
+        console.log("Not Authenticated");
         next();
+    }
+    res.redirect('/')
 }
+
+// //sends successful login state back to angular
+// router.get('/success', function(req, res){
+//     res.send({state: 'success', user: req.user ? req.user : null});
+// });
+//
+// //sends failure login state back to angular
+// router.get('/failure', function(req, res){
+//     res.send({state: 'failure', user: null, message: "Invalid username or password"});
+//     // res.redirect('/');
+// });
+
+//log in
+router.post('/login', passport.authenticate('login', function(req, res) {
+    res.json(req.session)
+}));
+
+//sign up employee
+router.post('/employee-signup', passport.authenticate('employee-signup', {
+    successRedirect: '/auth/success',
+    failureRedirect: '/auth/failure',
+    failureFlash : true
+}));
+
+//sign up companies
+router.post('/company-signup', passport.authenticate('company-signup', {
+    successRedirect: '/auth/success',
+    failureRedirect: '/auth/failure',
+    failureFlash : true
+}));
+
+//log out
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+    res.send(200);
+});
 
 router.use('/employeeDashboard', isLoggedIn);
 

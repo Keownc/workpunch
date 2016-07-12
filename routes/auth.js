@@ -1,16 +1,12 @@
 'use-strict'
 const express = require('express');
 const router = express.Router();
-const api = require('../routes/api');
-const mongoose = require('mongoose');
-const Employee = mongoose.model('Employee');
 
 module.exports = function(passport){
 
 	//sends successful login state back to angular
 	router.get('/success', function(req, res){
-		// res.send({state: 'success', user: req.user ? req.user : null});
-        res.render('/api/employeeDashboard');
+		res.send({state: 'success', user: req.user ? req.user : null});
 	});
 
 	//sends failure login state back to angular
