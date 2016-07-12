@@ -20,6 +20,11 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 const app = express();
 const port = process.env.PORT || 3000;
 
+// middleware
+app.use(logger('dev'));
+app.use(body_parser.json());
+app.use(body_parser.urlencoded({extended: false}));
+app.use(cookie_parser());
 
 // Start server
 var server = app.listen(port, function() {
