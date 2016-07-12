@@ -20,6 +20,13 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 const app = express();
 const port = process.env.PORT || 3000;
 
+//set static folder
+app.use(express.static(path.join(__dirname, '../public')));
+//Set view engine
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
+});
+
 // middleware
 app.use(logger('dev'));
 app.use(body_parser.json());
