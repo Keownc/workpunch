@@ -20,21 +20,14 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
     $scope.login = function () {
 
         Auth.login($scope.user).success(function(data) {
-            // If successful redirect to dashboard
-            // $scope.employee = Api.Employee.query();
-            // var username = $scope.employee.username;
-            // username = username.replace(/\s+/g, '-').toLowerCase();
-            // $location.path('/' + username + '/employeeDashboard');
-             $location.path('/employeeDashboard');
-            $uibModalInstance.close();
 
-		}).error(function(err) {
-          // If any errors redirect back to homepage
-          console.log('Authentication unsuccessful!', err);
-          $location.path('/');
-        })
+              $rootScope.authenticated = true;
+              $rootScope.current_user = data.user
+              $location.path('/employeeDashboard');
+
+
+		});
     }
-
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };

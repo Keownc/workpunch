@@ -15,21 +15,38 @@ require('../models/companyModel.js');
 const auth = require('../routes/auth')(passport);
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
+
 mongoose.connect("mongodb://localhost/workpunch");
 const MongoDBStore = require('connect-mongodb-session')(session)
+
+// Api routes
+const api = require('../routes/api');
+app.use('/api', api);
+app.use('/auth', auth);
+
 // Run Server
 const app = express();
 const port = process.env.PORT || 5000;
-
-//set static folder
-app.use(express.static(path.join(__dirname, '../public')));
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		//req.flash('error_msg','You are not logged in');
+		res.redirect('/users/login');
+	}
+}
 
 //app.use(facicon(__dirname + '/public/facicon.ico'))
-
+app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
+    res.render('../public/views/pages/employee/employeeDashboard');
+});
 app.get('*', function(req, res) {
     // res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
     res.sendFile('index.html', { root: path.join(__dirname, '../public/views') });
 });
+
+//set static folder
+app.use(express.static(path.join(__dirname, '../public')));
 
 // middleware
 app.use(logger('dev'));
@@ -56,11 +73,6 @@ const init_passport = require('./passport');
 init_passport(passport);
 //connect flash
 app.use(flash());
-// Api routes
-const api = require('../routes/api');
-app.use('/api' ,api);
-app.use('/auth',api, auth);
-
 
 
 app.use(upload);

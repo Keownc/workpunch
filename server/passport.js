@@ -11,11 +11,13 @@ const localStrategy = require('passport-local').Strategy;
 module.exports = function(passport){
 
     passport.serializeUser(function(user, done) {
+        console.log('serializing user:',user.username);
       return done(null, user._id);
     });
 
     passport.deserializeUser(function(id, done) {
         Employee.findById(id, function (err, user) {
+            console.log('deserializing user:',user.username);
             return done(err, user);
         });
     });
@@ -25,22 +27,26 @@ module.exports = function(passport){
         },
         function(req, username, password, done) {
             process.nextTick(function(){
-                Employee.findOne({ username: username, password: password }, function (err, user) {
+                Employee.findOne({ 'username': username}, function (err, user) {
                     if (err) { return done(err); }
-                    if (!user) { return done(null, false, req.flash('message','User not found')); }
-                    if (!user.validPassword(password)) { return done(null, false, req.flash('message','Invalid Password')); }
+                    if (!user) {
+                        console.log('User Not Found with username '+username);
+                        return done(null, false, {message:'User not found'}); }
+                    if (!user.validPassword(password)) {
+                        console.log('Invalid Password');
+                        return done(null, false, req.flash('message','Invalid Password')); }
 
                     return done(null, user);
                  });
              });
          }
     ));
-    // passport registration for employees 
+    // passport registration for employees
     passport.use('employee-signup',new localStrategy({
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            Employee.findOne({ username: username , password : password }, function (err, user) {
+            Employee.findOne({ 'username': username}, function (err, user) {
                 if (err) { return done(err); }
                 if (user) {
                     console.log('user exits'+ username);
@@ -69,7 +75,7 @@ module.exports = function(passport){
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            Employee.findOne({ username: username , password : password }, function (err, user) {
+            Employee.findOne({ 'username': username }, function (err, user) {
                 if (err) { return done(err); }
                 if (user) {
                     console.log('user exits'+ username);

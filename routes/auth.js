@@ -9,7 +9,7 @@ module.exports = function(passport){
 
 	//sends successful login state back to angular
 	router.get('/success', function(req, res){
-		// res.send({state: 'success', user: req.user ? req.user : null});
+		res.send({state: 'success', user: req.user ? req.user : null});
         res.json(req.session);
 	});
 
@@ -21,10 +21,14 @@ module.exports = function(passport){
 
 	//log in
 	router.post('/login', passport.authenticate('login', {
-		successRedirect: '/auth/success',
-		failureRedirect: '/auth/failure',
+		successRedirect: '/../public/views/pages/employee/employeeDashboard',
+		failureRedirect: '/',
 		failureFlash : true
-	}));
+	}),
+    function(req, res){
+        req.user;
+        res.redirect('/');
+    });
 
 	//sign up employee
 	router.post('/employee-signup', passport.authenticate('employee-signup', {
