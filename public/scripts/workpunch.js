@@ -29,7 +29,9 @@ myApp.run(function($rootScope, $http, $location, Auth){
     $rootScope.firstName = '';
     $rootScope.lastName = '';
     $rootScope.logout = function(){
-        $http.get('/auth/logout');
+        $http.get('/api/logout').success(function (data) {
+            $location.path('/');
+        });
 
         $rootScope.authenticated = false;
         $rootScope.current_user = '';

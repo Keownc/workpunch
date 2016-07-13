@@ -21,20 +21,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 const api = require('../routes/api');
 
-function ensureAuthenticated(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	} else {
-		//req.flash('error_msg','You are not logged in');
-		res.redirect('/users/login');
-	}
-}
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
-//Get all routes and set index.html as root
-app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
-    res.render('../public/views/pages/employee/employeeDashboard');
-});
+
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
 });
@@ -58,12 +47,16 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 //connect flash
 app.use(flash());
 app.use(function(req, res, next){
     res.locals.success = req.flash('success');
     res.locals.failure = req.flash('failure');
     res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
+  next();
 })
 
 app.use('/api' ,api);

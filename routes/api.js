@@ -7,26 +7,30 @@ const Company = mongoose.model('Company');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+// Register
+router.get('/register', function(req, res){
+	res.render('register');
+});
+
 //Register
 router.post('/register', function(req, res){
 
     const new_user = new Employee();
     new_user.username = req.body.username;
-    new_user.password = req.body.password);
+    new_user.password = new_user.createHash(req.body.password);
     new_user.firstName = req.body.firstName;
     new_user.lastName = req.body.lastName;
     new_user.email = req.body.email;
     new_user.companyID = req.body.companyID;
     new_user.company = req.body.company;
+
     new_user.save(function(err, data){
         if (err){
             return res.send(500, err);
         }
         return res.json(data);
     });
-
     req.flash('success', 'You have succesfull registered');
-
     // res.redirect('/employeeDashboard');
 })
 
@@ -50,17 +54,13 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+  Employee.findById(id, function(err, user) {
     done(err, user);
   });
 });
 
 //Login Route
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/employeeDashboard',
-    failureRedirect: '/',
-    failureFlash: true
-    }),
+router.post('/login', passport.authenticate('local'),
     function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
@@ -74,8 +74,20 @@ router.get('/logout', function(req, res) {
   res.send(200);
   res.redirect('/');
 });
-// Employee Dashboard Route
 
+// Employee Dashboard Route
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		req.flash('error_msg','You are not logged in');
+		res.redirect('/');
+	}
+}
+//Get all routes and set index.html as root
+router.get('/employeeDashboard', ensureAuthenticated, function(req, res){
+    res.render('../public/views/pages/employee/employeeDashboard');
+});
 
 router.route('/employeeDashboard')
 
@@ -101,7 +113,9 @@ router.route('/employeeDashboard')
             if (err){
                 return res.send(500, err);
             }
+                console.log(data);
             return res.json(data);
+
         });
     })
 
