@@ -24,9 +24,9 @@ const employeeSchema = new mongoose.Schema({
 //Timepunch Database
 const timecardSchema = new mongoose.Schema({
     employeeID: String,
-    year: Number,
-    month: Number,
-    day: Number,
+    year: {type: Date, default: Date.now},
+    month: {type: Date, default: Date.now},
+    day: {type: Date, default: Date.now},
     clockIn: {type: Date, default: Date.now},
     clockOut: {type: Date, default: Date.now}
 });

@@ -3,19 +3,25 @@
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
     $rootScope.form = false;
     $scope.user = {};
-    $scope.employee = {};
+    $scope.employee = [];
     // Return from the Database
     Api.Employee.query({}, function(data){
          $scope.employee = data;
          console.log("firstname " + $scope.employee.firstName);
+         //  $scope.firstName = data.data;
+        //  console.log("company" + data.user.company);
     });
-
-    $scope.refresh =function(){
-        $http.get('/api/employeeDashboard/').success(function(data){
-             $scope.firstName = data.data.firstName;
-            console.log("company" + $scope.user.company);
-        })
-    }
+    // $http.get('/api/employeeDashboard/').success(function(data){
+    //     $scope.employee = data;
+    //     console.log("company" + data.data.user);
+    // })
+    //
+    // $scope.refresh =function(){
+    //     $http.get('/api/employeeDashboard/').success(function(data){
+    //         //  $scope.firstName = data.data;
+    //         console.log("company" + data.data.user);
+    //     })
+    // }
 
     // Add/Insert to the user Database
     $scope.addPost = function(){

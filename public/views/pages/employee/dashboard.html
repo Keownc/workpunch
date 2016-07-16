@@ -14,7 +14,7 @@
                 <section class="col-md-9">
                     <article class="profile-details">
                         <div >
-                            <div><em class="title">Name: </em>{{ employee.firstName }} {{ employee.lastName }}</div>
+                            <div><em class="title">Name: </em>{{ user.firstName }} {{ employee.lastName }}</div>
                             <div><em class="title">EmployeeID: </em>{{ user.employeeID }}</div>
                             <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || 'empty' }}</a></div>
                             <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || 'empty' }}</a></div>

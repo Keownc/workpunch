@@ -4,6 +4,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 const Company = mongoose.model('Company');
+const Timecard = mongoose.model('Timecard');
+const SickLeave = mongoose.model('SickLeave');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -12,7 +14,7 @@ router.get('/register', function(req, res){
 	res.render('register');
 });
 
-//Register
+//A Register route for employees
 router.post('/register', function(req, res){
 
     const new_user = new Employee();
@@ -23,7 +25,7 @@ router.post('/register', function(req, res){
     new_user.email = req.body.email;
     new_user.companyID = req.body.companyID;
     new_user.company = req.body.company;
-
+    new_user.employeeID = req.body.company.substring(0,3) + new_user.createID();
     new_user.save(function(err, data){
         if (err){
             return res.send(500, err);
@@ -32,6 +34,20 @@ router.post('/register', function(req, res){
     });
     req.flash('success', 'You have succesfull registered');
     // res.redirect('/employeeDashboard');
+});
+
+// A Register route for companies
+router.post('/companyRegister', function(req, res){
+    const new_company = new Company();
+    new_company.branch = req.body.branch;
+    new_company.companyID = req.body.companyID;
+    new_company.company = req.body.company;
+    new_company.username = req.body.username;
+    new_company.password = new_company.createHash(req.body.password);
+    new_company.save(function(err){
+        if (err) { return done(err, false); }
+        return done(null, new_company);
+    });
 })
 
 passport.use(new LocalStrategy(
@@ -75,30 +91,17 @@ router.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-// Employee Dashboard Route
-function ensureAuthenticated(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	} else {
-		req.flash('error_msg','You are not logged in');
-		res.redirect('/');
-	}
-}
-//Get all routes and set index.html as root
-router.get('/employeeDashboard', ensureAuthenticated, function(req, res){
-    res.render('../public/views/pages/employee/employeeDashboard');
-});
+// Create a route to check if the user is logged in
+// router.get('/isLoggedIn', function(req, res){
+//
+// });
 
 router.route('/employeeDashboard')
 
     .get(function (req, res) {
 
-        Employee.find({id: req.session.passport.user._id}, function(err, data) {
-            res.json({
-                user : data.user,
-                // user: req.data
-                sessions: req.session
-            })
+        Employee.findOne({id: req.params.id}, function(err, data) {
+            res.json(data)
             console.log('user data'+ data.user.username);
         })
     })
@@ -143,5 +146,22 @@ router.route('/employeeDashboard/:id')
             res.send(500, err);
         });
     });
+
+    // Timepunch routes
+    router.post('/timepunch', function(req, res){
+        const new_timepunch = new Timepunch();
+        time_punch.employeeID = req.body.employeeID;
+        time_punch.clockIn = req.body.employeeID;
+        time_punch.clockOut = req.body.employeeID;
+        time_punch.save(function(err, data){
+            if (err){
+                return res.send(500, err);
+            }
+            return res.json(data);
+        });
+    })
+
+
+
 
 module.exports = router;

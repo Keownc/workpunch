@@ -21,14 +21,12 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
 
         Auth.login($scope.user).success(function(data) {
             // If successful redirect to dashboard
+        $rootScope.authenticated = true;
+        $rootScope.current_user = data.user;
+        // console.log("current User "+$rootScope.current_user.firstName);
+        $location.path('/employeeDashboard');
+        $uibModalInstance.close();
 
-
-               $rootScope.authenticated = true;
-               $rootScope.current_user = data.user;
-               console.log("current User"+$rootScope.current_user);
-              $location.path('/employeeDashboard');
-               $uibModalInstance.close();
-        
 
 		})
     }
