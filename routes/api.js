@@ -149,7 +149,7 @@ router.route('/employeeDashboard/:id')
 
     // Timepunch routes
     router.post('/timepunch', function(req, res){
-        const new_timepunch = new Timepunch();
+        const time_punch = new Timepunch();
         time_punch.employeeID = req.body.employeeID;
         time_punch.clockIn = req.body.employeeID;
         time_punch.clockOut = req.body.employeeID;
@@ -160,7 +160,19 @@ router.route('/employeeDashboard/:id')
             return res.json(data);
         });
     })
-
+    // Sick Form Router
+    router.post('/sickLeave', function(req, res){
+        const sick_leave = new SickLeave();
+        sick_leave.employeeID = req.body.employeeID;
+        sick_leave.daysOutSick = req.body.slip;
+        sick_leave.slip = req.body.slip;
+        sick_leave.save(function(err, data){
+            if (err){
+                return res.send(500, err);
+            }
+            return res.json(data);
+        });
+    })
 
 
 

@@ -87,7 +87,21 @@
                                     </section>
                                 </uib-tab>
                                 <uib-tab index="1" heading="OverTime">
-                                    OverTime
+                                    <form ng-submit="overtime()">
+                                        <h2>Overtime</h2>
+                                        <div class="form-group">
+                                            <label for="amount">Amount per hour</label>
+                                            <input type="text" class="form-control" id="salary " placeholder="40" ng-model="user.amount">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="amount">Rate per hour</label>
+                                            <select class="form-option" id="rate" ng-model="user.rate" ng-options="opt for opt in options.rate" ></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hours">Number of hours</label>
+                                            <select class="form-option" id="hours" ng-model="user.amount" ng-options="opt for opt in options.hours" ></select>
+                                        </div>
+                                    </form>
                                 </uib-tab>
                                 <uib-tab index="2" heading="Logs">
                                     <table>
