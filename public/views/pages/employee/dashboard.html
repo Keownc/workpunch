@@ -87,21 +87,30 @@
                                     </section>
                                 </uib-tab>
                                 <uib-tab index="1" heading="OverTime">
-                                    <form ng-submit="overtime()">
+                                    <form id="overtime" ng-submit="overtime()">
                                         <h2>Overtime</h2>
+                                        <p>
+                                            Note: this information is private and as such will not be stored!
+                                        </p>
                                         <div class="form-group">
                                             <label for="amount">Amount per hour</label>
-                                            <input type="text" class="form-control" id="salary " placeholder="40" ng-model="user.amount">
+                                            <input type="text" class="form-control" id="salary" placeholder="40" ng-model="amount">
                                         </div>
                                         <div class="form-group">
                                             <label for="amount">Rate per hour</label>
-                                            <select class="form-option" id="rate" ng-model="user.rate" ng-options="opt for opt in options.rate" ></select>
+                                            <select class="form-option" id="rate" ng-model="rate" ng-options="opt for opt in options.rate" ></select>
                                         </div>
                                         <div class="form-group">
                                             <label for="hours">Number of hours</label>
-                                            <select class="form-option" id="hours" ng-model="user.amount" ng-options="opt for opt in options.hours" ></select>
+                                            <select class="form-option" id="hours" ng-model="time" ng-options="opt for opt in options.time" ></select>
                                         </div>
                                     </form>
+                                    <section>
+                                        <h2>Total</h2>
+                                        <p>
+                                            {{amount * rate * time}}
+                                        </p>
+                                    </section>
                                 </uib-tab>
                                 <uib-tab index="2" heading="Logs">
                                     <table>
@@ -139,7 +148,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="fName">Number of days</label>
-                                            <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.days" ></select>
+                                            <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.time" ></select>
                                         </div>
                                         <div class="form-group">
                                             <label for="file">Sick leave slip</label>

@@ -54,20 +54,25 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             }
         })
     };
+    // Store the users time in the Timecard/punch schema
 
 
-
-    // Sick leave form days option
+    // Option for Sick Leave days, Overtime Rate and Overtime hours
     $scope.options = {
-        days: [
+        time: [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
             24, 25, 26, 27, 28, 29, 30
+        ],
+        rate: [
+            1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6
         ]
     };
+
 
     // Sick Leave form submit
     $scope.sickLeaveSubmit = function () {
         const uploadUrl = '/upload';
         SickLeaveForm.post(uploadUrl, $scope.user)
     };
+
 });

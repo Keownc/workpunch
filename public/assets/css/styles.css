@@ -180,6 +180,9 @@ body {
     line-height: .1;
     color: #000;
 }
+#overtime .form-control {
+    width: 40%;
+}
 /* Sick Leave Form*/
 .form-option {
     width: 10%;
