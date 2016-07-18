@@ -3,6 +3,7 @@
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
     $rootScope.form = false;
     $scope.user = {};
+    $scope.time = {};
     $scope.employee = [];
     // Return from the Database
     Api.Employee.query({}, function(data){
@@ -11,10 +12,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
          //  $scope.firstName = data.data;
         //  console.log("company" + data.user.company);
     });
-    // $http.get('/api/employeeDashboard/').success(function(data){
-    //     $scope.employee = data;
-    //     console.log("company" + data.data.user);
-    // })
     //
     // $scope.refresh =function(){
     //     $http.get('/api/employeeDashboard/').success(function(data){
@@ -30,6 +27,39 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             $scope.employee = Api.Employee.query();
         })
     }
+
+    // Store the users time in the Timecard/punch schema
+    $scope.timecard = function() {
+        Api.Timecard.save({},$scope.time, function(data){
+            $scope.employee = Api.Timecard.query();
+        })
+    }
+    // Get the Employee time
+    // Store to Sick Leave schema
+    $scope.timecard = function() {
+        // Api.SickLeave.save({},$scope.time, function(data){
+        //     $scope.employee = Api.SickLeave.query();
+        // })
+            $http.get('/api/sickLeave').success(function(data){
+                $scope.employee = data;
+            })
+    }
+    // Option for Sick Leave days, Overtime Rate and Overtime hours
+    $scope.options = {
+        time: [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+            24, 25, 26, 27, 28, 29, 30
+        ],
+        rate: [
+            1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6
+        ]
+    };
+
+    // Sick Leave form submit
+    $scope.sickLeaveSubmit = function () {
+        const uploadUrl = '/upload';
+        SickLeaveForm.post(uploadUrl, $scope.user)
+    };
 
     // Adds an profile image
     $scope.avatar = function(files){
@@ -54,25 +84,4 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             }
         })
     };
-    // Store the users time in the Timecard/punch schema
-
-
-    // Option for Sick Leave days, Overtime Rate and Overtime hours
-    $scope.options = {
-        time: [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-            24, 25, 26, 27, 28, 29, 30
-        ],
-        rate: [
-            1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6
-        ]
-    };
-
-
-    // Sick Leave form submit
-    $scope.sickLeaveSubmit = function () {
-        const uploadUrl = '/upload';
-        SickLeaveForm.post(uploadUrl, $scope.user)
-    };
-
 });

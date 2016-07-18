@@ -7,6 +7,10 @@ myApp.factory('Api',['$resource', function($resource){
           'remove': {method:'DELETE'},
           'delete': {method:'DELETE'},
           'update': {method: 'PUT'}
-      })
+      }),
+
+      Timecard: $resource('/timecard', {employeeID: '@employeeID'}),
+
+      SickLeave: $resource('/sickLeave', {employeeID: '@employeeID'})
     }
 }])

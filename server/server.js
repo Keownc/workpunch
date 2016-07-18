@@ -33,9 +33,9 @@ function ensureAuthenticated(req, res, next){
 	}
 }
 //Get all routes and set index.html as root
-app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
-    res.render('../public/views/pages/employee/employeeDashboard');
-});
+// app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
+//     res.render('../public/views/pages/employee/employeeDashboard');
+// });
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
 });

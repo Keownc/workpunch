@@ -49,49 +49,47 @@
         <div class="col-sm-9 col-md-10 main">
             <h1 class="page-header">Dashboard</h1>
             <!-- Sidebar Navigation Tab -->
-            <uib-tabset active="tab" id="tabsNav">
+            <uib-tabset active="tab" id="dashboard">
                 <!-- Switch to Timepunch -->
                 <uib-tab index="0" >
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
-                            <uib-tabset  id="tabsNav">
+                            <uib-tabset>
                                 <h2>Time Punch</h2>
                                 <uib-tab index="0" heading="Time">
-                                    <section class="timepunch">
+                                    <section>
                                         <div ng-hide="punchcard.dateOut || punchcard.dateIn">
-                                            <h3>Check In</h3>
-                                            <p><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'">></ds-widget-clock></p>
+                                            <h3 class="timepunch-heading">Check In</h3>
+                                            <p><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></p>
                                             <!-- theme="blue-light" -->
-                                            <ds-widget-clock show-digital digital-format="'hh:mm:ss a'">></ds-widget-clock>
+                                            <ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock>
                                            <button type="button" name="button">Punch Me</button>
                                         </div>
                                         <div ng-show="punchcard.dateIn && !punchcard.dateOut">
-                                            <h3>Check Out</h3>
-                                            <p>Date: </p>
-                                            <p>
-                                            time
-                                            </p>
+                                            <h3 class="timepunch-heading">Check Out</h3>
+                                            <p><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></p>
+                                            <!-- theme="blue-light" -->
+                                            <ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock>
                                             <button type="button" name="button">Punch Me</button>
                                         </div>
                                         <div ng-show="punchcard.dateIn && punchcard.dateOut">
-                                            <h3>Next Check In</h3>
-                                            <p>Date: </p>
+                                            <h3 class="timepunch-heading">Next Check In</h3>
+                                            <p><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></p>
                                             <p>
                                             Next login available at 7am
                                             </p>
-                                            <p>
-                                            time
-                                            </p>
+                                            <ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock>
                                             <button type="button" name="button" disable="disabled">Punch Me</button>
                                         </div>
                                     </section>
                                 </uib-tab>
+                                <!-- Overtime -->
                                 <uib-tab index="1" heading="OverTime">
-                                    <form id="overtime" ng-submit="overtime()">
-                                        <h2>Overtime</h2>
-                                        <p>
-                                            Note: this information is private and as such will not be stored!
-                                        </p>
+                                    <p>
+                                        <em>Note: this information is private and as such will not be stored!</em>
+                                    </p>
+                                    <form ng-submit="overtime()" class="col-md-8 overtime">
+                                        <h3>Calculator</h3>
                                         <div class="form-group">
                                             <label for="amount">Amount per hour</label>
                                             <input type="text" class="form-control" id="salary" placeholder="40" ng-model="amount">
@@ -105,10 +103,10 @@
                                             <select class="form-option" id="hours" ng-model="time" ng-options="opt for opt in options.time" ></select>
                                         </div>
                                     </form>
-                                    <section>
-                                        <h2>Total</h2>
+                                    <section class="col-md-4 overtime">
+                                        <h3>Total</h3>
                                         <p>
-                                            {{amount * rate * time}}
+                                            ${{amount * rate * time}}
                                         </p>
                                     </section>
                                 </uib-tab>

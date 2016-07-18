@@ -26,7 +26,6 @@ body {
   font-size: 3.0em;
   color: #1da4eb;
 }
-
 /*--------------------------------- Navigation ---------------------------------*/
 .navbar>.container .navbar-brand{
     /*color: #e0e0d1;*/
@@ -160,27 +159,43 @@ body {
 }
 
 /*--------------------------------- Dashboard Body ---------------------------------*/
-.timepunch{
+#dashboard{
     text-align: center;
 }
-.timepunch h3{
-    font-size: 5rem;
-    text-transform: uppercase;
-}
-.timepunch span {
-    font-size: 3.5rem;
-}
-.timepunch date {
-    width: 50%;
-    float: left;
-}
-#tabsNav h2{
+#dashboard h2{
     float: left;
     width: 70%;
     line-height: .1;
     color: #000;
 }
-#overtime .form-control {
+.timepunch-heading{
+    font-size: 5rem;
+    text-transform: uppercase;
+}
+span {
+    font-size: 3.5rem;
+}
+p ds-widget-clock{
+    display: inline-block;
+    padding-left: 2rem;
+}
+#dashboard form{
+    text-align: left;
+}
+.overtime p{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+p em {
+    font-style: normal;
+    font-weight: 500;
+    margin: 2rem;
+}
+.overtime h3{
+    font-size: 2.5rem;
+    text-transform: capitalize;
+}
+#dashboard .form-control {
     width: 40%;
 }
 /* Sick Leave Form*/
