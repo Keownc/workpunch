@@ -1,6 +1,6 @@
 myApp.factory('Api',['$resource', function($resource){
     return {
-        Employee: $resource('/api/employeeDashboard/:id', {id: '@id'},
+        Employee: $resource('/api/employeeDashboard/', {id: 'id'},
         { 'get':    {method:'GET'},
           'save':   {method:'POST'},
           'query':  {method:'GET'},
@@ -9,8 +9,8 @@ myApp.factory('Api',['$resource', function($resource){
           'update': {method: 'PUT'}
       }),
 
-      Timecard: $resource('/timecard', {employeeID: '@employeeID'}),
+      Timecard: $resource('/timecard', {employeeID: 'employeeID'}),
 
-      SickLeave: $resource('/sickLeave', {employeeID: '@employeeID'})
+      SickLeave: $resource('/sickLeave', {employeeID: 'employeeID'})
     }
 }])

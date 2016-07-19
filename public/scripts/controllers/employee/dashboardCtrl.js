@@ -8,23 +8,15 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     // Return from the Database
     Api.Employee.query({}, function(data){
          $scope.employee = data;
-         console.log("firstname " + $scope.employee.firstName);
          //  $scope.firstName = data.data;
         //  console.log("company" + data.user.company);
     });
-    //
-    // $scope.refresh =function(){
-    //     $http.get('/api/employeeDashboard/').success(function(data){
-    //         //  $scope.firstName = data.data;
-    //         console.log("company" + data.data.user);
-    //     })
-    // }
 
     // Add/Insert to the user Database
     $scope.addPost = function(){
         Api.Employee.save({},$scope.user, function(data){
-            // $scope.user.push(data);
-            $scope.employee = Api.Employee.query();
+            $scope.user.push(data);
+            // $scope.employee = Api.Employee.query();
         })
     }
 

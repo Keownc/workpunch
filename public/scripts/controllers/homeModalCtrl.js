@@ -1,11 +1,10 @@
 //Home page Modal controller
-myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope, $http, $location, Auth, Session, $cookieStore, Api) {
+myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope, $http, $location, Auth, Session, Api) {
     $scope.user = {};
     $scope.error_message = '';
     $scope.error = {};
     $scope.employee = [];
-    $rootScope.current_user = $cookieStore.get('user') || null;
-
+    $rootScope.current_user = ''
     Api.Employee.query({}, function(data){
          $scope.employee = data;
     });
@@ -19,10 +18,11 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
 
     $scope.login = function () {
 
-        Auth.login($scope.user).success(function(data) {
+        Auth.login($scope.user).then(function(data) {
             // If successful redirect to dashboard
         $rootScope.authenticated = true;
-        $rootScope.current_user = data.user;
+        $rootScope.current_user = data.username;
+        console.log(data.username);
         // console.log("current User "+$rootScope.current_user.firstName);
         $location.path('/employeeDashboard');
         $uibModalInstance.close();

@@ -23,22 +23,7 @@ const api = require('../routes/api');
 
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
-// Employee Dashboard Route
-function ensureAuthenticated(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	} else {
-		// req.flash('error_msg','You are not logged in');
-		res.redirect('/');
-	}
-}
-//Get all routes and set index.html as root
-// app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
-//     res.render('../public/views/pages/employee/employeeDashboard');
-// });
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
-});
+
 
 // middleware
 app.use(logger('dev'));
@@ -72,7 +57,24 @@ app.use(function(req, res, next){
 })
 
 app.use('/api' ,api);
-
+// Employee Dashboard Route
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		// req.flash('error_msg','You are not logged in');
+		res.redirect('/');
+	}
+}
+//Get all routes and set index.html as root
+app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
+    res.render('../public/views/pages/employee/employeeDashboard', {
+        user : req.user
+    });
+});
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
+});
 // Start server
 var server = app.listen(port, function() {
     console.log("Listening on " + port + "...");

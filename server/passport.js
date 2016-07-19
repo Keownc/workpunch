@@ -34,7 +34,8 @@ module.exports = function(passport){
                         return done(null, false, {message:'User not found'}); }
                     if (!user.validPassword(password)) {
                         console.log('Invalid Password');
-                        return done(null, false, req.flash('message','Invalid Password')); }
+                        return done(null, false, req.flash('message','Invalid Password'));
+                    }
 
                     return done(null, user);
                  });

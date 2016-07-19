@@ -16,6 +16,8 @@ router.get('/register', function(req, res){
 
 //A Register route for employees
 router.post('/register', function(req, res){
+    const date = new Date();
+    date.toString();
 
     const new_user = new Employee();
     new_user.username = req.body.username;
@@ -26,6 +28,7 @@ router.post('/register', function(req, res){
     new_user.companyID = req.body.companyID;
     new_user.company = req.body.company;
     new_user.employeeID = req.body.company.substring(0,3) + new_user.createID();
+    new_user.created_at = date;
     new_user.save(function(err, data){
         if (err){
             return res.send(500, err);
@@ -76,18 +79,36 @@ passport.deserializeUser(function(id, done) {
 });
 
 //Login Route
-router.post('/login', passport.authenticate('local'),
-    function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    req.user;
-    res.redirect('/');
-  });
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.status(401).json({
+        err: info
+      });
+    }
+    Employee.findOne({username: req.body.username}, function(err, data) {
+        res.json(data)
+    })
+
+  })(req, res, next);
+});
+// Employee Dashboard Route
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		// req.flash('error_msg','You are not logged in');
+		res.redirect('/');
+	}
+}
 
 //log out
 router.get('/logout', function(req, res) {
   req.logout();
-  res.send(200);
+
   res.redirect('/');
 });
 
@@ -99,10 +120,10 @@ router.get('/logout', function(req, res) {
 router.route('/employeeDashboard')
 
     .get(function (req, res) {
-
-        Employee.findOne({id: req.params.id}, function(err, data) {
+        Employee.findOne({id: req.params._id}, function(err, data) {
+            // console.log("line 12 ", );
             res.json(data)
-            console.log('user data'+ data.user.username);
+            console.log('user data '+ data.username);
         })
     })
     .post(function (req, res) {
@@ -125,13 +146,13 @@ router.route('/employeeDashboard')
 router.route('/employeeDashboard/:id')
 
     .get(function (req, res) {
-        Employee.findOne({_id: req.params.id },function(err, data){
+        Employee.findOne({username: req.body.username},function(err, data){
 
                 if (err){
                     return res.send(500, err);
                 }
-                res.json(data.user);
-                console.log('user data id'+ data.user.username);
+                res.json(data);
+                console.log('user data id'+ data.id);
         });
     })
 
@@ -161,11 +182,16 @@ router.route('/employeeDashboard/:id')
         });
     })
     router.get('/timecard', function(req, res){
-        Timecard.find(function(ere, data){
+        Timecard.findOne({},function(err, data){
             res.json(data);
         })
     })
     // Sick Form Router
+    router.get('/sickLeave', function(req, res){
+        SickLeave.findOne({}, function(err, data){
+            res.json(data);
+        })
+    })
     router.post('/sickLeave', function(req, res){
         const sick_leave = new SickLeave();
         sick_leave.employeeID = req.body.employeeID;
