@@ -5,10 +5,6 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
     $scope.error = {};
     $scope.employee = [];
     $rootScope.current_user = ''
-    Api.Employee.query({}, function(data){
-         $scope.employee = data;
-    });
-
     // $scope.loadAuth = function() {
     //     Auth.load().success(function(data) {
     //         $scope.employee = data.user;

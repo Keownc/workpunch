@@ -8,8 +8,8 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     // Return from the Database
     Api.Employee.query({}, function(data){
          $scope.employee = data;
-         //  $scope.firstName = data.data;
-        //  console.log("company" + data.user.company);
+        //   $scope.firstName = data.data;
+         console.log("user " + data.username);
     });
 
     // Add/Insert to the user Database

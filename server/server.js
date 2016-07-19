@@ -23,8 +23,20 @@ const api = require('../routes/api');
 
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
-
-
+// Employee Dashboard Route auth
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		// req.flash('error_msg','You are not logged in');
+		res.redirect('/');
+	}
+}
+app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
+    res.render('../public/views/pages/employee/employeeDashboard', {
+        user : req.user
+    });
+});
 // middleware
 app.use(logger('dev'));
 app.use(body_parser.json());
@@ -45,33 +57,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 //connect flash
 app.use(flash());
-app.use(function(req, res, next){
-    res.locals.success = req.flash('success');
-    res.locals.failure = req.flash('failure');
-    res.locals.error = req.flash('error');
-    res.locals.user = req.user || null;
-  next();
-})
 
 app.use('/api' ,api);
-// Employee Dashboard Route
-function ensureAuthenticated(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	} else {
-		// req.flash('error_msg','You are not logged in');
-		res.redirect('/');
-	}
-}
 //Get all routes and set index.html as root
-app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
-    res.render('../public/views/pages/employee/employeeDashboard', {
-        user : req.user
-    });
-});
+
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
 });

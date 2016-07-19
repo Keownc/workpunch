@@ -79,22 +79,23 @@ passport.deserializeUser(function(id, done) {
 });
 
 //Login Route
-router.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.status(401).json({
-        err: info
-      });
-    }
-    Employee.findOne({username: req.body.username}, function(err, data) {
-        res.json(data)
-    })
-
-  })(req, res, next);
-});
+// router.post('/login', function(req, res, next) {
+//   passport.authenticate('local', function(err, user, info) {
+//     if (err) {
+//       return next(err);
+//     }
+//     if (!user) {
+//       return res.status(401).json({
+//         err: info
+//       });
+//     }
+//     Employee.findOne({username: req.body.username}, function(err, data) {
+//         res.json(data)
+//     })
+//
+//   })(req, res, next);
+// });
+router.post('/login', passport.authenticate('local'), function(req, res) { res.send(req.user); });
 // Employee Dashboard Route
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
@@ -117,13 +118,15 @@ router.get('/logout', function(req, res) {
 //
 // });
 
-router.route('/employeeDashboard')
-
+router.route('/employeeDashboard/:id')
+// id: req.params._id
     .get(function (req, res) {
-        Employee.findOne({id: req.params._id}, function(err, data) {
-            // console.log("line 12 ", );
+        console.log("line 123 ",  req.body.id);
+        Employee.findOne({id: req.params.id}, function(err, data) {
+
             res.json(data)
-            console.log('user data '+ data.username);
+            console.log('user data '+ data);
+            console.log("line 128 ",  req.params.id);
         })
     })
     .post(function (req, res) {
@@ -143,30 +146,30 @@ router.route('/employeeDashboard')
         });
     })
 
-router.route('/employeeDashboard/:id')
-
-    .get(function (req, res) {
-        Employee.findOne({username: req.body.username},function(err, data){
-
-                if (err){
-                    return res.send(500, err);
-                }
-                res.json(data);
-                console.log('user data id'+ data.id);
-        });
-    })
-
-    .post(function (req, res) {
-        Employee.findAndModify({_id: req.params.id}, function(err, data){
-            res.json(data);
-        });
-    })
-
-    .delete(function (req, res) {
-        Employee.remove({_id: req.params.id}, function (err) {
-            res.send(500, err);
-        });
-    });
+// router.route('/employeeDashboard/:id')
+//
+//     .get(function (req, res) {
+//         Employee.findOne({username: req.body.username},function(err, data){
+//
+//                 if (err){
+//                     return res.send(500, err);
+//                 }
+//                 res.json(data);
+//                 console.log('user data id'+ data.id);
+//         });
+//     })
+//
+//     .post(function (req, res) {
+//         Employee.findAndModify({_id: req.params.id}, function(err, data){
+//             res.json(data);
+//         });
+//     })
+//
+//     .delete(function (req, res) {
+//         Employee.remove({_id: req.params.id}, function (err) {
+//             res.send(500, err);
+//         });
+//     });
 
     // Timepunch routes
     router.post('/timecard', function(req, res){
