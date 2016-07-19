@@ -26,8 +26,7 @@ router.post('/register', function(req, res){
     new_user.lastName = req.body.lastName;
     new_user.email = req.body.email;
     new_user.companyID = req.body.companyID;
-    new_user.company = req.body.company;
-    new_user.employeeID = req.body.company.substring(0,3) + new_user.createID();
+    new_user.employeeID = req.body.companyID.substring(0,3) + new_user.createID();
     new_user.created_at = date;
     new_user.save(function(err, data){
         if (err){
@@ -68,6 +67,7 @@ passport.use(new LocalStrategy(
 
   }
 ));
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -79,23 +79,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 //Login Route
-// router.post('/login', function(req, res, next) {
-//   passport.authenticate('local', function(err, user, info) {
-//     if (err) {
-//       return next(err);
-//     }
-//     if (!user) {
-//       return res.status(401).json({
-//         err: info
-//       });
-//     }
-//     Employee.findOne({username: req.body.username}, function(err, data) {
-//         res.json(data)
-//     })
-//
-//   })(req, res, next);
-// });
-router.post('/login', passport.authenticate('local'), function(req, res) { res.send(req.user); });
+router.post('/login', passport.authenticate('local'), function(req, res) {
+    res.send(req.user);
+});
 // Employee Dashboard Route
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
@@ -118,18 +104,14 @@ router.get('/logout', function(req, res) {
 //
 // });
 
-router.route('/employeeDashboard/:id')
-// id: req.params._id
+router.route('/employeeDashboard/')
+// username: req.user.username
     .get(function (req, res) {
-        console.log("line 123 ",  req.body.id);
-        Employee.findOne({id: req.params.id}, function(err, data) {
-
+        Employee.findOne({_id: req.user._id}, function(err, data) {
             res.json(data)
-            console.log('user data '+ data);
-            console.log("line 128 ",  req.params.id);
-        })
+        });
     })
-    .post(function (req, res) {
+    .put(function (req, res) {
 
         var user = req.user;
         user.fullName = req.body.fullname;

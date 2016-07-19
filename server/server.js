@@ -18,7 +18,7 @@ mongoose.connect("mongodb://localhost/workpunch");
 const MongoDBStore = require('connect-mongodb-session')(session)
 // Run Server
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const api = require('../routes/api');
 
 //set static folder

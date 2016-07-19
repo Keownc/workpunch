@@ -14,9 +14,9 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
 
     // Add/Insert to the user Database
     $scope.addPost = function(){
-        Api.Employee.save({},$scope.user, function(data){
-            $scope.user.push(data);
-            // $scope.employee = Api.Employee.query();
+        Api.Employee.update({},$scope.user, function(data){
+            // $scope.user.push(data);
+            $scope.employee = Api.Employee.query();
         })
     }
 
@@ -33,7 +33,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         //     $scope.employee = Api.SickLeave.query();
         // })
             $http.get('/api/sickLeave').success(function(data){
-                $scope.employee = data;
+                // $scope.employee = data;
             })
     }
     // Option for Sick Leave days, Overtime Rate and Overtime hours

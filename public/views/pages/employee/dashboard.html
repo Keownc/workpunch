@@ -16,9 +16,9 @@
                         <div >
                             <div><em class="title">Name: </em>{{ employee.firstName }} {{ employee.lastName }}</div>
                             <div><em class="title">EmployeeID: </em>{{ employee.employeeID }}</div>
-                            <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ employee.company || 'empty' }}</a></div>
-                            <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ employee.position || 'empty' }}</a></div>
-                            <div><em class="title">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40" onaftersave="addPost()">{{ employee.description || 'no description' }}</a></div>
+                            <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || employee.company || 'empty' }}</a></div>
+                            <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || employee.position || 'empty' }}</a></div>
+                            <div><em class="title">Description: </em><a href="#" editable-textarea="user.description" e-rows="7" e-cols="40" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div>
                         </div>
                     </article>
                 </section>
@@ -63,8 +63,7 @@
                                             <p><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></p>
                                             <!-- theme="blue-light" -->
                                             <ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock>
-                                           <button type="button" name="button" >Punch Me</button>
-                                           <!-- ng-sumbit="timecard()" -->
+                                           <button type="button" name="button">Punch Me</button>
                                         </div>
                                         <div ng-show="punchcard.dateIn && !punchcard.dateOut">
                                             <h3 class="timepunch-heading">Check Out</h3>

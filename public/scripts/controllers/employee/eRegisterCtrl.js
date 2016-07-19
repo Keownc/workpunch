@@ -9,12 +9,12 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
         //
         // });
 
-        Auth.register($scope.user).success(function(data) {
-            // $location.path('/employeeDashboard');
+        Auth.register($scope.user).then(function(data) {
 
               $rootScope.authenticated = true;
               $rootScope.current_user = data.user;
-              $location.path('/employeeDashboard');
+              $rootScope.message = "You have successful Register your account. Please login"
+              $location.path('/');
 
 
             // $rootScope.current_user = data.username;
