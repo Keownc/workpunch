@@ -6,10 +6,23 @@
         <div class="content">
              <div class="container">
                 <div class="col-md-3 text">
-                    <!-- <section>
-                        <img src="{{avater}}" alt="User avatar goes here" />
-                        <a href="#" ngf-select="avatar($files)">Upload</a>
-                    </section> -->
+                    <section>
+                        <!-- <img src="{{avater}}" alt="User avatar goes here" />
+                        <a href="#" ngf-select="avatar($files)">Upload</a> -->
+                        <!-- <div ngf-change="avatar($files)"
+                             class="drop-box"
+                             ngf-drag-over-class="drop-box-dragover"
+                             ngf-drop
+                             ngf-select
+                             ng-model="files"
+                             ngf-multiple="false"
+                             ng-show="!user.avater"
+                             ngf-allow-dir="true"
+                             accept="image/*">
+                           Drop Images
+                      </div>
+                        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div> -->
+                    </section>
                 </div>
                 <section class="col-md-9">
                     <article class="profile-details">
@@ -58,29 +71,12 @@
                                 <uib-tab index="0" heading="Time">
                                     <section>
                                         <!--  -->
-                                        <div ng-hide="timecard.dateOut || timecard.dateIn">
-                                            <h3 class="timepunch-heading">Check In</h3>
+                                        <div ng-hide="timecard.clockOut || timecard.clockIn">
+                                            <h3 class="timepunch-heading">Timecard</h3>
                                             <div><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></div>
                                             <!-- theme="blue-light" -->
                                             <div><ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock></div>
-                                           <button type="button" name="button"  class="btn btn-lg btn-success cta-btn" ng-click="timecard()">Punch Me</button>
-                                        </div>
-                                        <!--  -->
-                                        <div ng-show="timecard.dateIn && !timecard.dateOut">
-                                            <h3 class="timepunch-heading">Check Out</h3>
-                                            <div><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></div>
-                                            <!-- theme="blue-light" -->
-                                            <ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock>
-                                            <button type="button" name="button" class="btn btn-lg btn-success cta-btn" ng-click="timecard()">Punch Me</button>
-                                        </div>
-                                        <div ng-show="timecard.dateIn && timecard.dateOut">
-                                            <h3 class="timepunch-heading">Next Check In</h3>
-                                            <div><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></div>
-                                            <p>
-                                            Next login available at 7am
-                                            </p>
-                                            <ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock>
-                                            <button type="button" name="button" class="btn btn-lg btn-success cta-btn" disable="disabled">Punch Me</button>
+                                            <button type="button" name="button" class="btn btn-lg btn-success cta-btn" ng-click="checkIn()" ng-disabled="checked" >Punch Me</button>
                                         </div>
                                     </section>
                                 </uib-tab>
@@ -140,20 +136,20 @@
                             <uib-tabset id="tabsNav">
                                 <h2>Sick Leave</h2>
                                 <uib-tab index="0" heading="Form">
-                                    <form ng-submit="sickLeave()" ng-hide="submitted">
+                                    <form ng-submit="sickLeave($files)" ng-hide="submitted">
                                         <div class="form-group">
                                             <label for="employeeID">EmployeeID</label>
-                                            <input type="text" id="employeeID" class="form-control" placeholder="Sam" ng-model="user.employeeID" ng-required="true"/>
+                                            <input type="text" id="employeeID" class="form-control" placeholder="wer45ce995c437c" ng-model="user.employeeID" ng-required="true"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="fName">Number of days</label>
-                                            <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.time" ></select>
+                                            <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.time" ng-required="true"></select>
                                         </div>
                                         <div class="form-group">
                                             <label for="file">Sick leave slip</label>
-                                            <input type="file" name="slip" value="" file-model='user.file'>
+                                            <input type="file" ng-model="file" name="file" required="">
                                         </div>
-                                        <button type="submit" class="btn btn-default">Sumbit</button>
+                                        <button type="submit" class="btn btn-default" >Sumbit</button>
                                     </form>
                                     <div class="" ng-show="submitted">
                                         <h3 class="timepunch-heading">Check In</h3>

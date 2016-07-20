@@ -51,6 +51,27 @@ body {
      background-color: #e0e0d1;
      border-color: #ccc;
 }
+/*  */
+.button {
+    -moz-appearance: button;
+    /* Firefox */
+    -webkit-appearance: button;
+    /* Safari and Chrome */
+    padding: 10px;
+    margin: 10px;
+    width: 70px;
+}
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    height: 20rem;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
 /*--------------------------------- Home Page CTA ---------------------------------*/
 #myCarousel {
     /*position: fixed;
@@ -178,7 +199,7 @@ span {
 div ds-widget-clock{
     display: inline-block;
     padding-left: 2rem;
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
 }
 #dashboard div p {
     font-size: 2rem;

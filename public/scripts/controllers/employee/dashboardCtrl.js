@@ -21,15 +21,36 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             $scope.employee = Api.Employee.query();
         })
     }
-
+    var today = new Date();
+   var yearNum = today.getFullYear();
+   var monthNum = today.getMonth();
+   var dayNum = today.getDate();
     // Store the users time in the Timecard/punch schema
-    $scope.timecard = function() {
-        var punchInDay = new Date();;
+    $scope.checkIn = function() {
+        var punchInDay = Date.now();
+        var clockIn = punchInDay;
+        var month = monthNum;
+        var year = yearNum;
+        var day = dayNum;
+        var employeeID = $scope.employee.username;
+        $http.post('/api/timecard', {
+            clockIn: clockIn,
+            month: monthNum,
+            year: yearNum,
+            day: dayNum,
+            employeeID: employeeID
+        }).success(function(data){
+            // Disable after sumbit
+            $scope.checked = true;
+            // Enable after an 8 hours
+            setTimeout(function(){
+                $scope.checked = false;
+            }, 60*60*1000*8)
 
-        Api.Timecard.save({},$scope.time, function(data){
-            $scope.time = Api.Timecard.query();
-        })
+            // $scope.time = Api.Timecard.query();
+        });
     }
+    // 28800
     // Get the Employee time
     // Store to Sick Leave schema
     $scope.sickLeave = function() {
@@ -58,27 +79,28 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         SickLeaveForm.post(uploadUrl, $scope.user)
     };
 
-    // Adds an profile image
-    $scope.avatar = function(files){
+    // Adds an sick leave slip image
+    $scope.upload = function(files){
         $scope.files = files;
         if(!$scope.files){ return }
         angular.forEach(files, function(file){
             if(file && !file.$error){
                 file.upload = $upload.upload({
-                    url:"https://api.cloudinary.com/v1_1"+cloudinary.config().cloud_name+"/upload",
+                    url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
                     data:{
                         upload_preset:cloudinary.config().cloud_preset,
                         tags:'myphotoalbum',
                         file: file
                     }
                 }).success(function(data, status, headers, config){
-                    file_result = data;
-                    const avatarUrl = data.url;
-                    $scope.avatar = avatarUrl;
+                    file.result = data;
+                    const imageUrl = data.url;
+                    $scope.slip = imageUrl;
                 }).error(function (data, status, headers, config) {
-                    file_result = data;
+                    file.result = data;
                 })
             }
         })
     };
+
 });

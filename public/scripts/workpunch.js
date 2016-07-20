@@ -9,6 +9,7 @@ const myApp = angular.module('workpunch', [
     'xeditable',
     'ngCookies',
     'ds.clock',
+    'ngAutodisable',
     // 'cloudinary ',
     'ngFileUpload'
 ]);
