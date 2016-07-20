@@ -12,7 +12,7 @@ require('../models/model.js');
 require('../models/companyModel.js');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/workpunch");
+mongoose.connect("mongodb://heroku_qf2rkvwj:heroku_qf2rkvwj@ds023435.mlab.com:23435/heroku_qf2rkvwj");
 const MongoDBStore = require('connect-mongodb-session')(session)
 // Run Server
 const app = express();
@@ -46,7 +46,7 @@ app.use(session({
     saveUninitialized: true,
     resave: true,
     store: new MongoDBStore({
-        uri: 'mongodb://localhost:27017/workpunch',
+        uri: 'mongodb://heroku_qf2rkvwj:heroku_qf2rkvwj@ds023435.mlab.com:23435/heroku_qf2rkvwj',
         collection: 'mySessions',
         connection: mongoose.connect,
         ttl: 2 * 3 * 60 * 60
