@@ -12,7 +12,7 @@ require('../models/model.js');
 require('../models/companyModel.js');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://heroku_qf2rkvwj:heroku_qf2rkvwj@ds023435.mlab.com:23435/heroku_qf2rkvwj");
+mongoose.connect(process.env.MONGODB_URI);
 const MongoDBStore = require('connect-mongodb-session')(session)
 // Run Server
 const app = express();
@@ -46,7 +46,7 @@ app.use(session({
     saveUninitialized: true,
     resave: true,
     store: new MongoDBStore({
-        uri: 'mongodb://heroku_qf2rkvwj:heroku_qf2rkvwj@ds023435.mlab.com:23435/heroku_qf2rkvwj',
+        uri: process.env.MONGODB_URI,
         collection: 'mySessions',
         connection: mongoose.connect,
         ttl: 2 * 3 * 60 * 60
@@ -68,5 +68,3 @@ app.get('*', function(req, res) {
 var server = app.listen(port, function() {
     console.log("Listening on " + port + "...");
 });
-
-module.exports = server;
