@@ -9,8 +9,8 @@ myApp.factory('Api',['$resource', function($resource){
           'update': {method: 'PUT'}
       }),
 
-      Timecard: $resource('/timecard', {employeeID: 'employeeID'}),
+      Timecard: $resource('/api/timecard', {id: '@id'}, {'query':  {method:'GET'}}),
 
-      SickLeave: $resource('/sickLeave', {employeeID: 'employeeID'})
+      SickLeave: $resource('/api/sickLeave', {id: '@id'}, {'query':  {method:'GET'}})
     }
 }])

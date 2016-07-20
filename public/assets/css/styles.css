@@ -175,9 +175,15 @@ body {
 span {
     font-size: 3.5rem;
 }
-p ds-widget-clock{
+div ds-widget-clock{
     display: inline-block;
     padding-left: 2rem;
+    margin-bottom: 2rem; 
+}
+#dashboard div p {
+    font-size: 2rem;
+    width: 50%;
+    margin: 0 auto;
 }
 #dashboard form{
     text-align: left;
@@ -190,6 +196,7 @@ p em {
     font-style: normal;
     font-weight: 500;
     margin: 2rem;
+    font-size: 1.5rem;
 }
 .overtime h3{
     font-size: 2.5rem;

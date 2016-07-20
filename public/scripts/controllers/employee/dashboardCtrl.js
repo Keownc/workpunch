@@ -3,9 +3,12 @@
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
     $rootScope.form = false;
     $scope.user = {};
-    $scope.time = {};
+    $scope.time = [];
     $scope.employee = [];
     // Return from the Database
+    Api.SickLeave.query({},$scope.time, function(data){
+        $scope.employee = data;
+    })
     Api.Employee.query({}, function(data){
          $scope.employee = data;
         //   $scope.firstName = data.data;
@@ -15,27 +18,29 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     // Add/Insert to the user Database
     $scope.addPost = function(){
         Api.Employee.update({},$scope.user, function(data){
-            // $scope.user.push(data);
             $scope.employee = Api.Employee.query();
         })
     }
 
     // Store the users time in the Timecard/punch schema
     $scope.timecard = function() {
+        var punchInDay = new Date();;
+
         Api.Timecard.save({},$scope.time, function(data){
-            $scope.employee = Api.Timecard.query();
+            $scope.time = Api.Timecard.query();
         })
     }
     // Get the Employee time
     // Store to Sick Leave schema
-    $scope.timecard = function() {
-        // Api.SickLeave.save({},$scope.time, function(data){
-        //     $scope.employee = Api.SickLeave.query();
-        // })
-            $http.get('/api/sickLeave').success(function(data){
-                // $scope.employee = data;
-            })
+    $scope.sickLeave = function() {
+        $scope.submitted = false;
+        $http.post('/api/sickLeave', $scope.user).success(function(data){
+            $scope.submitted = true;
+        });
     }
+    $scope.sickLeaveForm = function () {
+       $scope.submitted = false;
+    };
     // Option for Sick Leave days, Overtime Rate and Overtime hours
     $scope.options = {
         time: [
