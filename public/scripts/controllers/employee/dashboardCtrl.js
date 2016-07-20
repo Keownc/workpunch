@@ -4,10 +4,14 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $rootScope.form = false;
     $scope.user = {};
     $scope.time = [];
+    $scope.sick = [];
     $scope.employee = [];
     // Return from the Database
+    Api.Timecard.query({},$scope.time, function(data){
+        $scope.time = data;
+    })
     Api.SickLeave.query({},$scope.time, function(data){
-        $scope.employee = data;
+        $scope.sick = data;
     })
     Api.Employee.query({}, function(data){
          $scope.employee = data;
@@ -32,7 +36,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         var month = monthNum;
         var year = yearNum;
         var day = dayNum;
-        var employeeID = $scope.employee.username;
+        var employeeID = $scope.employee.employeeID;
         $http.post('/api/timecard', {
             clockIn: clockIn,
             month: monthNum,
@@ -46,7 +50,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             setTimeout(function(){
                 $scope.checked = false;
             }, 60*60*1000*8)
-
             // $scope.time = Api.Timecard.query();
         });
     }

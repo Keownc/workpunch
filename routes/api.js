@@ -128,31 +128,6 @@ router.route('/employeeDashboard/')
         });
     })
 
-// router.route('/employeeDashboard/:id')
-//
-//     .get(function (req, res) {
-//         Employee.findOne({username: req.body.username},function(err, data){
-//
-//                 if (err){
-//                     return res.send(500, err);
-//                 }
-//                 res.json(data);
-//                 console.log('user data id'+ data.id);
-//         });
-//     })
-//
-//     .post(function (req, res) {
-//         Employee.findAndModify({_id: req.params.id}, function(err, data){
-//             res.json(data);
-//         });
-//     })
-//
-//     .delete(function (req, res) {
-//         Employee.remove({_id: req.params.id}, function (err) {
-//             res.send(500, err);
-//         });
-//     });
-
     // Timepunch routes
     router.post('/timecard', function(req, res){
         const time_punch = new Timecard();
@@ -171,13 +146,15 @@ router.route('/employeeDashboard/')
         });
     })
     router.get('/timecard', function(req, res){
-        Timecard.findOne({},function(err, data){
+        console.log(req.user.employeeID);
+        Timecard.findOne({employeeID: req.user.employeeID},function(err, data){
             res.json(data);
         })
     })
     // Sick Form Router
     router.get('/sickLeave', function(req, res){
-        SickLeave.findOne({}, function(err, data){
+
+        SickLeave.findOne({employeeID: req.user.employeeID}, function(err, data){
             res.json(data);
         })
     })

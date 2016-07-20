@@ -16,15 +16,6 @@ const myApp = angular.module('workpunch', [
 
 myApp.run(function($rootScope, $http, $location, Auth){
 
-    // $rootScope.$watch('currentUser', function(current_user) {
-    //     if (!current_user && (['/', '/logout', '/employeeRegister'].indexOf($location.path()) == -1 )) {
-    //         Auth.currentUser();
-    //       }
-    // });
-    // $rootScope.$on('event:auth-loginRequired', function() {
-    //     $location.path('/login');
-    //     return false;
-    // });
     $rootScope.current_user = '';
     $rootScope.authenticated = false;
     $rootScope.firstName = '';

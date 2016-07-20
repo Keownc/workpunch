@@ -236,6 +236,9 @@ p em {
 .panel-default>.panel-heading {
     height: 45rem;
 }
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+ text-align: left;
+}
 /*--------------------------------- Modal ---------------------------------*/
 .modal-header h3 {
     float: left;

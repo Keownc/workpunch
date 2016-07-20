@@ -108,19 +108,34 @@
                                     </section>
                                 </uib-tab>
                                 <uib-tab index="2" heading="Logs">
-                                    <table>
+                                    <table class="table table-striped">
                                         <tr>
+                                            <th>
+                                                Name
+                                            </th>
                                             <th>
                                                 Date
                                             </th>
                                             <th>
-                                                time
+                                                Clocked In At
+                                            </th>
+                                            <th>
+                                                Clocked Out At
                                             </th>
 
                                         </tr>
                                         <tr>
                                             <td>
-                                                date here
+                                                {{ employee.firstName }} {{ employee.lastName }}
+                                            </td>
+                                            <td>
+                                                {{time.clockIn | date : 'mediumDate'}}
+                                            </td>
+                                            <td>
+                                                {{time.clockIn | date : 'mediumTime'}}
+                                            </td>
+                                            <td>
+                                                {{time.clockOut | date : 'mediumTime'}}
                                             </td>
                                         </tr>
                                     </table>
@@ -160,7 +175,24 @@
                                     </div>
                                 </uib-tab>
                                 <uib-tab index="1" heading="View">
-                                    View
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>
+                                                Day Out
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ employee.firstName }} {{ employee.lastName }}
+                                            </td>
+                                            <td>
+                                                {{sick.daysOutSick}}
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </uib-tab>
                             </uib-tabset>
                         </div>

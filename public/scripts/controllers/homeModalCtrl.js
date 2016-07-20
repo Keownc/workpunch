@@ -5,12 +5,6 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
     $scope.error = {};
     $scope.employee = [];
     $rootScope.current_user = ''
-    // $scope.loadAuth = function() {
-    //     Auth.load().success(function(data) {
-    //         $scope.employee = data.user;
-    //         //  $location.path('/employeeDashboard');
-    //     });
-    // }
 
     $scope.login = function () {
 
