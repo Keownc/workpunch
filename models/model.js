@@ -18,17 +18,17 @@ const employeeSchema = new mongoose.Schema({
     description: String,
     avatar: String,
     employeeID: String,
-    created_at: {type: Date, default: Date.now}
+    created_at: {type: Date}
 });
 
 //Timepunch Database
 const timecardSchema = new mongoose.Schema({
     employeeID: String,
-    year: Number,
-    month: Number,
-    day: Number,
-    clockIn: {type: Date, default: Date.now},
-    clockOut: {type: Date, default: Date.now}
+    year: {type: Date},
+    month: {type: Date},
+    day: {type: Date},
+    clockIn: {type: Date},
+    clockOut: {type: Date}
 });
 
 //SickLeave
