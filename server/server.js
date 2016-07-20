@@ -5,8 +5,6 @@ const flash = require('connect-flash');
 const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
 const logger = require('morgan');
-const multer  = require('multer');
-const upload = multer({ dest: '../uploads/'}).array()
 const path = require('path');
 const passport = require('passport');
 // Database connection and session
