@@ -109,6 +109,10 @@ body {
     padding: 3rem;
     background-color: #326699
 }
+#services .thumbnail  {
+    min-height: 250px;
+    padding: 3rem;
+}
 .heading {
     text-align: center;
     margin-top: 6rem;

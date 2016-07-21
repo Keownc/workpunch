@@ -30,30 +30,47 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
    var monthNum = today.getMonth();
    var dayNum = today.getDate();
     // Store the users time in the Timecard/punch schema
-    $scope.checkIn = function() {
-        var punchInDay = Date.now();
-        var clockIn = punchInDay;
-        var month = monthNum;
-        var year = yearNum;
-        var day = dayNum;
+
+    $scope.checkIn = function(){
         var employeeID = $scope.employee.employeeID;
+            var punchInDay = Date.now();
+            var clockIn = punchInDay;
+            var month = punchInDay;
+            var year = punchInDay;
+            var day = punchInDay;
         $http.post('/api/timecard', {
             clockIn: clockIn,
-            month: monthNum,
-            year: yearNum,
-            day: dayNum,
+            month: month,
+            year: year,
+            day: day,
             employeeID: employeeID
         }).success(function(data){
+            $scope.dateIn=true;
             // Disable after sumbit
-            $scope.checked = true;
-            // Enable after an 8 hours
-            setTimeout(function(){
-                $scope.checked = false;
-            }, 60*60*1000*8)
-            // $scope.time = Api.Timecard.query();
+            // $scope.checked = true;
+            // // Enable after an 8 hours
+            // setTimeout(function(){
+            //     $scope.checked = false;
+            // }, 60*60*1000*8)
         });
     }
-    // 28800
+    $scope.checkOut = function(){
+        var punchInDay = Date.now();
+        var employeeID = $scope.employee.employeeID;
+        var month =punchInDay;
+        var year = punchInDay;
+        var day = punchInDay;
+        var clockOut = punchInDay;
+        $http.post('/api/timecard', {
+            clockOut: clockOut,
+            month: month,
+            year: year,
+            day: day,
+            employeeID: employeeID
+        }).success(function(data){
+            $scope.dateOut=true;
+        });
+    }
     // Get the Employee time
     // Store to Sick Leave schema
     $scope.sickLeave = function() {
