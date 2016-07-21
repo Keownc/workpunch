@@ -112,7 +112,6 @@ router.route('/employeeDashboard/')
         });
     })
     .put(function (req, res) {
-
         var user = req.user;
         user.fullName = req.body.fullname;
         user.company = req.body.company;
@@ -124,53 +123,61 @@ router.route('/employeeDashboard/')
             }
                 console.log(data);
             return res.json(data);
-
         });
     })
+router.get('/timecard', function(req, res){
+    console.log(req.user.employeeID);
+    Timecard.findOne({employeeID: req.user.employeeID},function(err, data){
+        res.json(data);
+    })
+})
+// Timepunch routes
+router.post('/timecard', function(req, res){
+    const time_punch = new Timecard();
+    time_punch.clockIn = req.body.clockIn;
+    time_punch.clockOut = req.body.clockOut;
+    time_punch.day = req.body.day;
+    time_punch.month = req.body.month;
+    time_punch.year = req.body.year;
+    time_punch.employeeID = req.body.employeeID;
+    time_punch.save(function(err, data){
+        if (err){
+            return res.send(500, err);
+        }
+        return res.json(data);
+    });
+})
+router.put('timecard', function(req, res){
 
-    // Timepunch routes
-    router.post('/timecard', function(req, res){
-        const time_punch = new Timecard();
+    time_punch.clockOut = req.body.clockOut;
+    time_punch.save(function(err, data) {
+        if (err){
+            return res.send(500, err);
+        }
+            console.log(data);
+        return res.json(data);
+    });
+})
+// Sick Form Router
+router.get('/sickLeave', function(req, res){
 
-        time_punch.clockIn = req.body.clockIn;
-        time_punch.clockOut = req.body.clockOut;
-        time_punch.day = req.body.day;
-        time_punch.month = req.body.month;
-        time_punch.year = req.body.year;
-        time_punch.employeeID = req.body.employeeID;
-        time_punch.save(function(err, data){
-            if (err){
-                return res.send(500, err);
-            }
-            return res.json(data);
-        });
+    SickLeave.findOne({employeeID: req.user.employeeID}, function(err, data){
+        res.json(data);
     })
-    router.get('/timecard', function(req, res){
-        console.log(req.user.employeeID);
-        Timecard.findOne({employeeID: req.user.employeeID},function(err, data){
-            res.json(data);
-        })
-    })
-    // Sick Form Router
-    router.get('/sickLeave', function(req, res){
-
-        SickLeave.findOne({employeeID: req.user.employeeID}, function(err, data){
-            res.json(data);
-        })
-    })
-    router.post('/sickLeave', function(req, res){
-        const sick_leave = new SickLeave();
-        sick_leave.employeeID = req.body.employeeID;
-        sick_leave.daysOutSick = req.body.days;
-        sick_leave.slip = req.body.file;
-        sick_leave.save(function(err, data){
-            if (err){
-                return res.send(500, err);
-                res.status(status).send(body)
-            }
-            return res.json(data);
-        });
-    })
+})
+router.post('/sickLeave', function(req, res){
+    const sick_leave = new SickLeave();
+    sick_leave.employeeID = req.body.employeeID;
+    sick_leave.daysOutSick = req.body.days;
+    sick_leave.slip = req.body.file;
+    sick_leave.save(function(err, data){
+        if (err){
+            return res.send(500, err);
+            res.status(status).send(body)
+        }
+        return res.json(data);
+    });
+})
 
 
 
