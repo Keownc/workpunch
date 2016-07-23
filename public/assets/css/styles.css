@@ -135,15 +135,16 @@ body {
     width: 60rem;
 }
 /*--------------------------------- Dashboard Wallpaper ---------------------------------*/
-#wallpaper  {
+.wallpaper  {
     height: 500px;
     background-color: #777;
     font-size: 21px;
     line-height: 1.4;
-    background-image: url("../images/wallpaper.png");
-    background-size: cover;
 }
-
+.wallpaper > img{
+    min-width: 100%;
+    height: 500px;
+}
 .title {
     color: #fff;
     font-style: normal;
@@ -413,7 +414,7 @@ label[for*="submit"] {
     border-radius: 4px;
   }
   /* Bring the CTA and the wallpaper to the top */
-  #myCarousel , #wallpaper{
+  #myCarousel , .wallpaper{
     position: relative;
     top: -7.1rem;
 
@@ -425,7 +426,7 @@ label[for*="submit"] {
     line-height: 1.4;
   }
   /* wallpaper content */
-  #wallpaper .content {
+  .wallpaper .content {
     position: absolute;
     top: 25%;
     right: 5%;

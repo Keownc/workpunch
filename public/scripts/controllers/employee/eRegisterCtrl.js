@@ -6,7 +6,6 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
 
         Auth.register($scope.user).then(function(data) {
 
-              $rootScope.authenticated = true;
               $rootScope.current_user = data.user;
               $rootScope.message = "You have successful Register your account. Please login"
               $location.path('/');
@@ -19,5 +18,9 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
     };
 
     $rootScope.form = true;
+    // $scope.alerts = [
+    //    { type: 'danger', msg: 'Sorry that username is taken! please try again' },
+    //    { type: 'success', msg: 'You have successful Register your account. Please login' }
+    //  ];
 
 });

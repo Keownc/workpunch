@@ -37,9 +37,9 @@ myApp.config(['$routeProvider', '$locationProvider',
             templateUrl: './views/pages/home.html',
             controller: 'HomeCtrl',
         })
-        .when('/register',{
-            templateUrl: './views/pages/register.html',
-            controller: 'registerCtrl',
+        .when('/companyLogin',{
+            templateUrl: './views/pages/login.html',
+            controller: 'companyCtrl',
             // controllerAs: 'register'
         })
         .when('/employeeRegister',{
@@ -53,6 +53,10 @@ myApp.config(['$routeProvider', '$locationProvider',
         .when('/companyRegister',{
             templateUrl: './views/pages/company/register.html',
             controller: 'cRegisterCtrl',
+        })
+        .when('/companyDashboard',{
+            templateUrl: './views/pages/company/dashboard.html',
+            controller: 'adminCtrl',
         })
         .otherwise('/');
 

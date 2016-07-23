@@ -4,8 +4,8 @@ myApp.controller('cRegisterCtrl', function ($scope, $rootScope, $http, $location
     $scope.user = {};
 
     $scope.registerCompany = function(){
-        $http.post('/auth/company-signup', $scope.user).success(function(data){
-            $rootScope.authenticated = true;
+        $http.post('/api/companyRegister', $scope.user).success(function(data){
+            // $rootScope.authenticated = true;
             // $rootScope.current_user = data.users.username;
             $location.path('/');
         });

@@ -3,14 +3,14 @@
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
     $rootScope.form = false;
     $scope.user = {};
-    $scope.time = [];
+    $scope.times = [];
     $scope.sick = [];
     $scope.employee = [];
     // Return from the Database
-    Api.Timecard.query({},$scope.time, function(data){
-        $scope.time = data;
+    Api.Timecard.query({}, function(data){
+        $scope.times = data;
     })
-    Api.SickLeave.query({},$scope.time, function(data){
+    Api.SickLeave.query({}, function(data){
         $scope.sick = data;
     })
     Api.Employee.query({}, function(data){
