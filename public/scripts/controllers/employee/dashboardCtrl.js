@@ -31,6 +31,10 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
    var dayNum = today.getDate();
     // Store the users time in the Timecard/punch schema
 
+    // Enable after an 8 hours
+    setTimeout(function(){
+        $scope.dateIn = false;
+    }, 60*60*1000*8)
     $scope.checkIn = function(){
         var employeeID = $scope.employee.employeeID;
             var punchInDay = Date.now();
@@ -46,12 +50,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             employeeID: employeeID
         }).success(function(data){
             $scope.dateIn=true;
-            // Disable after sumbit
-            // $scope.checked = true;
-            // // Enable after an 8 hours
-            // setTimeout(function(){
-            //     $scope.checked = false;
-            // }, 60*60*1000*8)
         });
     }
     $scope.checkOut = function(){

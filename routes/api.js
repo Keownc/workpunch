@@ -51,7 +51,7 @@ router.post('/companyRegister', function(req, res){
         return res.json(data);
     });
 })
-
+// passpot local Strategy to sign the Employees
 passport.use(new LocalStrategy(
   function(username, password, done) {
     Employee.findOne({ 'username': username }, function(err, user) {
@@ -67,7 +67,7 @@ passport.use(new LocalStrategy(
 
   }
 ));
-
+// Passport Strategy to sign in the Employers
 passport.use('signup-company',new LocalStrategy(
   function(username, password, done) {
     Company.findOne({ 'username': username }, function(err, user) {
@@ -208,5 +208,10 @@ router.route('/companyDashboard/')
     })
 
 
-
+router.route('/employeeRecords')
+    .get(function(req, res){
+        Employee.find({companyID: req.user.companyID}, function(err, data){
+            res.json(data);
+        })
+    })
 module.exports = router;
