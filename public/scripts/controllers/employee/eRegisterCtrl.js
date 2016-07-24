@@ -17,7 +17,7 @@ myApp.controller('eRegisterCtrl', function ($scope, $rootScope, $http, $location
       $location.path('/');
     };
 
-    $rootScope.form = true;
+    $rootScope.navbar = true;
     // $scope.alerts = [
     //    { type: 'danger', msg: 'Sorry that username is taken! please try again' },
     //    { type: 'success', msg: 'You have successful Register your account. Please login' }

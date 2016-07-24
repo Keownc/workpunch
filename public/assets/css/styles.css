@@ -26,6 +26,9 @@ body {
   font-size: 3.0em;
   color: #1da4eb;
 }
+.thumbnail {
+     margin-bottom: 0;
+}
 /*--------------------------------- Navigation ---------------------------------*/
 .navbar>.container .navbar-brand{
     /*color: #e0e0d1;*/
@@ -112,6 +115,10 @@ body {
 #services .thumbnail  {
     min-height: 250px;
     padding: 3rem;
+}
+#services h3 {
+    text-decoration: underline;
+    text-transform: capitalize;
 }
 .heading {
     text-align: center;
@@ -348,18 +355,18 @@ label[for*="submit"] {
     display: none;
 }
 #workpunch input {
-    width: 200px;
-    background: #1f2c38;
+    width: 25rem;
+    background: #f5f5f5;
     color: #c5c7cb;
     line-height: 1.4;
     padding: 8px 12px;
     display: inline;
     margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
-#workpunch input[type*="submit"]{
-    width: 100px;
-    background: #2a3c4c;
-    color: #fff;
+#workpunch button{
+    padding: 8px 12px;
 }
 #navigation {
 
@@ -367,24 +374,26 @@ label[for*="submit"] {
 #bottom-footer {
     font-size: 1.3rem;
     line-height: 50px;
-    padding: 0 0 0 20px;
     background-color: #121a21;
     color: #8d8e92;
     clear: both;
 }
-#bottom-footer p {
+/*#bottom-footer p {
     width: 75%;
     float: left;
-}
+}*/
 #bottom-footer ul {
-    width: 25%;
-    float: right;
     text-align: left;
+    padding-left: 25px;
+}
+#bottom-footer p, #bottom-footer ul {
+    margin: 0;
 }
 #bottom-footer ul li {
     width: 65px;
     display: inline-block;
     text-transform: capitalize;
+    text-align: center;
     border-right: 1px dotted center;
 }
 #bottom-footer a {

@@ -1,7 +1,7 @@
 'use-strict'
 //Employee Dashboard page controller
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
-    $rootScope.form = false;
+    $rootScope.navbar = false;
     $scope.user = {};
     $scope.times = [];
     $scope.sick = [];
@@ -15,7 +15,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     })
     Api.Employee.query({}, function(data){
          $scope.employee = data;
-        //   $scope.firstName = data.data;
          console.log("user " + data.username);
     });
 

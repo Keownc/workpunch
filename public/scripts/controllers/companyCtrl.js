@@ -5,7 +5,7 @@ myApp.controller('companyCtrl', function ($scope, $rootScope, $http, $location, 
     $scope.error = {};
     $scope.employee = [];
     $rootScope.current_user = ''
-    $scope.login = function(){
+    $scope.Login = function(){
         Auth.company($scope.user).then(function(data) {
             // If successful redirect to dashboard
         $rootScope.authenticated = true;
@@ -14,7 +14,10 @@ myApp.controller('companyCtrl', function ($scope, $rootScope, $http, $location, 
         // console.log("current User "+$rootScope.current_user.firstName);
         $location.path('/companyDashboard');
 
-
         })
     }
+    $scope.back = function () {
+      $location.path('/');
+    };
+    $rootScope.navbar = true;
 });

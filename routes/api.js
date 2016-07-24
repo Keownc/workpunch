@@ -125,7 +125,7 @@ router.get('/logout', function(req, res) {
 
 router.route('/employeeDashboard/')
 // username: req.user.username
-    .get(function (req, res) {
+    .get(function (req, res, next) {
         Employee.findOne({_id: req.user._id}, function(err, data) {
             res.json(data);
         });
@@ -145,6 +145,16 @@ router.route('/employeeDashboard/')
             return res.json(data);
         });
     })
+router.route('/companyDashboard/')
+    .get(function (req, res) {
+        console.log("Company ID", req.admin);
+        Company.findOne({_id: "5793dc65d50cfd7a3cf075ff"}, function(err, data) {
+            res.json(data);
+            const companyID = data.companyID;
+            return companyID
+        });
+    })
+
 router.get('/timecard', function(req, res){
     console.log(req.user.employeeID);
     Timecard.find({employeeID: req.user.employeeID},function(err, data){
@@ -199,18 +209,10 @@ router.post('/sickLeave', function(req, res){
     });
 })
 
-router.route('/companyDashboard/')
-// username: req.user.username
-    .get(function (req, res) {
-        Company.findOne({_id: req.user._id}, function(err, data) {
-            res.json(data);
-        });
-    })
-
-
 router.route('/employeeRecords')
     .get(function(req, res){
-        Employee.find({companyID: req.user.companyID}, function(err, data){
+        console.log("GEt Company ID",companyID);
+        Employee.find({companyID: companyID}, function(err, data){
             res.json(data);
         })
     })

@@ -1,6 +1,6 @@
 //Company register page controller
 myApp.controller('cRegisterCtrl', function ($scope, $rootScope, $http, $location) {
-    $rootScope.form = true;
+    $rootScope.navbar = true;
     $scope.user = {};
 
     $scope.registerCompany = function(){

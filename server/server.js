@@ -37,6 +37,11 @@ app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
         user : req.user
     });
 });
+app.get('/companyDashboard', ensureAuthenticated, function(req, res){
+    res.render('../public/views/pages/company/companyDashboard', {
+        admin : req.user
+    });
+});
 // middleware
 app.use(logger('dev'));
 app.use(body_parser.json());
@@ -51,6 +56,7 @@ app.use(session({
         uri: 'mongodb://localhost:27017/workpunch',
         collection: 'mySessions',
         connection: mongoose.connect,
+        cookie: { maxAge: 1000 * 60 * 60 * 3 * 1 }, 
         ttl: 2 * 3 * 60 * 60
   })
 }));
