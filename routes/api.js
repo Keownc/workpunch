@@ -99,7 +99,7 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
     res.send(req.user);
 });
 router.post('/login-company', passport.authenticate('signup-company'), function(req, res) {
-    res.send(req.user);
+    res.send(req.session);
 });
 // Employee Dashboard Route
 function ensureAuthenticated(req, res, next){
@@ -125,7 +125,7 @@ router.get('/logout', function(req, res) {
 
 router.route('/employeeDashboard/')
 // username: req.user.username
-    .get(function (req, res, next) {
+    .get(function (req, res) {
         Employee.findOne({_id: req.user._id}, function(err, data) {
             res.json(data);
         });
@@ -213,8 +213,9 @@ router.post('/sickLeave', function(req, res){
 
 router.route('/employeeRecords')
     .get(function(req, res){
-        console.log("GEt Company ID",companyID);
-        Employee.find({companyID: companyID}, function(err, data){
+        // console.log("GEt Session", req.session);
+        // req.user.companyID
+        Employee.find({companyID: "fullsail123"}, function(err, data){
             res.json(data);
         })
     })
