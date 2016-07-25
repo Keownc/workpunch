@@ -24,6 +24,11 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             $scope.employee = Api.Employee.query();
         })
     }
+    $scope.addAvatar = function(){
+        Api.Employee.save({},$scope.user, function(data){
+            $scope.employee = Api.Employee.query();
+        })
+    }
     var today = new Date();
    var yearNum = today.getFullYear();
    var monthNum = today.getMonth();
@@ -114,27 +119,26 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         SickLeaveForm.post(uploadUrl, $scope.user)
     };
     // Adds an sick leave slip image
-    $scope.upload = function(files){
-        $scope.files = files;
-        if(!$scope.files){ return }
-        angular.forEach(files, function(file){
-            if(file && !file.$error){
-                file.upload = $upload.upload({
-                    url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-                    data:{
-                        upload_preset:cloudinary.config().cloud_preset,
-                        tags:'myphotoalbum',
-                        file: file
-                    }
-                }).success(function(data, status, headers, config){
-                    file.result = data;
-                    const imageUrl = data.url;
-                    $scope.slip = imageUrl;
-                }).error(function (data, status, headers, config) {
-                    file.result = data;
-                })
-            }
-        })
-    };
-
+    // $scope.upload = function(files){
+    //     $scope.files = files;
+    //     if(!$scope.files){ return }
+    //     angular.forEach(files, function(file){
+    //         if(file && !file.$error){
+    //             file.upload = $upload.upload({
+    //                 url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
+    //                 data:{
+    //                     upload_preset:cloudinary.config().cloud_preset,
+    //                     tags:'myphotoalbum',
+    //                     file: file
+    //                 }
+    //             }).success(function(data, status, headers, config){
+    //                 file.result = data;
+    //                 const imageUrl = data.url;
+    //                 $scope.slip = imageUrl;
+    //             }).error(function (data, status, headers, config) {
+    //                 file.result = data;
+    //             })
+    //         }
+    //     })
+    // };
 });

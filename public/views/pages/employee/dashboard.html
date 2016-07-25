@@ -6,8 +6,7 @@
         <div class="container">
             <div class="col-md-3 text">
                 <section>
-                    <!-- <img src="{{avater}}" alt="User avatar goes here" />
-                    <a href="#" ngf-select="avatar($files)">Upload</a> -->
+                    <img src="{{user.avatar || employee.avatar}}" alt="User avatar goes here"/>
                     <!-- <div ngf-change="avatar($files)"
                          class="drop-box"
                          ngf-drag-over-class="drop-box-dragover"
@@ -21,6 +20,10 @@
                        Drop Images
                   </div>
                     <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div> -->
+                    <form ng-submit="addAvatar()">
+                        <input type="filepicker" data-fp-apikey="A86XHGWhSy6idD2jtHwOwz" ng-model="user.avatar" />
+                        <button type="submit" name="button">Upload</button>
+                    </form>
                 </section>
             </div>
             <section class="col-md-9">
@@ -175,7 +178,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="file">Sick leave slip</label>
-                                            <input type="file" ng-model="file" name="file" required="">
+                                            <input type="filepicker" data-fp-apikey="A86XHGWhSy6idD2jtHwOwz" ng-model="user.file" />{{user.file}}
                                         </div>
                                         <button type="submit" class="btn btn-default" >Sumbit</button>
                                     </form>
@@ -196,13 +199,20 @@
                                             <th>
                                                 Day Out
                                             </th>
+                                            <th>
+                                                Doctor Slip
+                                            </th>
                                         </tr>
-                                        <tr>
+                                        <tr ng-repeat="x in sick">
                                             <td>
                                                 {{ employee.firstName }} {{ employee.lastName }}
                                             </td>
                                             <td>
-                                                {{sick.daysOutSick}}
+                                                {{x.daysOutSick}}
+                                            </td>
+                                            <td>
+                                                <img src="{{ x.slip}}"  />
+                                                <!-- {{x.slip}} -->
                                             </td>
                                         </tr>
                                     </table>
@@ -279,7 +289,7 @@
                                         </form>
                                     </section>
                                     <section ng-show="updateEmail">
-                                        <form ng-submit="addPost()">
+                                        <form ng-submit="addEmail()">
                                             <h3>Update Email</h3>
                                             <div class="form-group">
                                                 <label for="email">Email</label>
@@ -311,3 +321,4 @@
         </div> <!-- End Dashboard Body Content -->
     </div> <!-- End row-->
 </div><!-- End container-fluid  -->
+<script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
