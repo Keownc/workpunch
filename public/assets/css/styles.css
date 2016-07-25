@@ -218,6 +218,10 @@ div ds-widget-clock{
     width: 50%;
     margin: 0 auto;
 }
+#dashboard .setting p {
+    width: 100%;
+    text-align: left;
+}
 #dashboard form{
     text-align: left;
 }

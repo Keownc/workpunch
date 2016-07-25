@@ -132,8 +132,10 @@ router.route('/employeeDashboard/')
     })
     .put(function (req, res) {
         var user = req.user;
-        const hash = Employee();
-        user.fullName = req.body.fullname;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        // user.email = req.body.email;
+        // user.username = req.body.username;
         user.company = req.body.company;
         user.position = req.body.position;
         user.description = req.body.description;

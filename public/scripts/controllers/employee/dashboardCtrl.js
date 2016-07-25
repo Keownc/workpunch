@@ -79,6 +79,24 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.sickLeaveForm = function () {
        $scope.submitted = false;
     };
+    $scope.editName = function () {
+        $scope.updateName = true;
+    }
+    $scope.editUser = function () {
+        $scope.updateUser = true;
+    }
+    $scope.editID = function () {
+        $scope.updateID = true;
+    }
+    $scope.editEmail = function () {
+        $scope.updateEmail = true;
+    }
+    $scope.back = function() {
+        $scope.updateName = false;
+        $scope.updateUser = false;
+        $scope.updateID = false;
+        $scope.updateEmail = false;
+    }
     // Option for Sick Leave days, Overtime Rate and Overtime hours
     $scope.options = {
         time: [
@@ -95,7 +113,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         const uploadUrl = '/upload';
         SickLeaveForm.post(uploadUrl, $scope.user)
     };
-
     // Adds an sick leave slip image
     $scope.upload = function(files){
         $scope.files = files;

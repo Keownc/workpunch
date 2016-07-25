@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "workpunch-1381",
+  "private_key_id": "71ed2aa6142a2bc26c94028f25db42b2c7f32bd0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCI32D/i88RK/Of\npPajE81PdoNhVeSMpcHnTsT+w7nCB8E+2JAGHGgwpaoRMUCuLRIl+lAQ5qAMMrqh\nTq90gTbH/7ZWwelhCxjdEJBxIyxqxzQy00qZkCLLVyoUGmsfe2bLhQ4fSMzoypx/\nqAiKuCp8cWSgK3WUMfRIt+WwyMmiW2A6OP42up/VqAGA66BCTvc9f4EYECDPN66O\n2Wdh4BAXCmcaMyNTkrZkdogwKD38aUsVPJni+NOLwVAjF4wDMfHc2uMAWDeFF9g1\n7tkEJ9sYl2fwa2DXsPqyBV9y8E0lOG6Q4TSvh8cZJvxStMJWcNGN9lQo+aSGbGMx\nwMio2QhHAgMBAAECggEAKUBp05snhV1hx7PIQc4uCs0FO8jPYTR0BGrRJJeI3NnJ\nfE942N6m6EKFxzi47cXXump+xxk7E3IWnZdBejOXdx+yrOM0m3Lkw3vCjNa1BFmV\nedwEl9PBKNfUbsqnjo16pcwsPXGLkH3APRk/uc9XvrnOQhfXEBseLOx/5ZAedTfz\nFq9N6SuXApV8b2Hknd0Rjht+iAi8yMYDXcJhmWCP/FiS5LJautkoueO32XNbAG1S\nrCOgNlQFyRMjBtxd4ig11HShR/5Ja5zt+txPfbqIiwyE+iMVzMAKY74Aq3FsCP9T\nelAcqK69fUkVCkOUOFgI+B+RmPlYnHk8KX43/ZCugQKBgQDW8Hem+xq1fn6SARPz\n1mObtyYEHZFvha7D1+SPXsqdouJMDT9N72wcbHwSBrJgELs2Q49UKI9EoQ/x15MO\nxA/CaX4qag1vthq2bgJT8rruNS/OWcKZMD8ZSBfJeUEuGMOkzJN1Uo7j84yoPnw8\n4H9xCFoV5zhKEebeSW1d6iiXOQKBgQCjBRWT4gVRUvTGos5kxyQUxR4errXKdpoT\nNPa37Kje2GnaLcC5VCH+MXdhW5pOeWoF+Rl2vwX3eDY9gSGC9+0ZM5BIPExr0JDC\nfxta8fuD/V07JfO+18pV6FDcDFIErl6lJP71ryai6ctyADOQZorQmqbL/Pk4KdgL\ndMoDodsbfwKBgBzWjKc5v56kRyUdweiQVjL5Qr+AnBfDbuxV1hOqWzMFPKmJiXnS\nasXxhEAC6AHdnNCuBdf7zSUfGv2Ot+teQOMLtmLIcd8QJstdPTC4O35kYnKkNmjJ\nQV4J/y8H9sfRiMZesFYoaoWJEtEr+Q1N7atjvHp92F6PwlMGtQbJuQJ5AoGBAJyP\n/HorfwnsjvLaVzhIXSmpalTzW9pXb3/0xOI9Yq2q0HZerJIQ8Bitr0aMcDTfvGiC\nJOd7bCKQjB8jjmi27Tnf4LjPWGHPS8fPxRjh/7lysoBk4aQuoL9Cv62mE3s1b+ZR\nEqAoGAYsXVxePyd2o+jWLk0I5tz+quPNxVoZr1HHAoGBAKLIjq/dydqoasL95aZE\npLX4jqDNR8CUnbh5loeKQ6UCUiHGuDNfgq+5VzcCJ5wd/viA1vbT8NIIEiw81vP3\nCydwM6np8HBJ8l99M16zYdUBF/837+CK7hnQsTXlSv6YQ76DtTOu4pku2Xs3MsBQ\nygEE8Lbr6U8FAKI2JJwG1eHD\n-----END PRIVATE KEY-----\n",
+  "client_email": "workpunchgcm@workpunch-1381.iam.gserviceaccount.com",
+  "client_id": "113892340385418326320",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/workpunchgcm%40workpunch-1381.iam.gserviceaccount.com"
+}
