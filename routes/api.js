@@ -147,6 +147,17 @@ router.route('/employeeDashboard/')
             return res.json(data);
         });
     })
+    .post(function (req, res) {
+        var user = req.user;
+        user.avatar = req.body.avatar;
+        user.save(function(err, data) {
+            if (err){
+                return res.send(500, err);
+            }
+                console.log(data);
+            return res.json(data);
+        });
+    })
 router.route('/companyDashboard/')
     .get(function (req, res) {
         console.log("Company ID", req.admin);
@@ -193,7 +204,7 @@ router.put('timecard', function(req, res){
 // Sick Form Router
 router.get('/sickLeave', function(req, res){
 
-    SickLeave.findOne({employeeID: req.user.employeeID}, function(err, data){
+    SickLeave.find({employeeID: req.user.employeeID}, function(err, data){
         res.json(data);
     })
 })
