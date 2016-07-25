@@ -1,0 +1,27 @@
+<section class="wallpaper">
+    <img src="../../assets/images/wallpapercity.jpeg" alt="wallpaper city view take by Drew Coffman">
+</section>
+<div class="container">
+    <div class="row">
+        <section>
+            <article>
+                <h3>Welcome</h3>
+            </article>
+        </section>
+        <section>
+            <uib-tabset active="active">
+              <uib-tab index="0">
+                  <uib-tab-heading>
+                      <i class="glyphicon glyphicon-user"></i> Employees
+                  </uib-tab-heading>
+                  <p ng-repeat="employees in employeeRecords">
+                      {{employees.employeeID}}
+                      {{employees.firstName}}
+                      {{employees.lastName}}
+                      {{employees.email}}
+                  </p>
+              </uib-tab>
+            </uib-tabset>
+        </section>
+    </div>
+</div>

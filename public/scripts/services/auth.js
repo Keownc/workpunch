@@ -8,6 +8,9 @@ myApp.factory('Auth', function Auth($location, $http, $rootScope, Session, Api){
         register: function(user, callback) {
             return $http.post('/api/register', user);
         },
+        company: function(user, callback){
+            return $http.post('/api/login-company', user);
+        },
         currentUser: function() {
             Session.get(function(user) {
                 $rootScope.current_user = user;

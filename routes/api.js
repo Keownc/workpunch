@@ -46,15 +46,31 @@ router.post('/companyRegister', function(req, res){
     new_company.company = req.body.company;
     new_company.username = req.body.username;
     new_company.password = new_company.createHash(req.body.password);
-    new_company.save(function(err){
-        if (err) { return done(err, false); }
-        return done(null, new_company);
+    new_company.save(function(err, data){
+        if (err) { return res.send(500, err); }
+        return res.json(data);
     });
 })
-
+// passpot local Strategy to sign the Employees
 passport.use(new LocalStrategy(
   function(username, password, done) {
     Employee.findOne({ 'username': username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+
+  }
+));
+// Passport Strategy to sign in the Employers
+passport.use('signup-company',new LocalStrategy(
+  function(username, password, done) {
+    Company.findOne({ 'username': username }, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
@@ -82,6 +98,9 @@ passport.deserializeUser(function(id, done) {
 router.post('/login', passport.authenticate('local'), function(req, res) {
     res.send(req.user);
 });
+router.post('/login-company', passport.authenticate('signup-company'), function(req, res) {
+    res.send(req.user);
+});
 // Employee Dashboard Route
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
@@ -106,14 +125,17 @@ router.get('/logout', function(req, res) {
 
 router.route('/employeeDashboard/')
 // username: req.user.username
-    .get(function (req, res) {
+    .get(function (req, res, next) {
         Employee.findOne({_id: req.user._id}, function(err, data) {
-            res.json(data)
+            res.json(data);
         });
     })
     .put(function (req, res) {
         var user = req.user;
-        user.fullName = req.body.fullname;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        // user.email = req.body.email;
+        // user.username = req.body.username;
         user.company = req.body.company;
         user.position = req.body.position;
         user.description = req.body.description;
@@ -125,9 +147,19 @@ router.route('/employeeDashboard/')
             return res.json(data);
         });
     })
+router.route('/companyDashboard/')
+    .get(function (req, res) {
+        console.log("Company ID", req.admin);
+        Company.findOne({_id: "5793dc65d50cfd7a3cf075ff"}, function(err, data) {
+            res.json(data);
+            const companyID = data.companyID;
+            return companyID
+        });
+    })
+
 router.get('/timecard', function(req, res){
     console.log(req.user.employeeID);
-    Timecard.findOne({employeeID: req.user.employeeID},function(err, data){
+    Timecard.find({employeeID: req.user.employeeID},function(err, data){
         res.json(data);
     })
 })
@@ -179,6 +211,11 @@ router.post('/sickLeave', function(req, res){
     });
 })
 
-
-
+router.route('/employeeRecords')
+    .get(function(req, res){
+        console.log("GEt Company ID",companyID);
+        Employee.find({companyID: companyID}, function(err, data){
+            res.json(data);
+        })
+    })
 module.exports = router;

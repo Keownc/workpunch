@@ -1,21 +1,20 @@
 'use-strict'
 //Employee Dashboard page controller
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
-    $rootScope.form = false;
+    $rootScope.navbar = false;
     $scope.user = {};
-    $scope.time = [];
+    $scope.times = [];
     $scope.sick = [];
     $scope.employee = [];
     // Return from the Database
-    Api.Timecard.query({},$scope.time, function(data){
-        $scope.time = data;
+    Api.Timecard.query({}, function(data){
+        $scope.times = data;
     })
-    Api.SickLeave.query({},$scope.time, function(data){
+    Api.SickLeave.query({}, function(data){
         $scope.sick = data;
     })
     Api.Employee.query({}, function(data){
          $scope.employee = data;
-        //   $scope.firstName = data.data;
          console.log("user " + data.username);
     });
 
@@ -31,6 +30,10 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
    var dayNum = today.getDate();
     // Store the users time in the Timecard/punch schema
 
+    // Enable after an 8 hours
+    setTimeout(function(){
+        $scope.dateIn = false;
+    }, 60*60*1000*8)
     $scope.checkIn = function(){
         var employeeID = $scope.employee.employeeID;
             var punchInDay = Date.now();
@@ -46,12 +49,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             employeeID: employeeID
         }).success(function(data){
             $scope.dateIn=true;
-            // Disable after sumbit
-            // $scope.checked = true;
-            // // Enable after an 8 hours
-            // setTimeout(function(){
-            //     $scope.checked = false;
-            // }, 60*60*1000*8)
         });
     }
     $scope.checkOut = function(){
@@ -82,6 +79,24 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.sickLeaveForm = function () {
        $scope.submitted = false;
     };
+    $scope.editName = function () {
+        $scope.updateName = true;
+    }
+    $scope.editUser = function () {
+        $scope.updateUser = true;
+    }
+    $scope.editID = function () {
+        $scope.updateID = true;
+    }
+    $scope.editEmail = function () {
+        $scope.updateEmail = true;
+    }
+    $scope.back = function() {
+        $scope.updateName = false;
+        $scope.updateUser = false;
+        $scope.updateID = false;
+        $scope.updateEmail = false;
+    }
     // Option for Sick Leave days, Overtime Rate and Overtime hours
     $scope.options = {
         time: [
@@ -98,7 +113,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         const uploadUrl = '/upload';
         SickLeaveForm.post(uploadUrl, $scope.user)
     };
-
     // Adds an sick leave slip image
     $scope.upload = function(files){
         $scope.files = files;

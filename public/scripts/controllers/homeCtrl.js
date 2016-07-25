@@ -1,5 +1,5 @@
 myApp.controller('HomeCtrl',function($scope, $uibModal, $log, $rootScope ){
-    $rootScope.form = false;
+    $rootScope.navbar = false;
     $scope.animationsEnabled = true;
 
     $scope.open = function (size) {

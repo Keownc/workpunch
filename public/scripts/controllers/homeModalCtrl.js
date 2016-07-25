@@ -17,7 +17,6 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
         $location.path('/employeeDashboard');
         $uibModalInstance.close();
 
-
 		})
     }
 
@@ -34,5 +33,9 @@ myApp.controller('homeModalCtrl', function($scope, $uibModalInstance, $rootScope
       $location.path('/companyRegister');
        $uibModalInstance.close();
     };
+    $scope.companyLogin = function(){
+        $location.path('/companyLogin');
+         $uibModalInstance.close();
+    }
 
 });
