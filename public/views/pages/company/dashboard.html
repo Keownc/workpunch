@@ -14,12 +14,36 @@
                   <uib-tab-heading>
                       <i class="glyphicon glyphicon-user"></i> Employees
                   </uib-tab-heading>
-                  <p ng-repeat="employees in employeeRecords">
-                      {{employees.employeeID}}
-                      {{employees.firstName}}
-                      {{employees.lastName}}
-                      {{employees.email}}
-                  </p>
+                  <table class="table table-striped">
+                      <tr>
+                          <th>
+                              EmployeeID
+                          </th>
+                          <th>
+                              First Name
+                          </th>
+                          <th>
+                              Email
+                          </th>
+                          <th>
+                              Last Name
+                          </th>
+                      </tr>
+                      <tr ng-repeat="employees in employeeRecords">
+                          <td>
+                              {{ employees.employeeID }}
+                          </td>
+                          <td>
+                              {{ employees.firstName }}
+                          </td>
+                          <td>
+                              {{employees.lastName}}
+                          </td>
+                          <td>
+                              {{employees.email}}
+                          </td>
+                      </tr>
+                  </table>
               </uib-tab>
             </uib-tabset>
         </section>

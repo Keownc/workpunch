@@ -20,13 +20,6 @@ myApp.factory('Api',['$resource', function($resource){
         'delete': {method:'DELETE'},
         'update': {method: 'PUT'}
         }),
-        Records: $resource('/api/employeeRecords', {companyID: '@companyID'},
-        { 'get':    {method:'GET'},
-        'save':   {method:'POST'},
-        'query':  {method:'GET'},
-        'remove': {method:'DELETE'},
-        'delete': {method:'DELETE'},
-        'update': {method: 'PUT'}
-        })
+        Records: $resource('/api/employeeRecords', {companyID: '@companyID'})
     }
 }])
