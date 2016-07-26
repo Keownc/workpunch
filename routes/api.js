@@ -18,7 +18,7 @@ router.get('/register', function(req, res){
 router.post('/register', function(req, res){
     const date = new Date();
     date.toString();
-
+    // Create a new user in the employee schema
     const new_user = new Employee();
     new_user.username = req.body.username;
     new_user.password = new_user.createHash(req.body.password);
@@ -35,11 +35,11 @@ router.post('/register', function(req, res){
         return res.json(data);
     });
     req.flash('success', 'You have succesfull registered');
-    // res.redirect('/employeeDashboard');
 });
 
 // A Register route for companies
 router.post('/companyRegister', function(req, res){
+    // Create a new user in the company schema
     const new_company = new Company();
     new_company.branch = req.body.branch;
     new_company.companyID = req.body.companyID;
@@ -52,9 +52,12 @@ router.post('/companyRegister', function(req, res){
     });
 })
 // passpot local Strategy to sign the Employees
+// Start a new LocalStrategy
 passport.use(new LocalStrategy(
   function(username, password, done) {
+    //   Run a function to fine A user using the username field in the Employee schema
     Employee.findOne({ 'username': username }, function(err, user) {
+        // Run an if statem to check for errors or if the user and their password matches
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
@@ -67,10 +70,12 @@ passport.use(new LocalStrategy(
 
   }
 ));
-// Passport Strategy to sign in the Employers
+// Passport Strategy to sign in the
 passport.use('signup-company',new LocalStrategy(
   function(username, password, done) {
+      //   Run a function to fine A user using the username field in the Company schema
     Company.findOne({ 'username': username }, function(err, user) {
+        // Run an if statem to check for errors or if the user and their password matches
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
@@ -101,52 +106,35 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 router.post('/login-company', passport.authenticate('signup-company'), function(req, res) {
     res.send(req.session);
 });
-// Employee Dashboard Route
-function ensureAuthenticated(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	} else {
-		// req.flash('error_msg','You are not logged in');
-		res.redirect('/');
-	}
-}
 
-//log out
+//log out the Users
 router.get('/logout', function(req, res) {
   req.logout();
-
   res.redirect('/');
 });
-
-// Create a route to check if the user is logged in
-// router.get('/isLoggedIn', function(req, res){
-//
-// });
-
+//  Employee Dashboard Route
 router.route('/employeeDashboard/')
-// username: req.user.username
+// Run a get request function to find the logged in user and return their information/data
     .get(function (req, res) {
         Employee.findOne({_id: req.user._id}, function(err, data) {
             res.json(data);
         });
     })
+    // Run a put request Function to update the user's data
     .put(function (req, res) {
         var user = req.user;
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
-        // user.email = req.body.email;
-        // user.username = req.body.username;
         user.company = req.body.company;
         user.position = req.body.position;
-        user.description = req.body.description;
         user.save(function(err, data) {
             if (err){
                 return res.send(500, err);
             }
-                console.log(data);
             return res.json(data);
         });
     })
+    // Run a post request to add their avatar image
     .post(function (req, res) {
         var user = req.user;
         user.avatar = req.body.avatar;
@@ -154,7 +142,6 @@ router.route('/employeeDashboard/')
             if (err){
                 return res.send(500, err);
             }
-                console.log(data);
             return res.json(data);
         });
     })

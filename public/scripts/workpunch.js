@@ -10,7 +10,6 @@ const myApp = angular.module('workpunch', [
     'ngCookies',
     'ds.clock',
     'ngAutodisable',
-    // 'cloudinary ',
     'ngFileUpload'
 ]);
 
@@ -18,13 +17,10 @@ myApp.run(function($rootScope, $http, $location, Auth){
 
     $rootScope.current_user = '';
     $rootScope.authenticated = false;
-    $rootScope.firstName = '';
-    $rootScope.lastName = '';
     $rootScope.logout = function(){
         $http.get('/api/logout').success(function (data) {
             $location.path('/');
         });
-
         $rootScope.authenticated = false;
         $rootScope.current_user = '';
     }
@@ -63,10 +59,3 @@ myApp.config(['$routeProvider', '$locationProvider',
         $locationProvider
             .html5Mode({enabled:true, requireBase: false})
 }]);
-
-// myApp.config(['cloudinaryProvider', function (cloudinaryProvider) {
-//     cloudinaryProvider
-//         .set('cloud_name','dbqouy9xa')
-//         .set('upload_preset', 'vzjnjauc')
-//
-// }]);

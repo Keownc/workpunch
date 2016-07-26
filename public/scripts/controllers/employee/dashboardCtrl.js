@@ -112,33 +112,9 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6
         ]
     };
-
     // Sick Leave form submit
     $scope.sickLeaveSubmit = function () {
         const uploadUrl = '/upload';
         SickLeaveForm.post(uploadUrl, $scope.user)
     };
-    // Adds an sick leave slip image
-    // $scope.upload = function(files){
-    //     $scope.files = files;
-    //     if(!$scope.files){ return }
-    //     angular.forEach(files, function(file){
-    //         if(file && !file.$error){
-    //             file.upload = $upload.upload({
-    //                 url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-    //                 data:{
-    //                     upload_preset:cloudinary.config().cloud_preset,
-    //                     tags:'myphotoalbum',
-    //                     file: file
-    //                 }
-    //             }).success(function(data, status, headers, config){
-    //                 file.result = data;
-    //                 const imageUrl = data.url;
-    //                 $scope.slip = imageUrl;
-    //             }).error(function (data, status, headers, config) {
-    //                 file.result = data;
-    //             })
-    //         }
-    //     })
-    // };
 });

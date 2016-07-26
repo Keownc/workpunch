@@ -203,7 +203,7 @@ body {
 }
 .timepunch-heading{
     font-size: 5rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 span {
     font-size: 3.5rem;

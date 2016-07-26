@@ -12,7 +12,7 @@ require('../models/model.js');
 require('../models/companyModel.js');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workpunch");
 const MongoDBStore = require('connect-mongodb-session')(session)
 // Run Server
 const app = express();
@@ -21,7 +21,7 @@ const api = require('../routes/api');
 
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
-// Employee Dashboard Route auth
+// Authenticated Function
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -30,11 +30,13 @@ function ensureAuthenticated(req, res, next){
 		res.redirect('/');
 	}
 }
+// Employee Dashboard Route auth
 app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
     res.render('../public/views/pages/employee/employeeDashboard', {
         user : req.user
     });
 });
+// Company Dashboard Route auth
 app.get('/companyDashboard', ensureAuthenticated, function(req, res){
     res.render('../public/views/pages/company/companyDashboard', {
         admin : req.user
@@ -51,11 +53,10 @@ app.use(session({
     saveUninitialized: true,
     resave: true,
     store: new MongoDBStore({
-        uri: process.env.MONGODB_URI,
+        uri: process.env.MONGODB_URI || "mongodb://localhost/workpunch",
         collection: 'mySessions',
         connection: mongoose.connect,
-        cookie: { maxAge: 1000 * 60 * 60 * 3 * 1 }, 
-        ttl: 2 * 3 * 60 * 60
+        cookie: { maxAge: 1000 * 60 * 60 * 3 * 1 }
   })
 }));
 app.use(passport.initialize());
