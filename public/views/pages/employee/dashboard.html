@@ -18,7 +18,7 @@
                 <article class="profile-details">
                     <div >
                         <div><em class="title">Name: </em>{{ employee.first_name }} {{ employee.last_name }}</div>
-                        <div><em class="title">EmployeeID: </em>{{ employee.employeeID }}</div>
+                        <div><em class="title">EmployeeID: </em>{{ employee.employee_id }}</div>
                         <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || employee.company || 'empty' }}</a></div>
                         <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || employee.position || 'empty' }}</a></div>
                         <!-- <div><em class="title">Description: </em><a href="#" editable-textarea="user.description" e-rows="4" e-cols="30" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div> -->
@@ -36,7 +36,7 @@
               <li><h2 class="sidebar-heading">WorkPunch</h2></li>
             </ul>
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#" ng-click="tab = 0">Time Punch <span class="sr-only">(current)</span></a></li>
+            <li class=""><a href="#" ng-click="tab = 0">Time Punch <span class="sr-only">(current)</span></a></li>
             <li><a href="#" ng-click="tab = 1">Sick Leave</a></li>
             <li><a href="#" ng-click="tab = 2">Account</a></li>
             <li><a href="#" ng-click="tab = 3">Setting</a></li>
@@ -45,35 +45,35 @@
       </div><!-- End Dashboard Sidebar -->
         <!-- Dashboard Body Content -->
         <div class="col-sm-9 col-md-10 main">
-            <h1 class="page-header">Dashboard</h1>
             <!-- Sidebar Navigation Tab -->
             <uib-tabset active="tab" id="dashboard">
+                    <!-- <h1 class="page-header">Dashboard</h1> -->
                 <!-- Switch to Timepunch -->
-                <uib-tab index="0" ng-hide="tabs">
+                <uib-tab index="0" heading="Time Punch" class="page-header">
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
                             <uib-tabset>
-                                <h2>Time Punch</h2>
+                                <h2>Time</h2>
                                 <uib-tab index="0" heading="Time">
                                     <section>
                                         <!--  -->
                                         <div ng-hide="dateOut || dateIn">
                                             <h3 class="timepunch-heading">Check In</h3>
-                                            <div><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'" ng-model="date"></ds-widget-clock></div>
+                                            <div> <ds-widget-clock show-digital digital-format="'EEEE, MMMM d, yyyy'" ng-model="date"></ds-widget-clock></div>
                                             <!-- theme="blue-light" -->
                                             <div><ds-widget-clock show-digital digital-format="'hh:mm:ss a'" ng-model="time"></ds-widget-clock></div>
                                             <button type="button" name="button" class="btn btn-lg btn-success cta-btn" ng-click="checkIn()" ng-disabled="checked" >Punch In</button>
                                         </div>
                                         <div ng-show="dateIn && !dateOut">
                                             <h3 class="timepunch-heading">Check Out</h3>
-                                            <div><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'" ng-model="date"></ds-widget-clock></div>
+                                            <div><ds-widget-clock show-digital digital-format="'EEEE, MMMM d, yyyy'" ng-model="date"></ds-widget-clock></div>
                                             <!-- theme="blue-light" -->
                                             <div><ds-widget-clock show-digital digital-format="'hh:mm:ss a'" ng-model="time"></ds-widget-clock></div>
                                             <button type="button" name="button" class="btn btn-lg btn-success cta-btn" ng-click="checkOut()">Punch Out</button>
                                         </div>
                                         <div ng-show="dateIn && dateOut">
                                             <h3 class="timepunch-heading">Next Check In</h3>
-                                            <div><span>Date:</span> <ds-widget-clock show-digital digital-format="'MMM/dd/yyyy'"></ds-widget-clock></div>
+                                            <div> <ds-widget-clock show-digital digital-format="'EEEE, MMMM d, yyyy'"></ds-widget-clock></div>
                                             <!-- theme="blue-light" -->
                                             <div><ds-widget-clock show-digital digital-format="'hh:mm:ss a'"></ds-widget-clock></div>
                                             <button type="button" name="button" class="btn btn-lg btn-success cta-btn" ng-disabled="!checked" >Punch In</button>
@@ -81,7 +81,7 @@
                                     </section>
                                 </uib-tab>
                                 <!-- Overtime -->
-                                <uib-tab index="1" heading="OverTime">
+                                <uib-tab index="1" heading="Overtime">
                                     <p>
                                         <em>Note: this information is private and as such will not be stored!</em>
                                     </p>
@@ -99,10 +99,11 @@
                                             <label for="hours">Number of hours</label>
                                             <select class="form-option" id="hours" ng-model="time" ng-options="opt for opt in options.time" ></select>
                                         </div>
+                                        <button type="button" name="button" ng-click="total()">Get Total Now</button>
                                     </form>
                                     <section class="col-md-4 overtime">
                                         <h3>Total</h3>
-                                        <p>
+                                        <p ng-show="!total">
                                             ${{amount * rate * time}}
                                         </p>
                                     </section>
@@ -126,16 +127,16 @@
                                         </tr>
                                         <tr ng-repeat="time in times">
                                             <td>
-                                                {{ employee.firstName }} {{ employee.lastName }}
+                                                {{ employee.first_name }} {{ employee.last_name }}
                                             </td>
                                             <td>
-                                                {{time.clockIn  || time.clockOut | date : 'mediumDate'}}
+                                                {{time.clock_in  || time.clock_out | date : 'mediumDate'}}
                                             </td>
                                             <td>
-                                                {{time.clockIn | date : 'mediumTime'}}
+                                                {{time.clock_in | date : 'mediumTime'}}
                                             </td>
                                             <td>
-                                                {{time.clockOut | date : 'mediumTime'}}
+                                                {{time.clock_out | date : 'mediumTime'}}
                                             </td>
                                         </tr>
                                     </table>
@@ -145,7 +146,7 @@
                     </div>
                 </uib-tab>  <!-- End Switch to Timepunch  -->
                 <!-- Switch to Sick Leave -->
-                <uib-tab index="1" ng-hide="tabs">
+                <uib-tab index="1" heading="Sick Leave" class="page-header">
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
                             <uib-tabset id="tabsNav">
@@ -153,15 +154,11 @@
                                 <uib-tab index="0" heading="Form">
                                     <form ng-submit="sickLeave($files)" ng-hide="submitted">
                                         <div class="form-group">
-                                            <label for="employeeID">EmployeeID</label>
-                                            <input type="text" id="employeeID" class="form-control" placeholder="wer45ce995c437c" ng-model="user.employeeID" ng-required="true"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fName">Number of days</label>
+                                            <label for="fName">Number Of Days</label>
                                             <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.time" ng-required="true"></select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="file">Sick leave slip</label>
+                                            <label for="file">Sick Leave Slip</label>
                                             <input type="filepicker" data-fp-apikey="A86XHGWhSy6idD2jtHwOwz" ng-model="user.file" />{{user.file}}
                                         </div>
                                         <button type="submit" class="btn btn-default" >Sumbit</button>
@@ -189,10 +186,10 @@
                                         </tr>
                                         <tr ng-repeat="x in sick">
                                             <td>
-                                                {{ employee.firstName }} {{ employee.lastName }}
+                                                {{ employee.first_name }} {{ employee.last_name }}
                                             </td>
                                             <td>
-                                                {{x.daysOutSick}}
+                                                {{x.days_out_sick}}
                                             </td>
                                             <td>
                                                 <img src="{{ x.slip}}"  />
@@ -206,16 +203,16 @@
                     </div>
                 </uib-tab> <!-- End Switch to Sick Leave  -->
                 <!-- Switch to user account -->
-                <uib-tab index="2" ng-hide="tabs">
+                <uib-tab index="2" heading="Account" class="page-header">
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
                             <uib-tabset id="tabsNav">
-                                <h2>Account</h2>
+                                <h2>Edit</h2>
                                 <uib-tab index="0" heading="Account">
                                     <section class="setting" ng-hide="updateName || updateUser || updateEmail || updateID">
                                         <h3>General Account Setting</h3>
                                         <p>
-                                            Name: {{ employee.firstName }} {{ employee.lastName }}
+                                            Name: {{ employee.first_name }} {{ employee.last_name }}
                                             <a href="#" role="button" ng-click="editName()">Edit</a>
                                         </p>
                                         <p>
@@ -225,10 +222,6 @@
                                         <p>
                                             Email: {{employee.email}}
                                             <a href="#" role="button" ng-click="editEmail()">Edit</a>
-                                        </p>
-                                        <p>
-                                            CompanyID: {{employee.companyID}}
-                                            <a href="#" role="button" ng-click="editID()">Edit</a>
                                         </p>
                                     </section>
                                     <section ng-show="updateUser">
@@ -261,17 +254,6 @@
                                             <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
                                         </form>
                                     </section>
-                                    <section ng-show="updateID">
-                                        <form ng-submit="addPost()">
-                                            <h3>Update CompanyID</h3>
-                                            <div class="form-group">
-                                                <label for="exampleInputText">Company ID</label>
-                                                <input type="text" class="form-control" id="exampleInputText" placeholder="company ID" ng-model="user.companyID" ng-required="true">
-                                            </div>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                            <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
-                                        </form>
-                                    </section>
                                     <section ng-show="updateEmail">
                                         <form ng-submit="addEmail()">
                                             <h3>Update Email</h3>
@@ -289,7 +271,7 @@
                     </div>
                 </uib-tab> <!-- End Switch to user account  -->
                 <!-- Switch to user setting -->
-                <uib-tab index="3" ng-hide="tabs">
+                <uib-tab index="3" heading="Setting" class="page-header">
                     <div class="panel {{panelClass || 'panel-default'}}">
                     <div class="panel-heading">
                          <uib-tabset id="tabsNav">

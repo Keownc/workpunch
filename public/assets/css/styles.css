@@ -29,6 +29,9 @@ body {
 .thumbnail {
      margin-bottom: 0;
 }
+h3 {
+    font-size: 2.5rem;
+}
 /*--------------------------------- Navigation ---------------------------------*/
 .navbar>.container .navbar-brand{
     /*color: #e0e0d1;*/
@@ -112,6 +115,9 @@ body {
     padding: 3rem;
     background-color: #326699
 }
+#features img {
+    width: 75px;
+}
 #services .thumbnail  {
     min-height: 250px;
     padding: 3rem;
@@ -122,6 +128,7 @@ body {
 }
 .heading {
     text-align: center;
+    text-transform: capitalize;
     margin-top: 6rem;
     margin-bottom: 6rem;
     font: 4.5rem Cronos Pro, "Helvetica Neue", Helvetica, Arial sans-serif;
@@ -166,7 +173,6 @@ body {
     position: relative;
     bottom: 0%;
     left: 80%;
-
 }*/
 /*--------------------------------- Dashboard sidebar ---------------------------------*/
 /* Sidebar navigation */
@@ -190,7 +196,9 @@ body {
     color: #fff;
     text-align: center;
 }
+.active {
 
+}
 /*--------------------------------- Dashboard Body ---------------------------------*/
 #dashboard{
     text-align: center;
@@ -272,7 +280,7 @@ p em {
 }
 /* Modal login section*/
 #modal-login{
-    width: 60%;
+    width: 58%;
     border-right: 1px solid #ccc;
     padding-right: 4rem;
 }
@@ -291,16 +299,15 @@ p em {
 }
 #modal-login p{
     position: absolute;
-    left: 41%;
-    bottom: 16%;
+    left: 34rem;
+    bottom: 6rem;
 }
 /* Modal signup section*/
 #modal-signup {
-    width: 40%;
+    width: 35%;
     position: absolute;
     top: 10%;
-    right: 0;
-    padding-left: 2rem;
+    right: 3rem;
     padding-right: 3rem;
 }
 #modal-signup button{
@@ -322,9 +329,6 @@ p em {
 footer {
     background: #19232d;
     color: #d7dade; /*#d7dade*/
-}
-img {
-    width: 75px;
 }
 footer a {
     color: #ffffff;

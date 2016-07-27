@@ -6,7 +6,12 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.times = [];
     $scope.sick = [];
     $scope.employee = [];
-    // Return from the Database
+    var today = new Date();
+   var yearNum = today.getFullYear();
+   var monthNum = today.getMonth();
+   var dayNum = today.getDate();
+
+    // Return Fields from the Database
     Api.Timecard.query({}, function(data){
         $scope.times = data;
     })
@@ -24,21 +29,19 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             $scope.employee = Api.Employee.query();
         })
     }
+    //A function to add or update User Avatar
     $scope.addAvatar = function(){
         Api.Employee.save({},$scope.user, function(data){
             $scope.employee = Api.Employee.query();
         })
     }
-    var today = new Date();
-   var yearNum = today.getFullYear();
-   var monthNum = today.getMonth();
-   var dayNum = today.getDate();
-    // Store the users time in the Timecard/punch schema
 
-    // Enable after an 8 hours
-    setTimeout(function(){
-        $scope.dateIn = false;
-    }, 60*60*1000*8)
+    // Overtime Function to show
+    $scope.total = function(){
+       $scope.total = false;
+    }
+    
+    // Store the users time in the Timecard/punch schema
     $scope.checkIn = function(){
         var employeeID = $scope.employee.employeeID;
             var punchInDay = Date.now();
@@ -90,16 +93,12 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.editUser = function () {
         $scope.updateUser = true;
     }
-    $scope.editID = function () {
-        $scope.updateID = true;
-    }
     $scope.editEmail = function () {
         $scope.updateEmail = true;
     }
     $scope.back = function() {
         $scope.updateName = false;
         $scope.updateUser = false;
-        $scope.updateID = false;
         $scope.updateEmail = false;
     }
     // Option for Sick Leave days, Overtime Rate and Overtime hours
