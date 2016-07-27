@@ -18,6 +18,7 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 const app = express();
 const port = process.env.PORT || 5000;
 const api = require('./routes/api');
+const company_api = require('./routes/company_api');
 const auth = require('./routes/auth');
 
 //set static folder
@@ -67,6 +68,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use('/api' ,api);
+app.use('/admin' ,company_api );
 app.use('/auth' ,auth);
 //Get all routes and set index.html as root
 

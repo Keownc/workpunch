@@ -2,7 +2,7 @@ myApp.factory('Auth', function Auth($location, $http, $rootScope, Session, Api){
 
     return {
         login: function(user, callback){
-            return $http.post('/api/login', user);
+            return $http.post('/auth/login', user);
         },
 
         register: function(user, callback) {
@@ -12,7 +12,7 @@ myApp.factory('Auth', function Auth($location, $http, $rootScope, Session, Api){
             return $http.post('/auth/login-company', user);
         },
         companyR: function(user, callback){
-            return $http.post('/api/companyRegister', user);
+            return $http.post('/admin/companyRegister', user);
         },
         currentUser: function() {
             Session.get(function(user) {
