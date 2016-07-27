@@ -10,6 +10,7 @@ const passport = require('passport');
 // Database connection and session
 require('../models/model.js');
 require('../models/companyModel.js');
+require('../models/appointmentModel.js');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workpunch");
@@ -17,8 +18,12 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 // Run Server
 const app = express();
 const port = process.env.PORT || 5000;
+// Require routes from routes folder
 const api = require('./routes/api');
 const company_api = require('./routes/company_api');
+const timecard_api = require('./routes/timecard_api');
+const sickLeave_api = require('./routes/timecard_api');
+const notification = require('./routes/notification');
 const auth = require('./routes/auth');
 
 //set static folder
@@ -33,11 +38,11 @@ function ensureAuthenticated(req, res, next){
 	}
 }
 // Employee Dashboard Route auth
-app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
-    res.render('../public/views/pages/employee/employeeDashboard', {
-        user : req.user
-    });
-});
+// app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
+//     res.render('../public/views/pages/employee/employeeDashboard', {
+//         user : req.user
+//     });
+// });
 // Company Dashboard Route auth
 app.get('/companyDashboard', ensureAuthenticated, function(req, res){
     res.render('../public/views/pages/company/companyDashboard', {
@@ -45,7 +50,6 @@ app.get('/companyDashboard', ensureAuthenticated, function(req, res){
     });
 });
 // middleware
-app.use(logger('dev'));
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended: false}));
 app.use(cookie_parser());
@@ -69,6 +73,9 @@ app.use(flash());
 
 app.use('/api' ,api);
 app.use('/admin' ,company_api );
+app.use('/timeCardApi' ,timecard_api );
+app.use('/notification' ,notification );
+app.use('/notification' ,notification );
 app.use('/auth' ,auth);
 //Get all routes and set index.html as root
 

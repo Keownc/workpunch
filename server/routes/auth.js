@@ -4,8 +4,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 const Company = mongoose.model('Company');
-const Timecard = mongoose.model('Timecard');
-const SickLeave = mongoose.model('SickLeave');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -28,15 +26,16 @@ passport.use(new LocalStrategy(
     Employee.findOne({ 'username': username }, function(err, user) {
         // Run an if statem to check for errors or if the user and their password matches
       if (err) { return done(err); }
+    //   Check to see if the user exist
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
+    //   Check to see if the password matches
       if (!user.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
     });
-
   }
 ));
 // Passport Strategy to sign in the Employer
@@ -46,15 +45,16 @@ passport.use('signup-company',new LocalStrategy(
     Company.findOne({ 'username': username }, function(err, user) {
         // Run an if statem to check for errors or if the user and their password matches
       if (err) { return done(err); }
+      //   Check to see if the user exist
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
+      //   Check to see if the password matches
       if (!user.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
     });
-
   }
 ));
 

@@ -5,18 +5,21 @@ Work Punch is a Web application that will manage the records of employees workin
 Clone the git repository to your machine using ssh.
 ```
 $ git clone git@github.com:Keownc/workpunch.git
-
+```
 Install the dependencies by using.
-
+```
 $ npm install //Installs the package.json file.
-
-Start server by  running the following command.
-
+```
+#Start server by running the following commands.
 Install nodemon globally
  $ npm install -g nodemon
 
+```
  Then run
-
+```
  $nodemon
+ ```
 Or Start server by
+```
 $ node server/server.js
+```

@@ -36,11 +36,10 @@
               <li><h2 class="sidebar-heading">WorkPunch</h2></li>
             </ul>
           <ul class="nav nav-sidebar">
-            <li class=""><a href="#" ng-click="tab = 0">Time Punch <span class="sr-only">(current)</span></a></li>
-            <li><a href="#" ng-click="tab = 1">Sick Leave</a></li>
-            <li><a href="#" ng-click="tab = 2">Account</a></li>
-            <li><a href="#" ng-click="tab = 3">Setting</a></li>
-            <li><a href="#" ng-click="tab = 4">Help & support</a></li>
+            <li class="active"><a href="#" ng-click="tab = 0">Time Punch <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="#" ng-click="tab = 1">Sick Leave</a></li>
+            <li class="active"><a href="#" ng-click="tab = 2">Account</a></li>
+            <li class="active"><a href="#" ng-click="tab = 3">Setting</a></li>
           </ul>
       </div><!-- End Dashboard Sidebar -->
         <!-- Dashboard Body Content -->
@@ -130,7 +129,7 @@
                                                 {{ employee.first_name }} {{ employee.last_name }}
                                             </td>
                                             <td>
-                                                {{time.clock_in  || time.clock_out | date : 'mediumDate'}}
+                                                {{time.clock_in  || time.clock_out | date : 'longDate'}}
                                             </td>
                                             <td>
                                                 {{time.clock_in | date : 'mediumTime'}}

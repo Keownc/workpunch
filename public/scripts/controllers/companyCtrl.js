@@ -1,10 +1,9 @@
 // 'use-strict'
 myApp.controller('companyCtrl', function ($scope, $rootScope, $http, $location, Auth) {
     $scope.user = {};
-    $scope.error_message = '';
-    $scope.error = {};
     $scope.employee = [];
     $rootScope.current_user = '';
+    $rootScope.navbar = true;
     // Run function to login a user and get their data
     $scope.Login = function(){
         Auth.companyLogin($scope.user).then(function(data) {
@@ -15,8 +14,5 @@ myApp.controller('companyCtrl', function ($scope, $rootScope, $http, $location, 
 
         })
     }
-    $scope.back = function () {
-      $location.path('/');
-    };
-    $rootScope.navbar = true;
+
 });

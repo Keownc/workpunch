@@ -1,5 +1,5 @@
 // 'use-strict'
-myApp.controller('adminCtrl', function ($scope, $rootScope, $http, $location, Auth, Api) {
+myApp.controller('adminCtrl', function ($scope, $rootScope, $location, Api) {
     $rootScope.navbar = false;
     $scope.user = {};
     $scope.company = [];

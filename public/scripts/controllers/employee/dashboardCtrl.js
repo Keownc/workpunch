@@ -1,73 +1,81 @@
 'use-strict'
 //Employee Dashboard page controller
-myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api, Auth, SickLeaveForm){
+myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api){
     $rootScope.navbar = false;
     $scope.user = {};
     $scope.times = [];
     $scope.sick = [];
     $scope.employee = [];
+    var today = new Date();
+   var yearNum = today.getFullYear();
+   var monthNum = today.getMonth();
+   var dayNum = today.getDate();
+
+   // A function to show total when requested
     $scope.total = function(){
          $scope.total = false;
     }
     // Return from the Database
+    //  go into the api factory and get Timecard $https request
+    // return the data
     Api.Timecard.query({}, function(data){
         $scope.times = data;
     })
+    //  go into the api factory and get SickLeave $https request
+    // return the data
     Api.SickLeave.query({}, function(data){
         $scope.sick = data;
     })
+    //  go into the api factory and get Employee $https request
+    // return the data
     Api.Employee.query({}, function(data){
          $scope.employee = data;
-         console.log("user " + data.username);
     });
 
-    // Add/Insert to the user Database
+    // Add/Update to the user Database
     $scope.addPost = function(){
         Api.Employee.update({},$scope.user, function(data){
             $scope.employee = Api.Employee.query();
         })
     }
+    // Add or update the user images/avatar
     $scope.addAvatar = function(){
         Api.Employee.save({},$scope.user, function(data){
             $scope.employee = Api.Employee.query();
         })
     }
-    var today = new Date();
-   var yearNum = today.getFullYear();
-   var monthNum = today.getMonth();
-   var dayNum = today.getDate();
-    // Store the users time in the Timecard/punch schema
-
+    // Store the users checked in time in the Timecard/ schema with the users employee_id
     $scope.checkIn = function(){
-        var employeeID = $scope.employee.employee_ID;
+        var employee_id = $scope.employee.employee_id;
             var punchInDay = Date.now();
-            var clockIn = punchInDay;
+            var clock_in = punchInDay;
             var month = punchInDay;
             var year = punchInDay;
             var day = punchInDay;
-        $http.post('/api/timecard', {
-            clock_in: clockIn,
+        $http.post('/timecards/timecard', {
+            clock_in: clock_in,
             month: month,
             year: year,
             day: day,
-            employee_id: employeeID
+            employee_id: employee_id
         }).success(function(data){
             $scope.dateIn=true;
         });
     }
+    // Store the users checked out time in the Timecard/ schema with the users employee_id
     $scope.checkOut = function(){
         var punchInDay = Date.now();
-        var employee_id = $scope.employee.employeeID;
+        var employee_id = $scope.employee.employee_id;
         var month =punchInDay;
         var year = punchInDay;
         var day = punchInDay;
         var clock_out = punchInDay;
-        $http.post('/api/timecard', {
-            clock_out: clockOut,
+        $http.post('/timecards/timecard', {
+            clock_out: clock_out,
             month: month,
             year: year,
             day: day,
-            employee_id: employeeID
+            employee_id: employee_id
         }).success(function(data){
             $scope.dateOut=true;
         });
@@ -76,10 +84,10 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     // Store to Sick Leave schema
     $scope.sickLeave = function() {
         $scope.submitted = false;
-        var employeeID = $scope.employee.employeeID;
-        var days = $scope.user.days;
-        var file = $scope.employee.file;
-        $http.post('/api/sickLeave', {employee_id: employeeID, days_out_sick: days, slip:file}).success(function(data){
+        var employee_id = $scope.employee.employee_id;
+        var days_out_sick = $scope.user.days;
+        var slip = $scope.employee.file;
+        $http.post('/api/sickLeave', {employee_id: employee_id, days_out_sick: days_out_sick, slip:slip}).success(function(data){
             $scope.submitted = true;
         });
     }
@@ -110,10 +118,5 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         rate: [
             1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6
         ]
-    };
-    // Sick Leave form submit
-    $scope.sickLeaveSubmit = function () {
-        const uploadUrl = '/upload';
-        SickLeaveForm.post(uploadUrl, $scope.user)
     };
 });

@@ -8,6 +8,11 @@ PROJECT: Final Project WorkPunch
 #e0e0d1 -
 #cc6666 - red
 #339966 - green
+#BBDEFB
+*/
+/*
+Font  font-family: 'Rationale', sans-serif;
+Cronos Pro
 */
 html {
     font-size: 62.5%;
@@ -30,7 +35,11 @@ body {
      margin-bottom: 0;
 }
 h3 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    padding-bottom: 1.5rem;
+}
+p {
+    font-size: 1.6rem;
 }
 /*--------------------------------- Navigation ---------------------------------*/
 .navbar>.container .navbar-brand{
@@ -120,7 +129,7 @@ h3 {
 }
 #services .thumbnail  {
     min-height: 250px;
-    padding: 3rem;
+    padding: .5rem 2rem
 }
 #services h3 {
     text-decoration: underline;
@@ -131,7 +140,7 @@ h3 {
     text-transform: capitalize;
     margin-top: 6rem;
     margin-bottom: 6rem;
-    font: 4.5rem Cronos Pro, "Helvetica Neue", Helvetica, Arial sans-serif;
+    font: 5.5rem "Helvetica Neue", Helvetica, Arial sans-serif;
     color: #505151;
 }
 #services {
@@ -169,12 +178,6 @@ h3 {
 .profile-details a {
     /*color: #000;*/
 }
-/*.uploader {
-    position: relative;
-    bottom: 0%;
-    left: 80%;
-
-}*/
 /*--------------------------------- Dashboard sidebar ---------------------------------*/
 /* Sidebar navigation */
 .nav-sidebar {
@@ -183,15 +186,17 @@ h3 {
   margin-left: -20px;
 }
 .nav-sidebar > li > a {
-  padding-right: 20px;
-  padding-left: 20px;
-  color: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #fff;
+    border-bottom: 1px solid;
+    line-height: 3;
 }
-.nav-sidebar > .active > a,
+.nav-sidebar >  a:hover,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
   color: #fff;
-  /*background-color: grey;*/
+  background-color:#009688;
 }
 .sidebar-heading{
     color: #fff;
@@ -259,7 +264,7 @@ p em {
     border-radius: 4px;
 }
 .panel-default>.panel-heading {
-    height: 45rem;
+    height: 49rem;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
  text-align: left;
@@ -326,6 +331,36 @@ p em {
     background-color: #339966;
     border-color: #46b8da;
 }
+.btn-e {
+    color: #fff;
+    background-color: #607D8B;
+    border-color: #607D8B;
+}
+.btn-e:hover {
+    color: #fff;
+    background-color: #455A64;
+    border-color: #455A64;
+}
+.btn-c {
+    color: #fff;
+    background-color: #FF5722;
+    border-color: #E64A19;
+}
+.btn-c:hover {
+    color: #fff;
+    background-color: #E64A19;
+    border-color: #E64A19;
+}
+.btn-l {
+    color: #fff;
+    background-color: #009688;
+    border-color: #009688;
+}
+.btn-l:hover {
+    color: #fff;
+    background-color: #00796B;
+    border-color: #00796B;
+}
 /*--------------------------------- Footer ---------------------------------*/
 footer {
     background: #19232d;
@@ -341,7 +376,7 @@ footer h2{
     font: bold 1.6rem "Open Sans", Arial, sans-serif;
     text-transform: uppercase;
     border-bottom: 1px solid #253443;
-    color: #c5c7cb;
+    color: #E64A19;
     margin-top: 2rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
@@ -351,6 +386,13 @@ footer h2{
     font-size: 2.2rem;
     font-weight: 600;
     margin-bottom: 2rem;
+    color: #8BC34A;
+}
+#workpunch p {
+    color: #fff;
+}
+#workpunch label {
+    color: #F57C00;
 }
 #workpunch em{
     color: #e54e53;
@@ -386,6 +428,7 @@ label[for*="submit"] {
     background-color: #121a21;
     color: #8d8e92;
     clear: both;
+    margin-top: 1.5rem;
 }
 /*#bottom-footer p {
     width: 75%;
@@ -470,7 +513,7 @@ label[for*="submit"] {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #326699;
+    background-color: #00796B;
     border-right: 1px solid #eee;
     height: 55.2rem;
   }

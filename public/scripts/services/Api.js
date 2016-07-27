@@ -1,4 +1,5 @@
 myApp.factory('Api',['$resource', function($resource){
+    // Get the data/ resource from the api routes
     return {
         Employee: $resource('/api/employeeDashboard/', {id: '@id'},
         { 'get':    {method:'GET'},
@@ -8,11 +9,11 @@ myApp.factory('Api',['$resource', function($resource){
         'delete': {method:'DELETE'},
         'update': {method: 'PUT'}
         }),
-        Timecard: $resource('/api/timecard', {employeeID: '@employee_ID'}, { 'update': {method: 'PUT'}}),
+        Timecard: $resource('/timeCardApi/timecard', {employeeID: '@employee_ID'}, { 'update': {method: 'PUT'}}),
 
-        SickLeave: $resource('/api/sickLeave', {employeeID: '@employee_ID'}),
+        SickLeave: $resource('/sickLeaveApi/sickLeave', {employeeID: '@employee_ID'}),
 
-        Company: $resource('/api/companyDashboard', {id: '@id'},
+        Company: $resource('/admin/companyDashboard', {id: '@id'},
         { 'get':    {method:'GET'},
         'save':   {method:'POST'},
         'query':  {method:'GET'},

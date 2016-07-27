@@ -17,6 +17,7 @@ myApp.run(function($rootScope, $http, $location, Auth){
 
     $rootScope.current_user = '';
     $rootScope.authenticated = false;
+    // A function to get the log out route and deserialize the User
     $rootScope.logout = function(){
         $http.get('/api/logout').success(function (data) {
             $location.path('/');

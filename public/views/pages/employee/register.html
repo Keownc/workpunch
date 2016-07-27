@@ -3,6 +3,9 @@
         <div id="employee-form" class="col-sm-6 col-md-5 col-lg-offset-3 col-lg-6">
             <form ng-submit="registerUser()">
                 <h2>Employee Registration Form</h2>
+                <p>
+                    To complete your registration please fill out the following fields
+                </p>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="exampleInputText" placeholder="username" ng-model="user.username" ng-required="true">
@@ -27,7 +30,7 @@
                     <label for="exampleInputText">Company</label>
                     <input type="text" class="form-control" id="exampleInputText" placeholder="company" ng-model="user.company" ng-required="true">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit now</button>
+                <button type="submit" class="btn btn-primary">Register Now</button>
             </form>
         </div>
     </div>

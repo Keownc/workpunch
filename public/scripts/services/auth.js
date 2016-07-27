@@ -1,10 +1,9 @@
 myApp.factory('Auth', function Auth($location, $http, $rootScope, Session, Api){
-
+// Return the $http routes for the auth login, employee register and admin/ company login routes
     return {
         login: function(user, callback){
             return $http.post('/auth/login', user);
         },
-
         register: function(user, callback) {
             return $http.post('/api/register', user);
         },
