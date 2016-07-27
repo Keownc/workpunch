@@ -10,5 +10,13 @@ Install the dependencies by using.
 
 $ npm install //Installs the package.json file.
 
-Use bower-installer to get the bower files
-$ bower-installer
+Start server by  running the following command.
+
+Install nodemon globally
+ $ npm install -g nodemon
+
+ Then run
+
+ $nodemon
+Or Start server by
+$ node server/server.js

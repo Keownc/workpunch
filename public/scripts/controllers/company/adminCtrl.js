@@ -12,16 +12,6 @@ myApp.controller('adminCtrl', function ($scope, $rootScope, $http, $location, Au
         $scope.employeeRecords = data;
     });
 
-    // Return employees time
-    // Api.Timecard.query({}, function(data){
-    //     $scope.times = data;
-    // });
-
-    // Return employee sick
-    // Api.SickLeave.query({}, function(data){
-    //     $scope.sick = data;
-    // });
-    
     //Return the compant data
     Api.Company.query({}, function(data){
          $scope.company = data;

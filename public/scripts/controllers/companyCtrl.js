@@ -4,14 +4,13 @@ myApp.controller('companyCtrl', function ($scope, $rootScope, $http, $location, 
     $scope.error_message = '';
     $scope.error = {};
     $scope.employee = [];
-    $rootScope.current_user = ''
+    $rootScope.current_user = '';
+    // Run function to login a user and get their data
     $scope.Login = function(){
-        Auth.company($scope.user).then(function(data) {
+        Auth.companyLogin($scope.user).then(function(data) {
             // If successful redirect to dashboard
         $rootScope.authenticated = true;
         $rootScope.current_user = data.username;
-        console.log(data.username);
-        // console.log("current User "+$rootScope.current_user.firstName);
         $location.path('/companyDashboard');
 
         })

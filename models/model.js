@@ -2,39 +2,38 @@
 // Employee schema
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-
+const uuid = require('mongoose-uuid');
 //Employee Database schema
 const employeeSchema = new mongoose.Schema({
-    employeeID: String,
-    firstName: String,
-    lastName: String,
-    fullname: String,
+    _id: false,
+    employee_ID: String,
+    first_name: String,
+    last_name: String,
     username: String,
     password: String,
     email: String,
-    companyID: String,
+    company_ID: String,
     company: String,
     position: String,
     description: String,
     avatar: String,
-    employeeID: String,
     created_at: {type: Date}
 });
 
 //Timepunch Database
 const timecardSchema = new mongoose.Schema({
-    employeeID: String,
+    employee_ID: String,
     year: {type: Date},
     month: {type: Date},
     day: {type: Date},
-    clockIn: {type: Date},
-    clockOut: {type: Date}
+    clock_in: {type: Date},
+    clock_out: {type: Date}
 });
 
 //SickLeave
 const sickLeaveSchema = new mongoose.Schema({
-    employeeID: String,
-    daysOutSick: Number,
+    employee_ID: String,
+    days_out_sick: Number,
     slip: String,
 });
 
@@ -54,7 +53,7 @@ employeeSchema.methods.createID = function(company){
     }
     return number() + number() + number()
 }
-
+employeeSchema.plugin(uuid.plugin);
 
 
 mongoose.model('Employee', employeeSchema);

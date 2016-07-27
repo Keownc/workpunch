@@ -36,7 +36,6 @@ myApp.config(['$routeProvider', '$locationProvider',
         .when('/companyLogin',{
             templateUrl: './views/pages/login.html',
             controller: 'companyCtrl',
-            // controllerAs: 'register'
         })
         .when('/employeeRegister',{
             templateUrl: './views/pages/employee/register.html',

@@ -6,6 +6,9 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.times = [];
     $scope.sick = [];
     $scope.employee = [];
+    $scope.total = function(){
+         $scope.total = false;
+    }
     // Return from the Database
     Api.Timecard.query({}, function(data){
         $scope.times = data;
@@ -35,12 +38,8 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
    var dayNum = today.getDate();
     // Store the users time in the Timecard/punch schema
 
-    // Enable after an 8 hours
-    setTimeout(function(){
-        $scope.dateIn = false;
-    }, 60*60*1000*8)
     $scope.checkIn = function(){
-        var employeeID = $scope.employee.employeeID;
+        var employeeID = $scope.employee.employee_ID;
             var punchInDay = Date.now();
             var clockIn = punchInDay;
             var month = punchInDay;
@@ -64,11 +63,11 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         var day = punchInDay;
         var clockOut = punchInDay;
         $http.post('/api/timecard', {
-            clockOut: clockOut,
+            clock_Out: clockOut,
             month: month,
             year: year,
             day: day,
-            employeeID: employeeID
+            employee_ID: employeeID
         }).success(function(data){
             $scope.dateOut=true;
         });
@@ -77,7 +76,10 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     // Store to Sick Leave schema
     $scope.sickLeave = function() {
         $scope.submitted = false;
-        $http.post('/api/sickLeave', $scope.user).success(function(data){
+        var employeeID = $scope.employee.employeeID;
+        var days = $scope.user.days;
+        var file = $scope.employee.file;
+        $http.post('/api/sickLeave', {employeeID: employeeID, daysOutSick: days, slip:file}).success(function(data){
             $scope.submitted = true;
         });
     }

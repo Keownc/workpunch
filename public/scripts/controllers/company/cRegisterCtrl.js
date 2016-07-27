@@ -1,13 +1,12 @@
 //Company register page controller
-myApp.controller('cRegisterCtrl', function ($scope, $rootScope, $http, $location) {
+myApp.controller('cRegisterCtrl', function ($scope, $location, $rootScope, Auth) {
     $rootScope.navbar = true;
     $scope.user = {};
-
+// Run a function to call the api/company register route to add a new user to the data base
     $scope.registerCompany = function(){
-        $http.post('/api/companyRegister', $scope.user).success(function(data){
-            // $rootScope.authenticated = true;
-            // $rootScope.current_user = data.users.username;
+        Auth.companyRegister($scope.user).then(function(data) {
             $location.path('/');
+
         });
     };
     $scope.back = function () {
