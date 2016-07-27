@@ -8,7 +8,7 @@ const Timecard = mongoose.model('Timecard');
 const SickLeave = mongoose.model('SickLeave');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const uuid = require('node-uuid');
+
 // Register
 router.get('/register', function(req, res){
 	res.render('register');
@@ -26,7 +26,7 @@ router.post('/register', function(req, res){
     new_user.last_name = req.body.lastName;
     new_user.email = req.body.email;
     new_user.company = req.body.company;
-    new_user.employee_id = uuid.v4();
+    new_user.employee_id = req.body.company.substring(0,3) + new_user.createID();
     new_user.created_at = date;
     new_user.save(function(err, data){
         if (err){

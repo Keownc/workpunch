@@ -17,7 +17,7 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 // Run Server
 const app = express();
 const port = process.env.PORT || 5000;
-const api = require('../routes/api');
+const api = require('./routes/api');
 
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));

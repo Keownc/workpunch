@@ -7,7 +7,7 @@ const companySchema = new mongoose.Schema({
     username: String,
     password: String,
     company: String,
-    companyID: String,
+    company_id: String,
     plan: String,
     branch: String,
     description: String
