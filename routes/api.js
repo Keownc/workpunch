@@ -153,8 +153,7 @@ router.route('/companyDashboard/')
     })
 
 router.get('/timecard', function(req, res){
-    console.log(req.user.employeeID);
-    Timecard.find({employee_id: req.user.employeeID},function(err, data){
+    Timecard.find({employee_id: req.user.employee_id},function(err, data){
         res.json(data);
     })
 })
