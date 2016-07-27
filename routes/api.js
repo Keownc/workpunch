@@ -22,11 +22,11 @@ router.post('/register', function(req, res){
     const new_user = new Employee();
     new_user.username = req.body.username;
     new_user.password = new_user.createHash(req.body.password);
-    new_user.firstName = req.body.firstName;
-    new_user.lastName = req.body.lastName;
+    new_user.first_name = req.body.firstName;
+    new_user.last_name = req.body.lastName;
     new_user.email = req.body.email;
-    new_user.companyID = req.body.companyID;
-    new_user.employeeID = req.body.companyID.substring(0,3) + new_user.createID();
+    new_user.company = req.body.company;
+    new_user.employee_id = req.body.company.substring(0,3) + new_user.createID();
     new_user.created_at = date;
     new_user.save(function(err, data){
         if (err){
@@ -42,7 +42,6 @@ router.post('/companyRegister', function(req, res){
     // Create a new user in the company schema
     const new_company = new Company();
     new_company.branch = req.body.branch;
-    new_company.companyID = req.body.companyID;
     new_company.company = req.body.company;
     new_company.username = req.body.username;
     new_company.password = new_company.createHash(req.body.password);
@@ -123,8 +122,8 @@ router.route('/employeeDashboard/')
     // Run a put request Function to update the user's data
     .put(function (req, res) {
         var user = req.user;
-        user.firstName = req.body.firstName;
-        user.lastName = req.body.lastName;
+        user.first_name = req.body.firstName;
+        user.last_name = req.body.lastName;
         user.company = req.body.company;
         user.position = req.body.position;
         user.save(function(err, data) {
@@ -150,26 +149,24 @@ router.route('/companyDashboard/')
         console.log("Company ID", req.admin);
         Company.findOne({_id: "5793dc65d50cfd7a3cf075ff"}, function(err, data) {
             res.json(data);
-            const companyID = data.companyID;
-            return companyID
         });
     })
 
 router.get('/timecard', function(req, res){
     console.log(req.user.employeeID);
-    Timecard.find({employeeID: req.user.employeeID},function(err, data){
+    Timecard.find({employee_id: req.user.employeeID},function(err, data){
         res.json(data);
     })
 })
 // Timepunch routes
 router.post('/timecard', function(req, res){
     const time_punch = new Timecard();
-    time_punch.clockIn = req.body.clockIn;
-    time_punch.clockOut = req.body.clockOut;
+    time_punch.clock_in = req.body.clockIn;
+    time_punch.clock_out = req.body.clockOut;
     time_punch.day = req.body.day;
     time_punch.month = req.body.month;
     time_punch.year = req.body.year;
-    time_punch.employeeID = req.body.employeeID;
+    time_punch.employee_id = req.body.employeeID;
     time_punch.save(function(err, data){
         if (err){
             return res.send(500, err);
@@ -179,26 +176,24 @@ router.post('/timecard', function(req, res){
 })
 router.put('timecard', function(req, res){
 
-    time_punch.clockOut = req.body.clockOut;
+    time_punch.clock_out = req.body.clockOut;
     time_punch.save(function(err, data) {
         if (err){
             return res.send(500, err);
         }
-            console.log(data);
         return res.json(data);
     });
 })
 // Sick Form Router
 router.get('/sickLeave', function(req, res){
-
-    SickLeave.find({employeeID: req.user.employeeID}, function(err, data){
+    SickLeave.find({employee_id: req.user.employee_id}, function(err, data){
         res.json(data);
     })
 })
 router.post('/sickLeave', function(req, res){
     const sick_leave = new SickLeave();
-    sick_leave.employeeID = req.body.employeeID;
-    sick_leave.daysOutSick = req.body.days;
+    sick_leave.employee_id = req.body.employeeID;
+    sick_leave.days_out_sick = req.body.days;
     sick_leave.slip = req.body.file;
     sick_leave.save(function(err, data){
         if (err){
@@ -213,7 +208,7 @@ router.route('/employeeRecords')
     .get(function(req, res){
         // console.log("GEt Session", req.session);
         // req.user.companyID
-        Employee.find({companyID: "fullsail123"}, function(err, data){
+        Employee.find({company_id: "fullsail123"}, function(err, data){
             res.json(data);
         })
     })

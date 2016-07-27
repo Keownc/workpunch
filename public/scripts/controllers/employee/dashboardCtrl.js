@@ -51,7 +51,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             month: month,
             year: year,
             day: day,
-            employeeID: employeeID
+            employee_id: employeeID
         }).success(function(data){
             $scope.dateIn=true;
         });
@@ -68,7 +68,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             month: month,
             year: year,
             day: day,
-            employeeID: employeeID
+            employee_id: employeeID
         }).success(function(data){
             $scope.dateOut=true;
         });
