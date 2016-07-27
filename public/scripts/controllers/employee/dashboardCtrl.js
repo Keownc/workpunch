@@ -40,7 +40,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     }
     // Add or update the user images/avatar
     $scope.addAvatar = function(){
-        Api.Employee.save({},$scope.user, function(data){
+        Api.Employee.save({},$scope.user.avatar, function(data){
             $scope.employee = Api.Employee.query();
         })
     }
@@ -97,7 +97,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             employee_id: employee_id,
             description: description
         }).success(function(data){
-            console.log(new_time, current_date, get_date, request, employee_id, description);
             $scope.modifyForm = true;
         });
     }
@@ -107,7 +106,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         $scope.submitted = false;
         const employee_id = $scope.employee.employee_id;
         const days_out_sick = $scope.user.days;
-        const slip = $scope.employee.file;
+        const slip = $scope.user.file;
         $http.post('/sickLeaveApi/sickLeave', {
             employee_id: employee_id,
             days_out_sick: days_out_sick,
@@ -133,7 +132,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             time_zone: time_zone,
             time: time
         }).success(function(data){
-
+            $scope.note = true;
         })
     }
     // hide the Sick leave form after submitted

@@ -9,13 +9,14 @@ const EmployeeRequest = mongoose.model('employeeRequest');
 const LocalStrategy = require('passport-local').Strategy;
 
 // Timepunch routes
-//  Find and return the employee times
+//  Run a function find by all records of the logged employee by
+// their employee_id and then return the employee times
 router.get('/timecard', function(req, res){
     Timecard.find({employee_id: req.user.employee_id},function(err, data){
         res.json(data);
     })
 })
-// A the time the user clocked in
+// Run a function to save the time the user clocked in
 router.post('/timecard', function(req, res){
     const time_punch = new Timecard();
     time_punch.clock_in = req.body.clock_in;
@@ -31,7 +32,7 @@ router.post('/timecard', function(req, res){
         return res.json(data);
     });
 })
-// Add the time the user clocked out
+// Run a function to save the time the user clocked out
 router.put('timecard', function(req, res){
     time_punch.clock_out = req.body.clock_out;
     time_punch.save(function(err, data) {

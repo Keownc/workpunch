@@ -12,11 +12,12 @@ $ npm install //Installs the package.json file.
 ```
 #Start server by running the following commands.
 Install nodemon globally
- $ npm install -g nodemon
 
 ```
- Then run
+ $ npm install -g nodemon
 ```
+ Then run
+ ```
  $nodemon
  ```
 Or Start server by

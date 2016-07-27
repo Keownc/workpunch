@@ -38,11 +38,11 @@ function ensureAuthenticated(req, res, next){
 	}
 }
 // Employee Dashboard Route auth
-// app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
-//     res.render('../public/views/pages/employee/employeeDashboard', {
-//         user : req.user
-//     });
-// });
+app.get('/employeeDashboard', ensureAuthenticated, function(req, res){
+    res.render('../public/views/pages/employee/employeeDashboard', {
+        user : req.user
+    });
+});
 // Company Dashboard Route auth
 app.get('/companyDashboard', ensureAuthenticated, function(req, res){
     res.render('../public/views/pages/company/companyDashboard', {
@@ -70,7 +70,6 @@ app.use(passport.session());
 
 //connect flash
 app.use(flash());
-
 app.use('/api', api);
 app.use('/admin', company_api );
 app.use('/timeCardApi', timecard_api );
