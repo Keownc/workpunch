@@ -46,28 +46,28 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             var year = punchInDay;
             var day = punchInDay;
         $http.post('/api/timecard', {
-            clockIn: clockIn,
+            clock_in: clockIn,
             month: month,
             year: year,
             day: day,
-            employeeID: employeeID
+            employee_id: employeeID
         }).success(function(data){
             $scope.dateIn=true;
         });
     }
     $scope.checkOut = function(){
         var punchInDay = Date.now();
-        var employeeID = $scope.employee.employeeID;
+        var employee_id = $scope.employee.employeeID;
         var month =punchInDay;
         var year = punchInDay;
         var day = punchInDay;
-        var clockOut = punchInDay;
+        var clock_out = punchInDay;
         $http.post('/api/timecard', {
-            clock_Out: clockOut,
+            clock_out: clockOut,
             month: month,
             year: year,
             day: day,
-            employee_ID: employeeID
+            employee_id: employeeID
         }).success(function(data){
             $scope.dateOut=true;
         });
@@ -79,7 +79,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         var employeeID = $scope.employee.employeeID;
         var days = $scope.user.days;
         var file = $scope.employee.file;
-        $http.post('/api/sickLeave', {employeeID: employeeID, daysOutSick: days, slip:file}).success(function(data){
+        $http.post('/api/sickLeave', {employee_id: employeeID, days_out_sick: days, slip:file}).success(function(data){
             $scope.submitted = true;
         });
     }

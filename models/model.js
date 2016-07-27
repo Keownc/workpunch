@@ -6,13 +6,13 @@ const uuid = require('mongoose-uuid');
 //Employee Database schema
 const employeeSchema = new mongoose.Schema({
     _id: false,
-    employee_ID: String,
+    employee_id: String,
     first_name: String,
     last_name: String,
     username: String,
     password: String,
     email: String,
-    company_ID: String,
+    company_id: String,
     company: String,
     position: String,
     description: String,
@@ -22,7 +22,7 @@ const employeeSchema = new mongoose.Schema({
 
 //Timepunch Database
 const timecardSchema = new mongoose.Schema({
-    employee_ID: String,
+    employee_id: String,
     year: {type: Date},
     month: {type: Date},
     day: {type: Date},
@@ -32,7 +32,7 @@ const timecardSchema = new mongoose.Schema({
 
 //SickLeave
 const sickLeaveSchema = new mongoose.Schema({
-    employee_ID: String,
+    employee_id: String,
     days_out_sick: Number,
     slip: String,
 });
@@ -49,7 +49,7 @@ employeeSchema.methods.validPassword = function(password){
 //EmployeeID Generator
 employeeSchema.methods.createID = function(company){
     const number = function(){
-        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16);
     }
     return number() + number() + number()
 }
