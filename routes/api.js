@@ -26,7 +26,7 @@ router.post('/register', function(req, res){
     new_user.last_name = req.body.lastName;
     new_user.email = req.body.email;
     new_user.company = req.body.company;
-    new_user.employee_id =  new_user.createID();
+    new_user.employee_id = req.body.company.substring(0,3) + new_user.createID();
     new_user.created_at = date;
     new_user.save(function(err, data){
         if (err){
@@ -42,7 +42,6 @@ router.post('/companyRegister', function(req, res){
     // Create a new user in the company schema
     const new_company = new Company();
     new_company.branch = req.body.branch;
-    new_company.company_id = req.body.companyID;
     new_company.company = req.body.company;
     new_company.username = req.body.username;
     new_company.password = new_company.createHash(req.body.password);
@@ -147,17 +146,13 @@ router.route('/employeeDashboard/')
     })
 router.route('/companyDashboard/')
     .get(function (req, res) {
-        console.log("Company ID", req.admin);
         Company.findOne({_id: "5793dc65d50cfd7a3cf075ff"}, function(err, data) {
             res.json(data);
-            const companyID = data.companyID;
-            return companyID
         });
     })
 
 router.get('/timecard', function(req, res){
-    console.log(req.user.employeeID);
-    Timecard.find({employeeID: req.user.employeeID},function(err, data){
+    Timecard.find({employee_id: req.user.employee_id},function(err, data){
         res.json(data);
     })
 })
@@ -179,7 +174,7 @@ router.post('/timecard', function(req, res){
 })
 router.put('timecard', function(req, res){
 
-    time_punch.clockOut = req.body.clockOut;
+    time_punch.clock_out = req.body.clockOut;
     time_punch.save(function(err, data) {
         if (err){
             return res.send(500, err);
@@ -190,15 +185,14 @@ router.put('timecard', function(req, res){
 })
 // Sick Form Router
 router.get('/sickLeave', function(req, res){
-
-    SickLeave.find({employeeID: req.user.employeeID}, function(err, data){
+    SickLeave.find({employee_id: req.user.employee_id}, function(err, data){
         res.json(data);
     })
 })
 router.post('/sickLeave', function(req, res){
     const sick_leave = new SickLeave();
-    sick_leave.employeeID = req.body.employeeID;
-    sick_leave.daysOutSick = req.body.days;
+    sick_leave.employee_id = req.body.employeeID;
+    sick_leave.days_out_sick = req.body.days;
     sick_leave.slip = req.body.file;
     sick_leave.save(function(err, data){
         if (err){
@@ -213,7 +207,7 @@ router.route('/employeeRecords')
     .get(function(req, res){
         // console.log("GEt Session", req.session);
         // req.user.companyID
-        Employee.find({companyID: "fullsail123"}, function(err, data){
+        Employee.find({company_id: "fullsail123"}, function(err, data){
             res.json(data);
         })
     })

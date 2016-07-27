@@ -17,8 +17,8 @@
             <section class="col-md-9">
                 <article class="profile-details">
                     <div >
-                        <div><em class="title">Name: </em>{{ employee.firstName }} {{ employee.lastName }}</div>
-                        <div><em class="title">EmployeeID: </em>{{ employee.employeeID }}</div>
+                        <div><em class="title">Name: </em>{{ employee.first_name }} {{ employee.last_name }}</div>
+                        <div><em class="title">EmployeeID: </em>{{ employee.employee_id }}</div>
                         <div><em class="title">Company: </em><a href="#" editable-text="user.company" onaftersave="addPost()">{{ user.company || employee.company || 'empty' }}</a></div>
                         <div><em class="title">Position: </em><a href="#" editable-text="user.position" onaftersave="addPost()">{{ user.position || employee.position || 'empty' }}</a></div>
                         <!-- <div><em class="title">Description: </em><a href="#" editable-textarea="user.description" e-rows="4" e-cols="30" onaftersave="addPost()">{{ user.description || 'no description' }}</a></div> -->
@@ -127,16 +127,16 @@
                                         </tr>
                                         <tr ng-repeat="time in times">
                                             <td>
-                                                {{ employee.firstName }} {{ employee.lastName }}
+                                                {{ employee.first_name }} {{ employee.last_name }}
                                             </td>
                                             <td>
-                                                {{time.clockIn  || time.clockOut | date : 'mediumDate'}}
+                                                {{time.clock_in  || time.clock_out | date : 'mediumDate'}}
                                             </td>
                                             <td>
-                                                {{time.clockIn | date : 'mediumTime'}}
+                                                {{time.clock_in | date : 'mediumTime'}}
                                             </td>
                                             <td>
-                                                {{time.clockOut | date : 'mediumTime'}}
+                                                {{time.clock_out | date : 'mediumTime'}}
                                             </td>
                                         </tr>
                                     </table>
@@ -186,10 +186,10 @@
                                         </tr>
                                         <tr ng-repeat="x in sick">
                                             <td>
-                                                {{ employee.firstName }} {{ employee.lastName }}
+                                                {{ employee.first_name }} {{ employee.last_name }}
                                             </td>
                                             <td>
-                                                {{x.daysOutSick}}
+                                                {{x.days_out_sick}}
                                             </td>
                                             <td>
                                                 <img src="{{ x.slip}}"  />
@@ -212,7 +212,7 @@
                                     <section class="setting" ng-hide="updateName || updateUser || updateEmail || updateID">
                                         <h3>General Account Setting</h3>
                                         <p>
-                                            Name: {{ employee.firstName }} {{ employee.lastName }}
+                                            Name: {{ employee.first_name }} {{ employee.last_name }}
                                             <a href="#" role="button" ng-click="editName()">Edit</a>
                                         </p>
                                         <p>
@@ -222,10 +222,6 @@
                                         <p>
                                             Email: {{employee.email}}
                                             <a href="#" role="button" ng-click="editEmail()">Edit</a>
-                                        </p>
-                                        <p>
-                                            CompanyID: {{employee.companyID}}
-                                            <a href="#" role="button" ng-click="editID()">Edit</a>
                                         </p>
                                     </section>
                                     <section ng-show="updateUser">
@@ -253,17 +249,6 @@
                                             <div class="form-group">
                                                 <label for="lName">Last Name</label>
                                                 <input type="text" class="form-control" id="lName" placeholder="Smith" ng-model="user.lastName" ng-required="true">
-                                            </div>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                            <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
-                                        </form>
-                                    </section>
-                                    <section ng-show="updateID">
-                                        <form ng-submit="addPost()">
-                                            <h3>Update CompanyID</h3>
-                                            <div class="form-group">
-                                                <label for="exampleInputText">Company ID</label>
-                                                <input type="text" class="form-control" id="exampleInputText" placeholder="company ID" ng-model="user.companyID" ng-required="true">
                                             </div>
                                             <button type="submit" class="btn btn-default">Submit</button>
                                             <button type="button" class="btn btn-primary" ng-click="back()">Back</button>

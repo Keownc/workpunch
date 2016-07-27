@@ -92,9 +92,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.editUser = function () {
         $scope.updateUser = true;
     }
-    $scope.editID = function () {
-        $scope.updateID = true;
-    }
     $scope.editEmail = function () {
         $scope.updateEmail = true;
     }
