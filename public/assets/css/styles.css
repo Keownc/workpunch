@@ -159,14 +159,14 @@ p {
 }
 /*--------------------------------- Dashboard Wallpaper ---------------------------------*/
 .wallpaper  {
-    height: 500px;
+    height: 340px;
     background-color: #777;
     font-size: 21px;
     line-height: 1.4;
 }
 .wallpaper > img{
-    min-width: 100%;
-    height: 500px;
+    width: 100%;
+    height: 100%
 }
 .title {
     color: #fff;
@@ -211,13 +211,16 @@ p {
 }
 #dashboard h2{
     float: left;
-    width: 70%;
+    width: 65%;
     line-height: .1;
     color: #000;
 }
 .timepunch-heading{
     font-size: 5rem;
     text-transform: capitalize;
+}
+.timepunch{
+    margin-top: 6rem;
 }
 span {
     font-size: 3.5rem;
@@ -256,6 +259,10 @@ p em {
 #dashboard .form-control {
     width: 40%;
 }
+.form-textarea{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 /* Sick Leave Form*/
 .form-option {
     width: 10%;
@@ -264,7 +271,7 @@ p em {
     border-radius: 4px;
 }
 .panel-default>.panel-heading {
-    height: 49rem;
+    height: 55rem;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
  text-align: left;
@@ -515,7 +522,7 @@ label[for*="submit"] {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #00796B;
     border-right: 1px solid #eee;
-    height: 55.2rem;
+    height: 61.4rem;
   }
   .main {
     position: relative;

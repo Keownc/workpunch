@@ -9,9 +9,9 @@ myApp.factory('Api',['$resource', function($resource){
         'delete': {method:'DELETE'},
         'update': {method: 'PUT'}
         }),
-        Timecard: $resource('/timeCardApi/timecard', {employeeID: '@employee_ID'}, { 'update': {method: 'PUT'}}),
+        Timecard: $resource('/timeCardApi/timecard', {employee_id: '@employee_id'}, { 'update': {method: 'PUT'}}),
 
-        SickLeave: $resource('/sickLeaveApi/sickLeave', {employeeID: '@employee_ID'}),
+        SickLeave: $resource('/sickLeaveApi/sickLeave', {employee_id: '@employee_id'}),
 
         Company: $resource('/admin/companyDashboard', {id: '@id'},
         { 'get':    {method:'GET'},
@@ -21,6 +21,6 @@ myApp.factory('Api',['$resource', function($resource){
         'delete': {method:'DELETE'},
         'update': {method: 'PUT'}
         }),
-        Records: $resource('/api/employeeRecords', {companyID: '@company_ID'})
+        Records: $resource('/api/employeeRecords', {company_id: '@company_id'})
     }
 }])

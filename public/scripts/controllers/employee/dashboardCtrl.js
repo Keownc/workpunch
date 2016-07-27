@@ -6,10 +6,10 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     $scope.times = [];
     $scope.sick = [];
     $scope.employee = [];
-    var today = new Date();
-   var yearNum = today.getFullYear();
-   var monthNum = today.getMonth();
-   var dayNum = today.getDate();
+    const today = new Date();
+   const yearNum = today.getFullYear();
+   const monthNum = today.getMonth();
+   const dayNum = today.getDate();
 
    // A function to show total when requested
     $scope.total = function(){
@@ -46,13 +46,13 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     }
     // Store the users checked in time in the Timecard/ schema with the users employee_id
     $scope.checkIn = function(){
-        var employee_id = $scope.employee.employee_id;
-            var punchInDay = Date.now();
-            var clock_in = punchInDay;
-            var month = punchInDay;
-            var year = punchInDay;
-            var day = punchInDay;
-        $http.post('/timecards/timecard', {
+        const employee_id = $scope.employee.employee_id;
+            const punchInDay = Date.now();
+            const clock_in = punchInDay;
+            const month = punchInDay;
+            const year = punchInDay;
+            const day = punchInDay;
+        $http.post('/timeCardApi/timecard', {
             clock_in: clock_in,
             month: month,
             year: year,
@@ -64,13 +64,13 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
     }
     // Store the users checked out time in the Timecard/ schema with the users employee_id
     $scope.checkOut = function(){
-        var punchInDay = Date.now();
-        var employee_id = $scope.employee.employee_id;
-        var month =punchInDay;
-        var year = punchInDay;
-        var day = punchInDay;
-        var clock_out = punchInDay;
-        $http.post('/timecards/timecard', {
+        const punchInDay = Date.now();
+        const employee_id = $scope.employee.employee_id;
+        const month =punchInDay;
+        const year = punchInDay;
+        const day = punchInDay;
+        const clock_out = punchInDay;
+        $http.post('/timeCardApi/timecard', {
             clock_out: clock_out,
             month: month,
             year: year,
@@ -80,29 +80,79 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
             $scope.dateOut=true;
         });
     }
+    // A function to get the value form the modify request form to store the data
+    $scope.modify = function () {
+        const punchInDay = Date.now();
+        const employee_id = $scope.employee.employee_id;
+        const current_date = punchInDay;
+        const get_date = $scope.modify.get_date;
+        const new_time = $scope.modify.new_time;
+        const request = $scope.modify.request;
+        const description = $scope.modify.description;
+        $http.post('/timeCardApi/employeeRequest', {
+            new_time: new_time,
+            current_date: current_date,
+            get_date: get_date,
+            request: request,
+            employee_id: employee_id,
+            description: description
+        }).success(function(data){
+            console.log(new_time, current_date, get_date, request, employee_id, description);
+            $scope.modifyForm = true;
+        });
+    }
     // Get the Employee time
     // Store to Sick Leave schema
     $scope.sickLeave = function() {
         $scope.submitted = false;
-        var employee_id = $scope.employee.employee_id;
-        var days_out_sick = $scope.user.days;
-        var slip = $scope.employee.file;
-        $http.post('/api/sickLeave', {employee_id: employee_id, days_out_sick: days_out_sick, slip:slip}).success(function(data){
+        const employee_id = $scope.employee.employee_id;
+        const days_out_sick = $scope.user.days;
+        const slip = $scope.employee.file;
+        $http.post('/sickLeaveApi/sickLeave', {
+            employee_id: employee_id,
+            days_out_sick: days_out_sick,
+            slip:slip
+        }).success(function(data){
             $scope.submitted = true;
         });
     }
+
+    // Get the user number and date for the notification to be send
+    $scope.nofity = function () {
+        const timeZone = Date.now();
+        const first_name = $scope.employee.first_name;
+        const last_name = $scope.employee.last_name;
+        const notification = $scope.user.notification;
+        const time_zone = timeZone;
+        const time = $scope.user.time;
+        $http.post('/alert/notification', {
+            first_name: irst_name,
+            last_name: last_name,
+            phone_number: phone_number,
+            notification: notification,
+            time_zone: time_zone,
+            time: time
+        }).success(function(data){
+
+        })
+    }
+    // hide the Sick leave form after submitted
     $scope.sickLeaveForm = function () {
        $scope.submitted = false;
     };
+    // Show the edit Name form
     $scope.editName = function () {
         $scope.updateName = true;
     }
+    // Show the edit Username form
     $scope.editUser = function () {
         $scope.updateUser = true;
     }
+    // Show the update email form
     $scope.editEmail = function () {
         $scope.updateEmail = true;
     }
+    // Go back to the Account edit setting
     $scope.back = function() {
         $scope.updateName = false;
         $scope.updateUser = false;
@@ -117,6 +167,7 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         ],
         rate: [
             1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6
-        ]
+        ],
+        text: ['checkIn', 'checkOut']
     };
 });

@@ -1,7 +1,6 @@
 // 'use-strict'
 myApp.controller('adminCtrl', function ($scope, $rootScope, $location, Api) {
     $rootScope.navbar = false;
-    $scope.user = {};
     $scope.company = [];
     $scope.times = [];
     $scope.sick = [];
@@ -15,7 +14,6 @@ myApp.controller('adminCtrl', function ($scope, $rootScope, $location, Api) {
     //Return the compant data
     Api.Company.query({}, function(data){
          $scope.company = data;
-        //   $scope.firstName = data.data;
          console.log("user " + data.username);
     });
 });

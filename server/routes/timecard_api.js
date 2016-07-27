@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 const Timecard = mongoose.model('Timecard');
 const passport = require('passport');
+const EmployeeRequest = mongoose.model('employeeRequest');
 const LocalStrategy = require('passport-local').Strategy;
 
 // Timepunch routes
@@ -40,4 +41,22 @@ router.put('timecard', function(req, res){
         return res.json(data);
     });
 })
+//  Run a function to save the employeeRequest to change their check in or check out time
+router.post('/employeeRequest', function(req, res){
+    const new_request = new EmployeeRequest();
+    new_request.current_date = req.body.current_date;
+    new_request.get_date = req.body.get_date;
+    new_request.new_time = req.body.new_time;
+    new_request.request = req.body.request;
+    new_request.description = req.body.description;
+    new_request.employee_id = req.body.employee_id;
+    new_request.save(function(err, data) {
+        if (err){
+            return res.send(500, err);
+        }
+        return res.json(data);
+    });
+})
+
+
 module.exports = router;

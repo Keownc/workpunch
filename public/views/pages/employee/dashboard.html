@@ -54,8 +54,7 @@
                             <uib-tabset>
                                 <h2>Time</h2>
                                 <uib-tab index="0" heading="Time">
-                                    <section>
-                                        <!--  -->
+                                    <section class="timepunch">
                                         <div ng-hide="dateOut || dateIn">
                                             <h3 class="timepunch-heading">Check In</h3>
                                             <div> <ds-widget-clock show-digital digital-format="'EEEE, MMMM d, yyyy'" ng-model="date"></ds-widget-clock></div>
@@ -81,33 +80,67 @@
                                 </uib-tab>
                                 <!-- Overtime -->
                                 <uib-tab index="1" heading="Overtime">
-                                    <p>
-                                        <em>Note: this information is private and as such will not be stored!</em>
-                                    </p>
-                                    <form ng-submit="overtime()" class="col-md-8 overtime">
-                                        <h3>Calculator</h3>
-                                        <div class="form-group">
-                                            <label for="amount">Amount per hour</label>
-                                            <input type="text" class="form-control" id="salary" placeholder="40" ng-model="amount">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="amount">Rate per hour</label>
-                                            <select class="form-option" id="rate" ng-model="rate" ng-options="opt for opt in options.rate" ></select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="hours">Number of hours</label>
-                                            <select class="form-option" id="hours" ng-model="time" ng-options="opt for opt in options.time" ></select>
-                                        </div>
-                                        <button type="button" name="button" ng-click="total()">Get Total Now</button>
-                                    </form>
-                                    <section class="col-md-4 overtime">
+                                    <section>
+                                        <p>
+                                            <em>Note: this information is private and as such will not be stored!</em>
+                                        </p>
+                                        <form ng-submit="overtime()" class="col-md-8 overtime timepunch">
+                                            <h3>Calculator</h3>
+                                            <div class="form-group">
+                                                <label for="amount">Amount per hour</label>
+                                                <input type="text" class="form-control" id="salary" placeholder="40" ng-model="amount">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="amount">Rate per hour</label>
+                                                <select class="form-option" id="rate" ng-model="rate" ng-options="opt for opt in options.rate" ></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="hours">Number of hours</label>
+                                                <select class="form-option" id="hours" ng-model="time" ng-options="opt for opt in options.time" ></select>
+                                            </div>
+                                            <button type="button" name="button" ng-click="total()">Get Total Now</button>
+                                        </form>
+                                    </section>
+                                    <section class="col-md-4 overtime timepunch">
                                         <h3>Total</h3>
                                         <p ng-show="!total">
                                             ${{amount * rate * time}}
                                         </p>
                                     </section>
                                 </uib-tab>
-                                <uib-tab index="2" heading="Logs">
+                                <uib-tab index="2" heading="Update">
+                                    <p>
+                                        <em>Request to modify check in or check out time</em>
+                                    </p>
+                                    <section ng-hide="modifyForm">
+                                        <form ng-submit="modify()">
+                                            <div class="form-group">
+                                                <label for="date">Date of inquiry</label>
+                                                <input type="date" class="form-control" id="date" placeholder="01/01/2016" ng-model="modify.get_date" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="time">Time</label>
+                                                <input type="text" class="form-control" id="time" placeholder="8am" ng-model="modify.new_time" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="t">Select</label>
+                                                <select class="form-option" id="t" ng-model="modify.request" ng-options="opt for opt in options.text" ></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Reason for change</label>
+                                                <textarea rows="4" cols="50" class="form-textarea" ng-model="modify.description"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit now</button>
+                                        </form>
+                                    </section>
+                                    <section ng-show="modifyForm" class="timepunch">
+                                        <h3 class="timepunch-heading">Thank You</h3>
+                                        <p>
+                                            Your request has been receive and will be reviewed before beening update.
+                                        </p>
+                                    </section>
+                                </uib-tab>
+                                <uib-tab index="3" heading="Logs">
                                     <table class="table table-striped">
                                         <tr>
                                             <th>
@@ -151,7 +184,7 @@
                             <uib-tabset id="tabsNav">
                                 <h2>Sick Leave</h2>
                                 <uib-tab index="0" heading="Form">
-                                    <form ng-submit="sickLeave($files)" ng-hide="submitted">
+                                    <form ng-submit="sickLeave($files)" ng-hide="submitted" class="timepunch">
                                         <div class="form-group">
                                             <label for="fName">Number Of Days</label>
                                             <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.time" ng-required="true"></select>
@@ -162,12 +195,11 @@
                                         </div>
                                         <button type="submit" class="btn btn-default" >Sumbit</button>
                                     </form>
-                                    <div class="" ng-show="submitted">
-                                        <h3 class="timepunch-heading">Check In</h3>
+                                    <div class="timepunch" ng-show="submitted">
+                                        <h3 class="timepunch-heading">Thank You</h3>
                                         <p>
                                             Your form has been accepted and is waiting for review by your supervisor/manager. We are sorry to heard that you are not feeling well at this time. Thank you for think the time to inform us and hope you feel better soon.
                                         </p>
-                                        <!-- <button type="button" class="btn btn-primary" ng-click="sickLeaveForm()">Back</button> -->
                                     </div>
                                 </uib-tab>
                                 <uib-tab index="1" heading="View">
@@ -192,7 +224,7 @@
                                             </td>
                                             <td>
                                                 <img src="{{ x.slip}}"  />
-                                                <!-- {{x.slip}} -->
+
                                             </td>
                                         </tr>
                                     </table>
@@ -223,7 +255,7 @@
                                             <a href="#" role="button" ng-click="editEmail()">Edit</a>
                                         </p>
                                     </section>
-                                    <section ng-show="updateUser">
+                                    <section ng-show="updateUser" class="timepunch">
                                         <form ng-submit="addPost()">
                                             <h3>Update Username or password</h3>
                                             <div class="form-group">
@@ -234,11 +266,11 @@
                                                 <label for="employeeId">Password</label>
                                                 <input type="password" class="form-control" id="employeeId" placeholder="Password" ng-model="user.password">
                                             </div>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                            <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
+                                            <button type="submit" class="btn btn-primary">Submit now</button>
+                                            <button type="button" class="btn btn-default" ng-click="back()">Back</button>
                                         </form>
                                     </section>
-                                    <section ng-show="updateName">
+                                    <section ng-show="updateName" class="timepunch">
                                         <form ng-submit="addPost()">
                                             <h3>Update Name</h3>
                                             <div class="form-group">
@@ -249,19 +281,19 @@
                                                 <label for="lName">Last Name</label>
                                                 <input type="text" class="form-control" id="lName" placeholder="Smith" ng-model="user.lastName" ng-required="true">
                                             </div>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                            <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
+                                            <button type="submit" class="btn btn-primary">Submit now</button>
+                                            <button type="button" class="btn btn-default" ng-click="back()">Back</button>
                                         </form>
                                     </section>
-                                    <section ng-show="updateEmail">
+                                    <section ng-show="updateEmail" class="timepunch">
                                         <form ng-submit="addEmail()">
                                             <h3>Update Email</h3>
                                             <div class="form-group">
                                                 <label for="email">Email</label>
                                                 <input type="email" class="form-control" id="email" placeholder="Email" ng-model="user.email" ng-required="true">
                                             </div>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                            <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
+                                            <button type="submit" class="btn btn-primary">Submit now</button>
+                                            <button type="button" class="btn btn-default" ng-click="back()">Back</button>
                                         </form>
                                     </section>
                                 </uib-tab>
@@ -275,8 +307,34 @@
                     <div class="panel-heading">
                          <uib-tabset id="tabsNav">
                              <h2>Setting</h2>
-                             <uib-tab index="0" heading="Setting">
-                                 Setting
+                             <uib-tab index="0" heading="Notification">
+                                 <p>
+                                     <em>To send notifications please fill out the following fields</em>
+                                 </p>
+                                 <section ng-hide="note" class="timepunch">
+                                     <form ng-submit="nofity()">
+
+                                         <div class="form-group">
+                                             <label for="number">Phone number</label>
+                                             <input type="tel" class="form-control" id="number" placeholder="e.g. 14074527123" ng-model="user.phone_number" ng-required="true">
+                                         </div>
+                                         <div class="form-group">
+                                             <label for="notify">Alert on</label>
+                                             <input type="date" class="form-control" id="notify" placeholder="01/01/2016" ng-model="user.time" ng-required="true">
+                                         </div>
+                                         <div class="form-group">
+                                             <label for="num">Num of times</label>
+                                             <select class="form-option" id="num" ng-model="user.notification" ng-options="opt for opt in options.time" ></select>
+                                         </div>
+                                         <button type="submit" class="btn btn-primary">Submit now</button>
+                                     </form>
+                                 </section>
+                                 <section ng-show="note" class="timepunch">
+                                     <h3 class="timepunch-heading">Thank You</h3>
+                                     <p>
+                                         Your notification request has been receive.
+                                     </p>
+                                 </section>
                              </uib-tab>
                          </uib-tabset>
                     </div>

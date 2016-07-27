@@ -22,7 +22,7 @@ const port = process.env.PORT || 5000;
 const api = require('./routes/api');
 const company_api = require('./routes/company_api');
 const timecard_api = require('./routes/timecard_api');
-const sickLeave_api = require('./routes/timecard_api');
+const sickLeave_api = require('./routes/sick_leave_api');
 const notification = require('./routes/notification');
 const auth = require('./routes/auth');
 
@@ -71,12 +71,12 @@ app.use(passport.session());
 //connect flash
 app.use(flash());
 
-app.use('/api' ,api);
-app.use('/admin' ,company_api );
-app.use('/timeCardApi' ,timecard_api );
-app.use('/notification' ,notification );
-app.use('/notification' ,notification );
-app.use('/auth' ,auth);
+app.use('/api', api);
+app.use('/admin', company_api );
+app.use('/timeCardApi', timecard_api );
+app.use('/sickLeaveApi', sickLeave_api );
+app.use('/alert', notification );
+app.use('/auth', auth);
 //Get all routes and set index.html as root
 
 app.get('*', function(req, res) {

@@ -4,15 +4,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const AppointmentSchema = new mongoose.Schema({
-  name:String,
-  phoneNumber: String,
-  notification : Number,
-  timeZone : String,
-  time : {type : Date, index : true}
+    first_name: String,
+    last_name: String,
+    phone_number: String,
+    notification : Number,
+    time_zone : String,
+    time : {type : Date, index : true}
 });
 
 AppointmentSchema.methods.requiresNotification = function (date) {
-  return Math.round(moment.duration(moment(this.time).tz(this.timeZone).utc()
+  return Math.round(moment.duration(moment(this.time).tz(this.time_zone).utc()
                           .diff(moment(date).utc())
                         ).asMinutes()) === this.notification;
 };
@@ -39,9 +40,9 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
         docs.forEach(function(appointment) {
             // Create options to send the message
             var options = {
-                to: "+" + appointment.phoneNumber,
+                to: "+" + appointment.phone_number,
                 from: cfg.twilioPhoneNumber,
-                body: "Hi " + appointment.name + ". Just a reminder that you are to be at work for  " + moment(appointment.time).calendar() +"."
+                body: "Hi " + appointment.first_name + appointment.first_last + ". Just a reminder that you are to be at work for  " + moment(appointment.time).calendar() +"."
             };
 
             // Send the message!
@@ -51,8 +52,8 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                     console.error(err);
                 } else {
                     // Log the last few digits of a phone number
-                    var masked = appointment.phoneNumber.substr(0,
-                        appointment.phoneNumber.length - 5);
+                    var masked = appointment.phone_number.substr(0,
+                        appointment.phone_number.length - 5);
                     masked += '*****';
                     console.log('Message sent to ' + masked);
                 }

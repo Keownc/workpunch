@@ -14,6 +14,15 @@ const companySchema = new mongoose.Schema({
     description: String
 });
 
+const employeeRequestSchema = new mongoose.Schema({
+    _id: false,
+    employee_id: String,
+    current_date: {type: Date},
+    get_date: {type: Date},
+    new_time: String,
+    request: String,
+    description: String
+});
 // Methods
 // Generate Hash
 companySchema.methods.createHash = function (password) {
@@ -25,5 +34,7 @@ companySchema.methods.validPassword = function(password){
 }
 // Use mongoose-uuid to Generate an id
 companySchema.plugin(uuid.plugin);
+employeeRequestSchema.plugin(uuid.plugin);
 
 mongoose.model('Company', companySchema);
+mongoose.model('employeeRequest', employeeRequestSchema);
