@@ -41,6 +41,16 @@ h3 {
 p {
     font-size: 1.6rem;
 }
+.alert {
+    z-index: 1000;
+}
+.arrow{
+    width: 100%;
+    text-align: center;
+}
+.list {
+    margin-top: 5rem;
+}
 /*--------------------------------- Navigation ---------------------------------*/
 .navbar>.container .navbar-brand{
     /*color: #e0e0d1;*/

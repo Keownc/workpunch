@@ -24,6 +24,7 @@ const company_api = require('./routes/company_api');
 const timecard_api = require('./routes/timecard_api');
 const sickLeave_api = require('./routes/sick_leave_api');
 const notification = require('./routes/notification');
+const schedule = require('./schedule');
 const auth = require('./routes/auth');
 
 //set static folder

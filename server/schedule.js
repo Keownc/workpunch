@@ -1,6 +1,6 @@
 'use-strict'
 const CronJob = require('cron').CronJob;
-const notificationsWorker = require('./workers/notificationsWorker');
+const notificationsWorker = require('./employeeNotify');
 const moment = require('moment');
 
 // Create a function to search for notification in the database to be sent
