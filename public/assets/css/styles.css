@@ -51,6 +51,10 @@ p {
 .list {
     margin-top: 5rem;
 }
+.example {
+    width: 67%;
+    margin: 0 auto;
+}
 /*--------------------------------- Navigation ---------------------------------*/
 .navbar>.container .navbar-brand{
     /*color: #e0e0d1;*/
@@ -218,6 +222,8 @@ p {
 /*--------------------------------- Dashboard Body ---------------------------------*/
 .img-responsive {
     max-width: 80%;
+}
+.avatar{
     margin-left: 2.5rem;
 }
 .img-sick {

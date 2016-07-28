@@ -6,7 +6,7 @@
         <div class="container">
             <div class="col-md-3 text">
                 <section>
-                    <img class="img-responsive img-rounded" src="{{user.avatar || employee.avatar}}" alt="User avatar goes here"/>
+                    <img class="img-responsive img-rounded avatar" src="{{user.avatar || employee.avatar}}" alt="User avatar goes here"/>
                     <form ng-submit="addAvatar()">
                         <input type="filepicker" data-fp-apikey="A86XHGWhSy6idD2jtHwOwz" ng-model="user.avatar" />
                         <button type="submit" name="button">Upload</button>
@@ -187,24 +187,24 @@
                                         <em>To fill out this form please fill out the following field!</em>
                                     </p>
                                     <section>
-                                        <div class="">
-
+                                        <div class="col-sm-7">
+                                            <h4>Complete Form</h4>
                                             <form ng-submit="sickLeave($files)" ng-hide="submitted" class="timepunch">
                                                 <div class="form-group">
                                                     <label for="fName">Number Of Days</label>
                                                     <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.time" ng-required="true"></select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="file">Sick Leave Slip</label>
+                                                    <label for="file">Upload Slip</label>
                                                     <input type="filepicker" data-fp-apikey="A86XHGWhSy6idD2jtHwOwz" ng-model="user.file" />{{user.file}}
                                                 </div>
                                                 <button type="submit" class="btn btn-default" >Sumbit</button>
                                             </form>
                                         </div>
-                                        <!-- <section class="col-sm-5">
+                                        <section class="col-sm-5">
                                             <h4>Example Form</h4>
-                                            <img src="" alt="" />
-                                        </section> -->
+                                            <img src="https://www.filestackapi.com/api/file/yvfDOqqSjeeWajknrE3Q" alt="" class="img-responsive example"/>
+                                        </section>
                                     </section>
                                     <div class="timepunch" ng-show="submitted">
                                         <h3 class="timepunch-heading">Thank You</h3>
