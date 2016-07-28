@@ -34,6 +34,7 @@
     "filepicker-js": "^2.4.14",
     "install": "^0.8.1",
     "jquery": "^2.2.4",
+    "moment": "^2.14.1",
     "mongodb": "^2.1.20",
     "mongoose": "^4.4.19",
     "mongoose-uuid": "0.0.2",

@@ -54,6 +54,7 @@ app.get('/companyDashboard', ensureAuthenticated, function(req, res){
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended: false}));
 app.use(cookie_parser());
+app.locals.moment = require('moment');
 //express session
 app.use(session({
     secret: 'punchme',
@@ -82,6 +83,7 @@ app.use('/auth', auth);
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
 });
+schedule.start();
 // Start server
 var server = app.listen(port, function() {
     console.log("Listening on " + port + "...");

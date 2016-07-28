@@ -5,8 +5,17 @@ const mongoose = require('mongoose');
 const Appointment = mongoose.model('Appointment');
 const moment = require('moment');
 
+
+// GET: /appointments
+router.get('/appointments', function(req, res, next) {
+  Appointment.find()
+    .then(function (appointments) {
+      res.render('appointments/index', { appointments: appointments });
+    });
+});
+
 // A route to get and save the user number
-router.post('/notification', function(req, res, next) {
+router.post('/appointments', function(req, res, next) {
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
   const phone_number = req.body.phone_number;

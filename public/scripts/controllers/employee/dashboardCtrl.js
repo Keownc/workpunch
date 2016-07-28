@@ -121,11 +121,11 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         const timeZone = Date.now();
         const first_name = $scope.employee.first_name;
         const last_name = $scope.employee.last_name;
-        const phone_number = $scope.employee.phone_number;
+        const phone_number = $scope.user.phone_number;
         const notification = $scope.user.notification;
         const time_zone = timeZone;
         const time = $scope.user.time;
-        $http.post('/alert/notification', {
+        $http.post('/alert/appointments', {
             first_name: first_name,
             last_name: last_name,
             phone_number: phone_number,
