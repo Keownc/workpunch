@@ -2,6 +2,7 @@
 //Employee Dashboard page controller
 myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Api){
     $rootScope.navbar = false;
+    $scope.tabs= true;
     $scope.user = {};
     $scope.times = [];
     $scope.sick = [];
@@ -170,4 +171,6 @@ myApp.controller('dashboardCtrl', function($scope, $http, $rootScope, $route, Ap
         ],
         text: ['checkIn', 'checkOut']
     };
+
+
 });

@@ -216,9 +216,12 @@ p {
 
 }
 /*--------------------------------- Dashboard Body ---------------------------------*/
+.page-header{
+    text-align: left;
+}
 .img-responsive {
-    max-width: 80%;
-    margin-left: 2.5rem;
+    max-width: 70%;
+    margin: auto;
 }
 .img-sick {
     width: 20%;
@@ -540,7 +543,8 @@ label[for*="submit"] {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #00796B;
     border-right: 1px solid #eee;
-    height: 61.4rem;
+    /*height: 61.4rem;*/
+    height: 63.1rem;
   }
   .main {
     position: relative;

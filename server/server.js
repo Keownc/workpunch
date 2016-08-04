@@ -83,7 +83,7 @@ app.use('/auth', auth);
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/views', 'index.html'));
 });
-schedule.start();
+// schedule.start();
 // Start server
 var server = app.listen(port, function() {
     console.log("Listening on " + port + "...");
