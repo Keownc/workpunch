@@ -45,13 +45,19 @@
         <div class="col-sm-9 col-md-10 main">
             <!-- Sidebar Navigation Tab -->
             <uib-tabset active="tab" id="dashboard">
-                    <!-- <h1 class="page-header">Dashboard</h1> -->
+                <h1 class="page-header">Dashboard</h1>
+                <!-- <h1 class="page-header" ng-hide="tab[0]">Dashboard - Timecard</h1>
+                <h1 class="page-header" ng-hide="!tab[1]">Dashboard - Leave Request</h1>
+                <h1 class="page-header" ng-hide="!tab[2]">Dashboard - Account</h1>
+                <h1 class="page-header" ng-hide="!tab[3]">Dashboard - Setting</h1> -->
                 <!-- Switch to Timepunch -->
-                <uib-tab index="0" heading="Time Punch" class="page-header">
+                <uib-tab index="0" heading="Time Punch" class="page-header" ng-hide="tabs">
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
                             <uib-tabset>
-                                <h2>Time</h2>
+                                <uib-tab-heading>
+                                    <h2>{{tab.title}}</h2>
+                                 </uib-tab-heading>
                                 <uib-tab index="0" heading="Time">
                                     <section class="timepunch">
                                         <div ng-hide="dateOut || dateIn">
@@ -107,7 +113,7 @@
                                         </p>
                                     </section>
                                 </uib-tab>
-                                <uib-tab index="2" heading="Update">
+                                <uib-tab index="2" heading="Time Update">
                                     <p>
                                         <em>Request to modify check in or check out time</em>
                                     </p>
@@ -177,19 +183,26 @@
                     </div>
                 </uib-tab>  <!-- End Switch to Timepunch  -->
                 <!-- Switch to Sick Leave -->
-                <uib-tab index="1" heading="Sick Leave" class="page-header">
+                <uib-tab index="1" heading="Sick Leave" class="page-header" ng-hide="tabs">
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
                             <uib-tabset id="tabsNav">
-                                <h2>Sick Leave</h2>
+                                <h2></h2>
                                 <uib-tab index="0" heading="Form">
                                     <p>
                                         <em>To fill out this form please fill out the following field!</em>
                                     </p>
+<<<<<<< HEAD
                                     <section>
                                         <div class="col-sm-7">
                                             <h4>Complete Form</h4>
                                             <form ng-submit="sickLeave($files)" ng-hide="submitted" class="timepunch">
+=======
+                                    <section ng-hide="submitted">
+                                        <div class="col-sm-7">
+                                            <h4>Complete Form</h4>
+                                            <form ng-submit="sickLeave($files)" class="timepunch">
+>>>>>>> beta
                                                 <div class="form-group">
                                                     <label for="fName">Number Of Days</label>
                                                     <select class="form-option" ng-model="user.days" ng-options="opt for opt in options.time" ng-required="true"></select>
@@ -244,11 +257,11 @@
                     </div>
                 </uib-tab> <!-- End Switch to Sick Leave  -->
                 <!-- Switch to user account -->
-                <uib-tab index="2" heading="Account" class="page-header">
+                <uib-tab index="2" heading="Account" class="page-header" ng-hide="tabs">
                     <div class="panel {{panelClass || 'panel-default'}}">
                         <div class="panel-heading">
                             <uib-tabset id="tabsNav">
-                                <h2>Edit</h2>
+                                <h2></h2>
                                 <uib-tab index="0" heading="Account">
                                     <section class="setting" ng-hide="updateName || updateUser || updateEmail || updateID">
                                         <h3>General Account Setting</h3>
@@ -312,11 +325,11 @@
                     </div>
                 </uib-tab> <!-- End Switch to user account  -->
                 <!-- Switch to user setting -->
-                <uib-tab index="3" heading="Setting" class="page-header">
+                <uib-tab index="3" heading="Setting" class="page-header" ng-hide="tabs">
                     <div class="panel {{panelClass || 'panel-default'}}">
                     <div class="panel-heading">
                          <uib-tabset id="tabsNav">
-                             <h2>Setting</h2>
+                             <h2></h2>
                              <uib-tab index="0" heading="Notification">
                                  <p>
                                      <em>To send notifications please fill out the following fields</em>
@@ -333,8 +346,8 @@
                                              <input type="date" class="form-control" id="notify" placeholder="01/01/2016" ng-model="user.time" ng-required="true">
                                          </div>
                                          <div class="form-group">
-                                             <label for="num">Num of times</label>
-                                             <select class="form-option" id="num" ng-model="user.notification" ng-options="opt for opt in options.time" ></select>
+                                             <label for="num">Notification time</label>
+                                             <select class="form-option" id="num" ng-model="user.notification" ng-options="opt for opt in options.time" ></select> M
                                          </div>
                                          <button type="submit" class="btn btn-primary">Submit now</button>
                                      </form>
@@ -342,7 +355,7 @@
                                  <section ng-show="note" class="timepunch">
                                      <h3 class="timepunch-heading">Thank You</h3>
                                      <p>
-                                         Your notification request has been receive.
+                                         Your notification request has been received.
                                      </p>
                                  </section>
                              </uib-tab>

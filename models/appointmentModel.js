@@ -67,4 +67,5 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
         }
     }
 };
-mongoose.model('Appointment', AppointmentSchema);
+var Appointment = mongoose.model('Appointment', AppointmentSchema);
+module.exports = Appointment;
